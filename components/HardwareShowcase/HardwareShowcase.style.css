@@ -1,0 +1,88 @@
+.hardware-image-container {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background-color: #050505;
+    border: 2px solid #ff3333;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: neonPulse 8s infinite;
+}
+
+@media (min-width: 768px) {
+    .hardware-image-container {
+        aspect-ratio: 1 / 1;
+    }
+}
+
+.hardware-image-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background-image: url('/test-AI-image.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.9;
+    transition: opacity 0.5s;
+    animation: micZoom 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.hardware-image-container:hover .hardware-image-bg {
+    opacity: 1;
+}
+
+@keyframes micZoom {
+
+    0%,
+    15% {
+        transform: scale(2.8) translateX(20%) translateY(10%);
+    }
+
+    45%,
+    55% {
+        transform: scale(1) translateX(0);
+    }
+
+    85%,
+    100% {
+        transform: scale(2.8) translateX(20%) translateY(10%);
+    }
+}
+
+@keyframes neonPulse {
+
+    0%,
+    15% {
+        box-shadow: 0 0 20px #d60000, inset 0 0 20px #d60000;
+        border-color: #ff3333;
+    }
+
+    17% {
+        box-shadow: 0 0 50px #ff3333, inset 0 0 50px #ff3333;
+        border-color: #ff6666;
+    }
+
+    20% {
+        box-shadow: 0 0 15px #d60000, inset 0 0 15px #d60000;
+        border-color: #ff3333;
+    }
+
+    45%,
+    55% {
+        box-shadow: 0 0 5px #800000, inset 0 0 5px #800000;
+        border-color: #660000;
+    }
+
+    82% {
+        box-shadow: 0 0 50px #ff3333, inset 0 0 50px #ff3333;
+        border-color: #ff6666;
+    }
+
+    85%,
+    100% {
+        box-shadow: 0 0 20px #d60000, inset 0 0 20px #d60000;
+        border-color: #ff3333;
+    }
+}

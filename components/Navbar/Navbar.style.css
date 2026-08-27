@@ -1,0 +1,38 @@
+.grouped-link:hover .crosshair {
+    transform: translateX(250%) rotate(90deg);
+}
+
+.logo::before {
+    content: '';
+    background-color: #050505;
+    background-image: url('/g8-without-bg.png');
+    background-size: 75px;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 0%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    transition: all .3s ease-in-out;
+}
+
+.grouped-link:hover .logo::before {
+    width: 100%;
+    opacity: 1;
+}
+
+.crosshair,
+.logo {
+    transition: all 0.3s ease-in-out;
+}
+
+.crosshair {
+    z-index: 3;
+}
+
+.logo {
+    position: relative;
+}

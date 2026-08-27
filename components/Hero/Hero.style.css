@@ -1,0 +1,5 @@
+.pseudo::after {
+    content: "    STUDIOS";
+    font-size: 3rem;
+}
+    
