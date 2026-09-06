@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectCoverflow } from 'swiper/modules';
-import { Mic, SlidersHorizontal, Disc3, Headphones, Radio } from 'lucide-react';
+import { Mic, SlidersHorizontal, Disc3, UserStar, Tv } from 'lucide-react';
 import Link from 'next/link';
 
 import 'swiper/css';
@@ -14,36 +14,36 @@ const services = [
     id: 1,
     title: "VOCAL RECORDING",
     description: "Capture your voice with pristine clarity using our world-class vocal chain. Perfect for artists who demand the highest fidelity.",
-    icon: <Mic className="w-8 h-8 text-primary" />,
-    tag: "STUDIO 01"
+    icon: Mic,
+    tag: "VOCALS"
   },
   {
     id: 2,
     title: "MIXING & MASTERING",
     description: "Industry-standard processing that makes your tracks translate perfectly from the studio to the stadium.",
-    icon: <SlidersHorizontal className="w-8 h-8 text-primary" />,
+    icon: SlidersHorizontal,
     tag: "ENGINEERING"
   },
   {
     id: 3,
     title: "BEAT PRODUCTION",
     description: "Custom instrumentals tailored to your exact sonic vision. Collaborate with our in-house producers.",
-    icon: <Disc3 className="w-8 h-8 text-primary" />,
+    icon: Disc3,
     tag: "PRODUCTION"
   },
   {
     id: 4,
-    title: "PODCAST RECORDING",
-    description: "Broadcast-quality audio and video setups for multi-host podcasts and interviews.",
-    icon: <Radio className="w-8 h-8 text-primary" />,
-    tag: "BROADCAST"
+    title: "COMMERCIAL MUSIC",
+    description: "Music for ads, brands, and campaigns. Every note with purpose, every beat with impact.",
+    icon: Tv,
+    tag: "BRANDED"
   },
   {
     id: 5,
-    title: "ADR & VOICE OVER",
-    description: "Precision automated dialogue replacement and pristine voice-over tracking for film and commercial work.",
-    icon: <Headphones className="w-8 h-8 text-primary" />,
-    tag: "COMMERCIAL"
+    title: "ARTIST MANAGEMENT",
+    description: "From the studio to the stage, we handle every step. Building careers with strategy, vision, and real results.",
+    icon: UserStar,
+    tag: "MANAGEMENT"
   }
 ];
 
@@ -94,41 +94,49 @@ export default function ServicesShowcase() {
           modules={[EffectCoverflow, Autoplay, Pagination]}
           className="w-full pb-16"
         >
-          {services.map((service) => (
-            <SwiperSlide key={service.id} className="max-w-[320px] md:max-w-[380px] w-full">
-              {/* @ts-ignore */}
-              {({ isActive }) => (
-                <div className={`
-                  flex flex-col h-[420px] p-8 border transition-all duration-500 bg-[#050505]
-                  ${isActive ? 'border-primary shadow-[0_0_30px_-5px_rgba(214,0,0,0.3)]' : 'border-secondary/50 opacity-60 scale-95'}
-                `}>
-                  <div className="flex justify-between items-start mb-8">
-                    <div className="p-3 border border-secondary/50 bg-[#111] rounded-sm">
-                      {service.icon}
+          {services.map((service) => {
+            const Icon = service.icon;
+            return (
+              <SwiperSlide key={service.id} className="max-w-[320px] md:max-w-[380px] w-full group">
+                {/* @ts-ignore */}
+                {({ isActive }) => (
+                  <div className={`
+                    relative overflow-hidden flex flex-col h-[420px] p-8 border transition-all duration-500 bg-[#050505]
+                    ${isActive ? 'border-primary shadow-[0_0_30px_-5px_rgba(214,0,0,0.3)]' : 'border-secondary/50 opacity-60 scale-95'}
+                  `}>
+                    {/* Background Icon */}
+                    <Icon className={`absolute -bottom-12 -right-12 w-96 h-96 transition-all duration-700 pointer-events-none
+                      ${isActive ? 'text-primary/20 rotate-12 scale-110' : 'text-secondary/10 -rotate-12'}
+                    `} />
+
+                    <div className="relative z-10 flex justify-between items-start mb-8">
+                      <div className="p-3 border border-secondary/50 bg-[#111] rounded-sm">
+                        <Icon className="w-8 h-8 text-primary" />
+                      </div>
+                      <span className="font-space text-[10px] text-muted tracking-widest px-2 py-1 border border-secondary/30 bg-black">
+                        {service.tag}
+                      </span>
                     </div>
-                    <span className="font-space text-[10px] text-muted tracking-widest px-2 py-1 border border-secondary/30 bg-black">
-                      {service.tag}
-                    </span>
-                  </div>
 
-                  <div className="mt-auto">
-                    <h3 className="font-bebas text-3xl tracking-wider text-white mb-4">
-                      {service.title}
-                    </h3>
-                    <p className="font-space text-sm text-muted leading-relaxed line-clamp-3">
-                      {service.description}
-                    </p>
-                  </div>
+                    <div className="mt-auto relative z-10">
+                      <h3 className="font-bebas text-3xl tracking-wider text-white mb-4">
+                        {service.title}
+                      </h3>
+                      <p className="font-space text-sm text-muted leading-relaxed line-clamp-3">
+                        {service.description}
+                      </p>
+                    </div>
 
-                  <div className={`mt-8 pt-6 border-t border-secondary/30 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                    <Link href="/#booking" className="font-space text-xs text-primary uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 group w-max">
-                      BOOK NOW <span className="group-hover:translate-x-1 transition-transform">-&gt;</span>
-                    </Link>
+                    <div className={`relative z-10 mt-8 pt-6 border-t border-secondary/30 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                      <Link href="/#booking" className="font-space text-xs text-primary uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 w-max">
+                        BOOK NOW <span className="transition-transform group-hover:translate-x-1">-&gt;</span>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              )}
-            </SwiperSlide>
-          ))}
+                )}
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
 
         {/* Mobile View Rates Button */}
