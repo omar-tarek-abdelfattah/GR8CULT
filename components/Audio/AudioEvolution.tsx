@@ -39,71 +39,168 @@ export default function AudioEvolution() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const targetTimeRef = useRef<number>(0);
+  const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
+  const isSeekingRef = useRef<boolean>(false);
 
-  // switching stages
+  // Keep mute states in sync whenever activeStage changes
+  useEffect(() => {
+    audioRefs.current.forEach((audio, idx) => {
+      if (audio) {
+        audio.muted = idx !== activeStage;
+      }
+    });
+  }, [activeStage]);
+
+  // Proactively check for duration from audio elements once mounted/cached
+  useEffect(() => {
+    const checkDuration = () => {
+      for (const audio of audioRefs.current) {
+        if (audio && audio.duration && !isNaN(audio.duration) && audio.duration > 0) {
+          setDuration(audio.duration);
+          return true;
+        }
+      }
+      return false;
+    };
+
+    if (checkDuration()) return;
+
+    const timer = setInterval(() => {
+      if (checkDuration()) {
+        clearInterval(timer);
+      }
+    }, 250);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      audioRefs.current.forEach((audio) => {
+        if (audio) audio.pause();
+      });
+    };
+  }, []);
+
+  // Instant seamless switching between stages by toggling mute
   const handleStageSelect = (idx: number) => {
     if (idx === activeStage) return;
 
-    if (audioRef.current) {
-      targetTimeRef.current = audioRef.current.currentTime;
-    }
     setActiveStage(idx);
+
+    // Unmute the selected audio, mute all others
+    audioRefs.current.forEach((audio, i) => {
+      if (!audio) return;
+      audio.muted = i !== idx;
+    });
+
+    // Align timestamp to master to avoid any micro-drift
+    const master = audioRefs.current[activeStage];
+    if (master && audioRefs.current[idx]) {
+      const currentMasterTime = master.currentTime;
+      if (Math.abs((audioRefs.current[idx]?.currentTime || 0) - currentMasterTime) > 0.05) {
+        audioRefs.current[idx]!.currentTime = currentMasterTime;
+      }
+    }
   };
 
   const togglePlay = () => {
-    if (!audioRef.current) return;
-
     if (isPlaying) {
-      audioRef.current.pause();
+      // Pause all 4 tracks
+      audioRefs.current.forEach((audio) => {
+        if (audio) audio.pause();
+      });
       setIsPlaying(false);
     } else {
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch((err) => {
-        console.error("Playback error:", err);
+      // Align all tracks to the current timestamp and play in unison
+      const targetTime = currentTime;
+      audioRefs.current.forEach((audio, idx) => {
+        if (!audio) return;
+        audio.currentTime = targetTime;
+        audio.muted = idx !== activeStage;
+        audio.play().catch(() => {});
       });
-    }
-  };
-
-  const handleCanPlay = () => {
-    if (audioRef.current && targetTimeRef.current > 0) {
-      audioRef.current.currentTime = targetTimeRef.current;
-      targetTimeRef.current = 0;
-    }
-
-    if (isPlaying && audioRef.current) {
-      audioRef.current.play().catch(() => { });
+      setIsPlaying(true);
     }
   };
 
   const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime);
+    // Prevent timeUpdate / drift correction from overriding during an active seek
+    if (isSeekingRef.current) return;
+
+    const master = audioRefs.current[activeStage] || audioRefs.current[0];
+    if (!master) return;
+
+    setCurrentTime(master.currentTime);
+
+    // Micro-drift correction: keep all 4 streams locked to the same millisecond
+    if (isPlaying) {
+      audioRefs.current.forEach((audio) => {
+        if (audio && audio !== master && Math.abs(audio.currentTime - master.currentTime) > 0.12) {
+          audio.currentTime = master.currentTime;
+        }
+      });
     }
   };
 
-  const handleLoadedMetadata = () => {
-    if (audioRef.current) {
-      setDuration(audioRef.current.duration || 0);
+  const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLAudioElement>) => {
+    const audio = e.currentTarget;
+    if (audio.duration && !isNaN(audio.duration) && audio.duration > 0) {
+      setDuration(audio.duration);
     }
   };
 
   const handleEnded = () => {
     setIsPlaying(false);
     setCurrentTime(0);
+    audioRefs.current.forEach((audio) => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
   };
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!audioRef.current || !duration) return;
+    // Get duration from state or directly from any loaded audio element
+    let totalDuration = duration;
+    if (!totalDuration || isNaN(totalDuration)) {
+      for (const a of audioRefs.current) {
+        if (a && a.duration && !isNaN(a.duration) && a.duration > 0) {
+          totalDuration = a.duration;
+          setDuration(a.duration);
+          break;
+        }
+      }
+    }
+
+    if (!totalDuration) return;
+
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const percentage = Math.max(0, Math.min(1, clickX / rect.width));
-    const newTime = percentage * duration;
+    const newTime = percentage * totalDuration;
 
-    audioRef.current.currentTime = newTime;
+    // Block timeUpdate micro-drift from reverting during seek
+    isSeekingRef.current = true;
     setCurrentTime(newTime);
+
+    // Seek all 4 audio streams simultaneously
+    audioRefs.current.forEach((audio) => {
+      if (audio) {
+        try {
+          audio.currentTime = newTime;
+        } catch (err) {
+          console.warn("Seek error:", err);
+        }
+      }
+    });
+
+    // Release seek lock after audio elements finish jumping
+    setTimeout(() => {
+      isSeekingRef.current = false;
+    }, 300);
   };
 
   const formatTime = (timeInSeconds: number) => {
@@ -117,16 +214,21 @@ export default function AudioEvolution() {
 
   return (
     <section className="w-full py-16 border-b border-secondary bg-background relative">
-      {/* Hidden audio element controlling playback */}
-      <audio
-        ref={audioRef}
-        src={stages[activeStage].src}
-        preload="auto"
-        onCanPlay={handleCanPlay}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-        onEnded={handleEnded}
-      />
+      {/* 4 Parallel Audio Streams: All play simultaneously, only active stage is unmuted */}
+      {stages.map((stage, idx) => (
+        <audio
+          key={stage.id}
+          ref={(el) => {
+            audioRefs.current[idx] = el;
+          }}
+          src={stage.src}
+          preload="auto"
+          muted={idx !== activeStage}
+          onTimeUpdate={idx === 0 ? handleTimeUpdate : undefined}
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={idx === 0 ? handleEnded : undefined}
+        />
+      ))}
 
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
@@ -224,7 +326,7 @@ export default function AudioEvolution() {
                 return (
                   <div
                     key={i}
-                    className={`w-full transition-all duration-200 rounded-none ${isPassed
+                    className={`w-full transition-all duration-200 rounded-none pointer-events-none ${isPassed
                       ? "bg-primary shadow-[0_0_8px_rgba(214,0,0,0.5)]"
                       : "bg-secondary/40 group-hover:bg-secondary/70"
                       } ${isPlaying && isPassed ? "opacity-100" : "opacity-80"}`}
@@ -240,10 +342,10 @@ export default function AudioEvolution() {
             <div className="flex flex-col gap-2 z-10">
               <div
                 onClick={handleSeek}
-                className="w-full h-1.5 bg-secondary/30 hover:h-2.5 transition-all cursor-pointer relative overflow-hidden"
+                className="w-full h-2 bg-secondary/30 hover:h-3 transition-all cursor-pointer relative overflow-hidden py-0.5"
               >
                 <div
-                  className="h-full bg-primary transition-all duration-100 relative"
+                  className="h-full bg-primary transition-all duration-100 relative pointer-events-none"
                   style={{ width: `${progressPercent}%` }}
                 >
                   <div className="absolute right-0 top-0 bottom-0 w-1 bg-white shadow-[0_0_6px_#fff]" />
