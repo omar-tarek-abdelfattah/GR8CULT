@@ -19,6 +19,7 @@ export default function AboutTabs() {
   const contactMapContainer = useRef<HTMLDivElement>(null);
   const contactMap = useRef<mapboxgl.Map | null>(null);
 
+  /*
   useEffect(() => {
     if (activeTab !== 3) {
       if (contactMap.current) {
@@ -56,17 +57,18 @@ export default function AboutTabs() {
       }
     };
   }, [activeTab]);
+  */
 
   return (
     <div className="w-full">
       {/* Tabs Navigation */}
-      <div className="flex flex-wrap border-b border-secondary/50 mb-12">
+      <div className="grid grid-cols-2 md:flex md:flex-wrap border-b border-secondary/50 mb-12">
         {tabs.map((tab, index) => (
           <button
             key={tab}
             onClick={() => setActiveTab(index)}
             className={`
-              font-space text-xs md:text-sm tracking-[0.2em] uppercase py-4 px-6 md:px-8 transition-colors
+              font-space text-[11px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase py-4 px-2 sm:px-6 md:px-8 text-center flex items-center justify-center transition-colors
               ${activeTab === index
                 ? 'border-b-2 border-primary text-white bg-secondary/10'
                 : 'text-muted hover:text-white hover:bg-secondary/5'
@@ -302,7 +304,7 @@ export default function AboutTabs() {
               </div>
 
               {/* Right Column: Studio Map */}
-              <div className="w-full lg:w-1/2 flex flex-col">
+              {/* <div className="w-full lg:w-1/2 flex flex-col">
                 <h2 className="font-bebas text-4xl text-white mb-2 tracking-wider">STUDIO LOCATION // CAIRO</h2>
                 <p className="font-space text-sm text-muted uppercase tracking-[0.2em] mb-6">
                   [ CLICK MAP TO NAVIGATE VIA GOOGLE MAPS ]
@@ -333,7 +335,7 @@ export default function AboutTabs() {
                     </div>
                   </div>
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         )}
