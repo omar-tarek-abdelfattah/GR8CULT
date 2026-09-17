@@ -4,6 +4,7 @@ import AudioEvolution from "@/components/Audio/AudioEvolution";
 import HardwareShowcase from "@/components/HardwareShowcase/HardwareShowcase";
 import ServicesShowcase from "@/components/ServicesShowcase/ServicesShowcase";
 import BookingMatrix from "@/components/Booking/BookingMatrix";
+import SpotifyPlaylist from "@/components/SpotifyPlaylist/SpotifyPlaylist";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <HardwareShowcase />
       <ServicesShowcase />
       <BookingMatrix />
+      <SpotifyPlaylist />
     </div>
   );
 }

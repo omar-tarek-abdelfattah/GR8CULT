@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Music2, Mail, Phone, ArrowUpRight, MapPin } from 'lucide-react';
-import { FaInstagram, FaYoutube, FaTwitter, FaWhatsapp } from 'react-icons/fa';
+import { Mail, Phone, ArrowUpRight, MapPin } from 'lucide-react';
+import { FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import SpotifyPlaylist from '@/components/SpotifyPlaylist/SpotifyPlaylist';
 import './AboutTabs.css';
 
 const tabs = [
@@ -188,40 +189,7 @@ export default function AboutTabs() {
         {/* Tab 3: Join the Cult */}
         {activeTab === 2 && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
-              <div className="w-full lg:w-3/5">
-                <h2 className="font-bebas text-4xl text-white mb-6 tracking-wider">NETWORK // ASSOCIATES</h2>
-                <p className="font-space text-lg text-muted leading-relaxed mb-8 max-w-2xl">
-                  GR8CULT is an exclusive network of producers, engineers, and visionaries. Connect with us across our secure channels to monitor operations and upcoming releases.
-                </p>
-
-                <div className="flex flex-wrap gap-4">
-                  <button onClick={() => window.open('https://www.instagram.com/gr8nikstudios/', '_blank', 'noopener,noreferrer')} className="flex items-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all bg-[#0a0a0a]">
-                    <FaInstagram className="w-4 h-4" /> [ INITIATE LINK ]
-                  </button>
-                  {/* <button onClick={() => window.open('https://twitter.com', '_blank', 'noopener,noreferrer')} className="flex items-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all bg-[#0a0a0a]">
-                    <FaTwitter className="w-4 h-4" /> [ INITIATE LINK ]
-                  </button> */}
-                  <button onClick={() => window.open('https://www.youtube.com/channel/UCDSYjeJct4T7IJAVsgL8AwA', '_blank', 'noopener,noreferrer')} className="flex items-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all bg-[#0a0a0a]">
-                    <FaYoutube className="w-4 h-4" /> [ INITIATE LINK ]
-                  </button>
-                  <button onClick={() => window.open('https://open.spotify.com/artist/72v5C9amne1zphSU3n7H3u?si=jkBSHQTFQU-ayMHGZN7ndA', '_blank', 'noopener,noreferrer')} className="flex items-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all bg-[#0a0a0a]">
-                    <Music2 className="w-4 h-4" /> [ INITIATE LINK ]
-                  </button>
-                </div>
-              </div>
-
-              {/* Logo on the right */}
-              <div className="w-full lg:w-2/5 flex justify-center items-center">
-                <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] max-w-full flex items-center justify-center">
-                  <img
-                    src="/logo-nobg.png"
-                    alt="GR8CULT Logo"
-                    className="w-full h-full object-contain opacity-85 hover:opacity-100 transition-all duration-500 hover:scale-105 drop-shadow-[0_0_35px_rgba(214,0,0,0.35)] hover:drop-shadow-[0_0_55px_rgba(214,0,0,0.7)]"
-                  />
-                </div>
-              </div>
-            </div>
+            <SpotifyPlaylist isTab={true} showSocials={true} />
           </div>
         )}
 

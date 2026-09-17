@@ -72,7 +72,7 @@ export default function Footer() {
 
         {/* Payment Gateways */}
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <div className="flex items-center gap-2.5 px-4 py-2 border border-secondary/30 bg-[#060606] font-space text-[11px] tracking-widest text-muted">
+          <div className="flex items-center gap-2.5 px-4 py-2 border border-secondary/30 bg-[#060606] h-[60px] font-space text-[11px] tracking-widest text-muted">
             <span className="text-secondary uppercase">ACCEPTED:</span>
             <span className="text-zinc-300 flex items-center gap-2">
               INSTAPAY
@@ -80,7 +80,7 @@ export default function Footer() {
             </span>
           </div>
 
-          <div className="flex items-center gap-2.5 px-4 py-2 border border-secondary/30 bg-[#060606] font-space text-[11px] tracking-widest text-muted">
+          <div className="flex items-center gap-2.5 px-4 py-2 border border-secondary/30 bg-[#060606] h-[60px] font-space text-[11px] tracking-widest text-muted">
             <span className="text-secondary uppercase">ACCEPTED:</span>
             <span className="text-zinc-300 flex items-center gap-2">
               VODAFONE CASH
