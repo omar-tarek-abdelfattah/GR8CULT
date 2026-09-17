@@ -3,35 +3,8 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { FaTwitch, FaInstagram } from "react-icons/fa";
-import { useEffect, useRef } from "react";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 
 export default function Footer() {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-
-  /*
-  useEffect(() => {
-    if (map.current || !mapContainer.current) return;
-
-    mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
-
-
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: process.env.NEXT_PUBLIC_MAPBOX_STYLE || '',
-      center: [31.318819202238007, 30.011750165945585],
-      zoom: 14.2
-    });
-
-    new mapboxgl.Marker({ color: "#d60000" })
-      .setLngLat([31.318819202238007, 30.011750165945585])
-      .addTo(map.current);
-
-  }, []);
-  */
-
   return (
     <footer className="relative w-full border-t border-secondary/60 bg-background mt-auto overflow-hidden">
       {/* Background Ambience: Subtle Grid & Red Glow */}
@@ -39,7 +12,7 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[220px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
 
-      <div className="relative z-10 container mx-auto px-4 py-16 flex flex-col items-center text-center gap-8">
+      <div className="relative z-10 container mx-auto px-4 py-16 flex flex-col items-center text-center gap-7">
         
         {/* Brand Emblem & Logo */}
         <div className="flex flex-col items-center gap-3">
@@ -56,34 +29,31 @@ export default function Footer() {
             />
           </Link>
           
-          {/* Studio Radar / Live Status Indicator */}
+          {/* Studio Radar / Status Indicator */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1 border border-secondary/50 bg-[#080808]/90 text-[11px] font-space tracking-[0.22em] text-muted uppercase">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <span>CAIRO HQ // 31.3188° E, 30.0117° N</span>
+            <span>MOKATTAM, CAIRO // PRIVATE STUDIO</span>
           </div>
         </div>
 
-        {/* Action Elements: Location & Socials */}
-        <div className="flex flex-wrap items-center justify-center gap-3 max-w-xl">
-          <Link
-            href="https://maps.app.goo.gl/8GVuSJFKQ2Np81CB9"
-            target="_blank"
-            rel="noreferrer"
-            className="group flex items-center gap-2.5 px-5 py-2.5 border border-secondary/60 bg-[#080808] hover:border-primary font-space text-xs tracking-widest text-muted hover:text-white transition-all duration-300"
-          >
-            <MapPin className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
-            <span>LOCATION ON GOOGLE MAPS</span>
-            <span className="text-primary text-[11px]">&gt;</span>
-          </Link>
+        {/* Location Notice */}
+        <div className="inline-flex items-center justify-center gap-2.5 px-4 py-2 border border-secondary/40 bg-[#080808]/90 text-xs font-space tracking-wider text-muted max-w-md">
+          <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+          <span>
+            LOCATED IN <span className="text-zinc-200 font-bold">MOKATTAM</span> — SPECIFIC LOCATION WILL BE SHARED UPON BOOKING
+          </span>
+        </div>
 
+        {/* Socials */}
+        <div className="flex flex-wrap items-center justify-center gap-3 max-w-xl">
           <Link
             href="https://instagram.com/gr8nikstudios"
             target="_blank"
             rel="noreferrer"
-            className="group flex items-center gap-2 px-4 py-2.5 border border-secondary/60 bg-[#080808] hover:border-primary font-space text-xs tracking-widest text-muted hover:text-white transition-all duration-300"
+            className="group flex items-center gap-2 px-5 py-2.5 border border-secondary/60 bg-[#080808] hover:border-primary font-space text-xs tracking-widest text-muted hover:text-white transition-all duration-300"
           >
             <FaInstagram className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
             <span>INSTAGRAM</span>
@@ -93,7 +63,7 @@ export default function Footer() {
             href="https://twitch.tv"
             target="_blank"
             rel="noreferrer"
-            className="group flex items-center gap-2 px-4 py-2.5 border border-secondary/60 bg-[#080808] hover:border-primary font-space text-xs tracking-widest text-muted hover:text-white transition-all duration-300"
+            className="group flex items-center gap-2 px-5 py-2.5 border border-secondary/60 bg-[#080808] hover:border-primary font-space text-xs tracking-widest text-muted hover:text-white transition-all duration-300"
           >
             <FaTwitch className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
             <span>TWITCH</span>
@@ -131,16 +101,6 @@ export default function Footer() {
             GR8NIK STUDIOS © {new Date().getFullYear()} // ALL RIGHTS RESERVED
           </span>
         </div>
-
-        {/* Right Content: Map Box (Preserved & Commented) */}
-        {/* <div className="w-full lg:w-[400px] flex-shrink-0">
-          <div className="relative w-full h-[300px] border border-secondary/30 grayscale hover:grayscale-0 transition-all duration-700 bg-[#050505] p-2">
-            <div
-              ref={mapContainer}
-              className="w-full h-full"
-            />
-          </div>
-        </div> */}
 
       </div>
     </footer>

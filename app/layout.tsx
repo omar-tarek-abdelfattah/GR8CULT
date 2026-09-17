@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Bebas_Neue, JetBrains_Mono, Space_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-import AudioPlayerContext from "@/components/Audio/AudioPlayerContext";
 import "./globals.css";
 
 const bebas = Bebas_Neue({
@@ -43,7 +42,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <AudioPlayerContext />
       </body>
     </html>
   );

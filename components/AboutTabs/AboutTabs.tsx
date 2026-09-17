@@ -232,9 +232,9 @@ export default function AboutTabs() {
               {/* Left Column: Direct Contact Links */}
               <div className="w-full lg:w-1/2 flex flex-col justify-between">
                 <div>
-                  <h2 className="font-bebas text-4xl text-white mb-2 tracking-wider">DIRECT LINE // TRANSMISSION</h2>
+                  <h2 className="font-bebas text-4xl text-white mb-2 tracking-wider">DIRECT CONTACT </h2>
                   <p className="font-space text-sm text-muted uppercase tracking-[0.2em] mb-6">
-                    [ SECURE COMMS // STUDIO INQUIRIES &amp; BOOKINGS ]
+                    [ STUDIO INQUIRIES &amp; BOOKINGS ]
                   </p>
                 </div>
 
@@ -271,7 +271,7 @@ export default function AboutTabs() {
                         <Mail className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">OFFICIAL DISPATCH</span>
+                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">OFFICIAL GMAIL</span>
                         <h3 className="font-bebas text-xl text-white tracking-wider">gr8nikstudios@gmail.com</h3>
                       </div>
                     </div>
@@ -291,8 +291,8 @@ export default function AboutTabs() {
                         <Phone className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">VOICE FREQUENCY</span>
-                        <h3 className="font-bebas text-xl text-white tracking-wider">+20 109 250 1573</h3>
+                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">PHONE NUMBER</span>
+                        <h3 className="font-bebas text-xl text-white tracking-wider">+20 101 144 4140</h3>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 font-space text-xs text-primary group-hover:text-white transition-colors">

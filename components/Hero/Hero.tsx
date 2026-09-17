@@ -12,29 +12,29 @@ import './Hero.style.css'
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[80vh] flex flex-row items-center justify-center gap-5 border-b border-secondary overflow-hidden bg-background px-4 md:px-12">
+    <section className="relative w-full h-[80vh] flex flex-col lg:flex-row items-center justify-center gap-5 border-b border-secondary overflow-hidden bg-background px-4 md:px-12 py-12 lg:py-0">
       {/* Background Grid Pattern (simulating the UI mockup) */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
 
       {/* Left side: Text Content */}
-      <div className="relative z-10 flex flex-col items-start w-full max-w-2xl gap-6">
-        <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl tracking-tight text-white uppercase leading-none drop-shadow-2xl">
+      <div className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left w-full max-w-2xl gap-6">
+        <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl tracking-tight text-white uppercase leading-none drop-shadow-2xl text-center md:text-left">
           CRAFT THE SOUND.<br />
           <span className="text-primary pseudo">JOIN GR8NIK</span>
         </h1>
 
-        <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em] md:tracking-[0.3em] mt-2">
+        <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em] md:tracking-[0.3em] mt-2 text-center md:text-left">
           MANIFEST YOUR FATE<br />
           BECOME THE GR8.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 mt-8 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center md:justify-start gap-4 mt-8 w-full sm:w-auto">
           <Link href="/#booking" className="bg-primary text-white font-space text-xs uppercase tracking-widest px-8 py-4 hover:bg-secondary transition-colors rounded-none text-center border border-primary hover:border-secondary">
             LOCK IN A SESSION
           </Link>
-          <Link href="https://wa.me/+201011444140" target="_blank" className="flex items-center justify-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all rounded-none bg-background/50 backdrop-blur-sm group">
-            <Play className="w-3 h-3 fill-current group-hover:text-primary transition-colors" />
-            STUDIO 01 SOUND &gt; READY
+          <Link href="https://wa.me/+201011444140" target="_blank" className="flex items-center justify-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all rounded-none bg-background/50 backdrop-blur-sm group text-center">
+            <Play className="w-3 h-3 fill-current group-hover:text-primary transition-colors shrink-0" />
+            <span>STUDIO 01 SOUND &gt; READY</span>
           </Link>
         </div>
       </div>

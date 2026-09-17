@@ -33,6 +33,14 @@ const stages = [
   },
 ];
 
+const BASE_WAVEFORM_HEIGHTS = Array.from({ length: 48 }).map((_, i) => {
+  const heightVal =
+    Math.abs(Math.sin((i / 48) * Math.PI * 5)) * 60 +
+    25 +
+    ((i * 157) % 25);
+  return Math.round(heightVal);
+});
+
 export default function AudioEvolution() {
   const [activeStage, setActiveStage] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -314,12 +322,10 @@ export default function AudioEvolution() {
               className="flex items-end justify-between gap-[3px] w-full h-40 my-auto cursor-pointer relative group py-2"
               title="Click to seek"
             >
-              {Array.from({ length: 48 }).map((_, i) => {
-                const heightVal =
-                  Math.abs(Math.sin((i / 48) * Math.PI * 5)) * 60 +
-                  25 +
-                  ((i * 157) % 25);
-                const barHeight = heightVal * stages[activeStage].heightMultiplier;
+              {BASE_WAVEFORM_HEIGHTS.map((baseHeight, i) => {
+                const barHeight = Math.round(
+                  Math.min(100, Math.max(12, baseHeight * stages[activeStage].heightMultiplier))
+                );
                 const barProgress = (i / 48) * 100;
                 const isPassed = barProgress <= progressPercent;
 
@@ -331,7 +337,7 @@ export default function AudioEvolution() {
                       : "bg-secondary/40 group-hover:bg-secondary/70"
                       } ${isPlaying && isPassed ? "opacity-100" : "opacity-80"}`}
                     style={{
-                      height: `${Math.min(100, Math.max(12, barHeight))}%`,
+                      height: `${barHeight}%`,
                     }}
                   />
                 );
