@@ -65,12 +65,19 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
       return;
     }
 
+    const isSameBeat =
+      activeBeat?.id === beat.id &&
+      !!audioRef.current &&
+      audioRef.current.src.includes(beat.audioUrl);
+
     setActiveBeat(beat);
 
     if (audioRef.current) {
       setShowEmbedPlayer(false);
-      audioRef.current.src = beat.audioUrl;
-      audioRef.current.currentTime = 0;
+      if (!isSameBeat || audioRef.current.ended) {
+        audioRef.current.src = beat.audioUrl;
+        audioRef.current.currentTime = 0;
+      }
       audioRef.current
         .play()
         .then(() => setIsPlayingPreview(true))

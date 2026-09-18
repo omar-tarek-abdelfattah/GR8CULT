@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { Play, Square, ExternalLink, Sparkles } from "lucide-react";
 import { FaYoutube } from "react-icons/fa";
 import { ShowcaseBeat, STATIC_BEAT_BARS, formatDuration } from "./types";
@@ -23,6 +24,33 @@ export default function BeatsTab({
   duration,
   onSeek,
 }: BeatsTabProps) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Space" || e.key === " ") {
+        const target = e.target as HTMLElement | null;
+        if (
+          target &&
+          (target.tagName === "INPUT" ||
+            target.tagName === "TEXTAREA" ||
+            target.isContentEditable)
+        ) {
+          return;
+        }
+
+        const beatToPlay = activeBeat || beats[0];
+        if (!beatToPlay) return;
+
+        e.preventDefault();
+        onSelectBeat(beatToPlay);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeBeat, beats, onSelectBeat]);
+
   return (
     <>
       {/* Featured Showcase Beat Spotlight (Playback on Top) */}
@@ -171,7 +199,9 @@ export default function BeatsTab({
                     </div>
 
                     <div className="flex justify-between items-center font-space text-[10px] text-muted tracking-widest">
-                      <span className="text-zinc-400">CLICK TO SCRUB WAVEFORM</span>
+                      <span className="text-zinc-400">
+                        CLICK TO SCRUB WAVEFORM • [SPACE] PLAY / PAUSE
+                      </span>
                       <span className="text-white">
                         {formatDuration(currentTime * 1000)} /{" "}
                         {formatDuration(
