@@ -23,7 +23,7 @@ interface SpotifyPlaylistProps {
 }
 
 // Default curated playlist: RapCaviar / Urban sound (can be customized via props or directly here)
-const DEFAULT_PLAYLIST_ID = "4Gn44LdHUKZ6rrRb7ZXCQQ";
+const DEFAULT_PLAYLIST_ID = "3HVdF0oFrRlQhqnLRVcEO2";
 
 function extractSpotifyPlaylistId(input: string): string {
   if (!input) return DEFAULT_PLAYLIST_ID;

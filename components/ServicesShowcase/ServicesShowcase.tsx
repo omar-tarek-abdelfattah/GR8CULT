@@ -44,6 +44,13 @@ const services = [
     description: "From the studio to the stage, we handle every step. Building careers with strategy, vision, and real results.",
     icon: UserStar,
     tag: "MANAGEMENT"
+  },
+  {
+    id: 6,
+    title: "Music videos",
+    description: "Visualizing your music by equipping the visuals with the exact energy, vibe and direction you require",
+    icon: UserStar,
+    tag: "MUSIC VIDEOS"
   }
 ];
 

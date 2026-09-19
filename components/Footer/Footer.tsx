@@ -19,12 +19,12 @@ export default function Footer() {
           <Link href="/" className="group flex flex-col items-center gap-2 cursor-pointer">
             <img
               src="/clean-crosshair-nobg.png"
-              alt="GR8NIK Crosshair"
+              alt="GR8NIK STUDIOS Crosshair Emblem"
               className="w-10 h-10 object-contain opacity-75 group-hover:opacity-100 group-hover:rotate-90 group-hover:scale-110 transition-all duration-500 filter drop-shadow-[0_0_12px_rgba(214,0,0,0.4)]"
             />
             <img
               src="/logo-nobg.png"
-              alt="GR8NIK Studios"
+              alt="GR8NIK STUDIOS Official Logo - Mokattam, Cairo"
               className="w-44 md:w-52 h-auto object-contain opacity-90 group-hover:opacity-100 drop-shadow-[0_0_25px_rgba(214,0,0,0.35)] transition-all duration-300"
             />
           </Link>
@@ -76,7 +76,7 @@ export default function Footer() {
             <span className="text-secondary uppercase">ACCEPTED:</span>
             <span className="text-zinc-300 flex items-center gap-2">
               INSTAPAY
-              <img src="/instapay.png" alt="Instapay" className="w-16 h-auto object-contain inline-block" />
+              <img src="/instapay.png" alt="Instapay Egypt payment method accepted at GR8NIK STUDIOS" className="w-16 h-auto object-contain inline-block" />
             </span>
           </div>
 
@@ -84,7 +84,7 @@ export default function Footer() {
             <span className="text-secondary uppercase">ACCEPTED:</span>
             <span className="text-zinc-300 flex items-center gap-2">
               VODAFONE CASH
-              <img src="/Vodafone_Symbol_1.png" alt="Vodafone Cash" className="w-4 h-4 object-contain inline-block" />
+              <img src="/Vodafone_Symbol_1.png" alt="Vodafone Cash Egypt payment method accepted at GR8NIK STUDIOS" className="w-4 h-4 object-contain inline-block" />
             </span>
           </div>
         </div>

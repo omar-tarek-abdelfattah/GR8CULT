@@ -34,7 +34,7 @@ export default function Hero() {
           </Link>
           <Link href="https://wa.me/+201011444140" target="_blank" className="flex items-center justify-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all rounded-none bg-background/50 backdrop-blur-sm group text-center">
             <Play className="w-3 h-3 fill-current group-hover:text-primary transition-colors shrink-0" />
-            <span>STUDIO 01 SOUND &gt; READY</span>
+            <span>COMMUNICATE WITH US</span>
           </Link>
         </div>
       </div>
@@ -61,10 +61,10 @@ export default function Hero() {
           className="h-full w-full"
         >
           {/* Example Slides (Replace with your actual video paths) */}
-          {[`https://d2flaqome864xs.cloudfront.net/first-video-muted.mp4`,
-            `https://d2flaqome864xs.cloudfront.net/second-video-muted.mp4`,
-            `https://d2flaqome864xs.cloudfront.net/third-video-muted.mp4`,
-            `https://d2flaqome864xs.cloudfront.net/fourth-video-muted.mp4`].map((video: string, index) => (
+          {[`https://d2flaqome864xs.cloudfront.net/vid1.mp4`,
+            `https://d2flaqome864xs.cloudfront.net/vid2.mp4`,
+            `https://d2flaqome864xs.cloudfront.net/vid3.mp4`,
+            `https://d2flaqome864xs.cloudfront.net/vid4.mp4`].map((video: string, index) => (
               <SwiperSlide key={index} className="transition-opacity duration-500 overflow-hidden border border-secondary/50 rounded-sm bg-black">
                 {({ isActive }: any) => (
                   <div className={`w-full h-full relative ${isActive ? 'opacity-100' : 'opacity-40 grayscale'} transition-all duration-700`}>
@@ -75,6 +75,8 @@ export default function Hero() {
                       muted
                       loop
                       playsInline
+                      aria-label={`GR8NIK STUDIOS recording session reel clip ${index + 1}`}
+                      title="GR8NIK STUDIOS studio session highlight"
                       className="object-cover w-full h-full"
                     />
                     {/* Stylistic Overlay */}

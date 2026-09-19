@@ -33,9 +33,9 @@ export default function CinematicIntro() {
       <div className="absolute inset-0 bg-black/60"></div>
 
       <div className="relative z-10 flex flex-col items-center gap-8">
-        <h1 className="font-bebas text-7xl md:text-9xl text-primary animate-pulse tracking-widest uppercase">
+        <div className="font-bebas text-7xl md:text-9xl text-primary animate-pulse tracking-widest uppercase">
           INITIATING
-        </h1>
+        </div>
         <div className="flex gap-2">
            <div className="w-16 h-1 bg-secondary overflow-hidden">
              <div className="w-full h-full bg-primary animate-[slide_1s_ease-in-out_infinite]"></div>

@@ -15,7 +15,7 @@ export default function BookingMatrix() {
         {/* Tactical Tag */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 border border-primary/50 bg-primary/10 text-primary font-space text-[11px] tracking-[0.25em] uppercase mb-8">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>SESSION TRANSMISSION // READY</span>
+          <span>SESSION INITIATION // BOOK NOW</span>
         </div>
 
         {/* Direct Call to Action Title */}
@@ -26,12 +26,18 @@ export default function BookingMatrix() {
 
         {/* Motivating Copy */}
         <p className="font-space text-base md:text-xl text-gray-200 leading-relaxed max-w-2xl mb-4 font-light">
-          Greatness isn't accidental—it's engineered. Step into Cairo's premier sonic sanctuary where raw analog warmth converges with surgical digital precision.
+          Greatness isn't accidental—it's engineered. A session of magic and artistry awaits you at Cairo's premier hit-maker.
         </p>
         <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em] max-w-xl mb-12">
-          "Don’t let your vision remain an unmastered frequency. Lock in the facility, capture raw energy, and build cultural artifacts that outlive the creator."
+          "Don’t let your vision remain an undiscovered idea and an unmastered frequency. Lock in the studio, capture raw energy, and build cultural artifacts that outlive the creator."
         </p>
 
+        <p className="font-space text-xs text-muted lowercase tracking-[0.1em] mb-1">
+          *pricing will be determined based on what you need, text us to enquire
+        </p>
+        <p className="font-space text-xs text-muted lowercase tracking-[0.1em] mb-8">
+          *specific location will be shared upon booking
+        </p>
         {/* 2 Buttons */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-5 w-full sm:w-auto">
           {/* Google Calendar Slots Button */}

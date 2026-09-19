@@ -245,7 +245,7 @@ export default function AudioEvolution() {
               AUDIO VAULT // A-B TEST
             </h2>
             <p className="font-space text-xs text-muted tracking-widest uppercase mt-1">
-              REAL-TIME PRODUCTION MATRIX // MULTI-STAGE COMPARISON
+              REAL-TIME PRODUCTION // MULTI-STAGE COMPARISON
             </p>
           </div>
 
@@ -300,7 +300,7 @@ export default function AudioEvolution() {
 
             {/* Matrix Status Indicator */}
             <div className="pt-4 border-t border-secondary/40 flex items-center justify-between font-space text-[10px] text-muted tracking-widest uppercase">
-              <span>SYNC_STATE: {isPlaying ? "STREAMING" : "STANDBY"}</span>
+              <span>STATE: {isPlaying ? "STREAMING" : "STANDBY"}</span>
             </div>
           </div>
 

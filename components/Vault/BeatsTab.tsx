@@ -73,7 +73,7 @@ export default function BeatsTab({
               <div className="w-full lg:w-2/5 aspect-square relative overflow-hidden border-b lg:border-b-0 lg:border-r border-secondary/50 bg-[#000]">
                 <img
                   src={activeBeat.thumbnail}
-                  alt={activeBeat.title}
+                  alt={`${activeBeat.title} - ${activeBeat.genre} instrumental beat (${activeBeat.bpm} BPM) produced by GR8NIK STUDIOS`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
@@ -83,7 +83,7 @@ export default function BeatsTab({
                   <div className="flex items-center gap-2 bg-black/85 backdrop-blur-md px-3 py-1.5 border border-secondary/60">
                     <img
                       src="/clean-crosshair-nobg.png"
-                      alt="GR8NIK"
+                      alt="GR8NIK STUDIOS Emblem Crosshair"
                       className="w-4 h-4 object-contain"
                     />
                     <span className="font-space text-[10px] text-white tracking-widest font-bold">
@@ -303,7 +303,7 @@ export default function BeatsTab({
                   <div className="w-full aspect-square bg-[#0a0a0a] relative border-b border-secondary/50 group-hover:border-primary/50 overflow-hidden">
                     <img
                       src={beat.thumbnail}
-                      alt={beat.title}
+                      alt={`${beat.title} (${beat.bpm} BPM) - ${beat.genre} Beat from GR8NIK STUDIOS`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90"
                     />
 
@@ -311,7 +311,7 @@ export default function BeatsTab({
                     <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1.5 bg-black/85 backdrop-blur-sm border border-secondary/60 px-2 py-0.5">
                       <img
                         src="/clean-crosshair-nobg.png"
-                        alt="GR8NIK"
+                        alt="GR8NIK STUDIOS Official Beat Stamp"
                         className="w-3 h-3 object-contain"
                       />
                       <span className="font-space text-[9px] text-white tracking-widest font-bold">

@@ -3,8 +3,33 @@ import { getTracksByIds, AHMEDY_TRACK_IDS } from "@/lib/spotify";
 import VaultClient from "@/components/Vault/VaultClient";
 
 export const metadata: Metadata = {
-  title: "Vault | GR8NIK STUDIOS",
-  description: "Official releases and discography from GR8NIK STUDIOS on Spotify.",
+  title: "The Vault | Discography, Exclusive Beats & Music Videos",
+  description:
+    "Explore official records, instrumental beats, stems, and high-definition music videos engineered and produced at GR8NIK STUDIOS in Cairo.",
+  alternates: {
+    canonical: "/vault",
+  },
+  openGraph: {
+    title: "The Vault // GR8NIK STUDIOS Discography & Beats",
+    description:
+      "Official releases, beats with stems, and official music videos from the GR8NIK sanctuary.",
+    url: "https://gr8nikstudios.com/vault",
+    images: [
+      {
+        url: "/ahmedy-hero-bg.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "GR8NIK STUDIOS Vault Discography",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Vault // GR8NIK STUDIOS Discography & Beats",
+    description:
+      "Official releases, beats with stems, and official music videos from the GR8NIK sanctuary.",
+    images: ["/ahmedy-hero-bg.jpeg"],
+  },
 };
 
 export const revalidate = 3600; // Revalidate every hour

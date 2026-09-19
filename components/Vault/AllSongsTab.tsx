@@ -47,7 +47,7 @@ export default function AllSongsTab({
                 {activeTrack.albumArt ? (
                   <img
                     src={activeTrack.albumArt}
-                    alt={activeTrack.title}
+                    alt={`${activeTrack.title} by ${activeTrack.artist} - Engineered at GR8NIK STUDIOS`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 ) : (
@@ -152,6 +152,7 @@ export default function AllSongsTab({
                       </div>
                       <iframe
                         src={`https://open.spotify.com/embed/track/${activeTrack.id}?utm_source=generator&theme=0`}
+                        title={`Spotify audio player for ${activeTrack.title} by ${activeTrack.artist}`}
                         width="100%"
                         height="152"
                         frameBorder="0"
@@ -198,7 +199,7 @@ export default function AllSongsTab({
                     {track.albumArt ? (
                       <img
                         src={track.albumArt}
-                        alt={track.title}
+                        alt={`${track.title} by ${track.artist} - Official GR8NIK STUDIOS release`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (

@@ -19,7 +19,11 @@ export default function HardwareShowcase() {
               <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#d60000_1px,transparent_1px)] bg-[size:24px_24px]"></div>
               
               {/* Background image handler */}
-              <div className="hardware-image-bg"></div>
+              <div
+                className="hardware-image-bg"
+                role="img"
+                aria-label="GR8NIK STUDIOS professional studio recording hardware and microphone vocal chain"
+              ></div>
 
               <div className="absolute bottom-4 left-4 z-20 font-space text-[10px] text-white tracking-widest flex flex-col gap-1 bg-black/70 p-3 border border-secondary/50 backdrop-blur-sm">
                 <span>[ STATUS: <span className="text-primary">ONLINE</span> ]</span>
@@ -36,7 +40,7 @@ export default function HardwareShowcase() {
             </h2>
             
             <p className="font-space text-sm md:text-base text-muted leading-relaxed max-w-xl">
-              At GR8CULT, we don't settle for "good enough." Our facility is armed with industry-standard, world-class analog and digital hardware designed to capture every frequency with absolute pristine clarity. 
+              At GR8NIK STUDIO, we don't settle for "good enough." Our studio is armed with industry-standard, world-class analog and digital hardware designed to capture every frequency with absolute clarity. 
             </p>
 
             <p className="font-space text-sm md:text-base text-muted leading-relaxed max-w-xl">

@@ -25,13 +25,13 @@ export default function Navbar() {
         >
           <img
             src="/clean-crosshair-nobg.png"
-            alt="gr8nik crosshair"
+            alt="GR8NIK STUDIOS Crosshair Emblem"
             className="w-14 sm:w-20 h-auto crosshair"
           />
           <div className="logo relative">
             <img
               src="/logo-nobg.png"
-              alt="gr8nik logo"
+              alt="GR8NIK STUDIOS Official Brand Logo"
               className="w-32 sm:w-40 h-auto"
             />
           </div>

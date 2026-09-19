@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, ArrowUpRight, MapPin } from 'lucide-react';
 import { FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa';
+import Image from 'next/image';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import SpotifyPlaylist from '@/components/SpotifyPlaylist/SpotifyPlaylist';
@@ -90,15 +91,21 @@ export default function AboutTabs() {
               <div className="w-full md:w-1/3 relative group overflow-hidden">
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#d60000_1px,transparent_1px)] bg-[size:16px_16px] z-10 pointer-events-none"></div>
                 <div className="absolute inset-0 bg-primary/40 mix-blend-multiply z-10 pointer-events-none"></div>
-                <img
+                <Image
                   src="/ahmedy-hero-2-bg.jpeg"
-                  alt="Ahmedy"
+                  alt="AhmedyTheGr8 - Founder and Chief Audio Engineer at GR8NIK STUDIOS"
                   className="w-full h-auto filter grayscale contrast-125 opacity-90 transition-all duration-500"
+                  priority
+                  width={500}
+                  height={500}
                 />
-                <img
+                <Image
                   src="/ahmedy-hero-bg.jpeg"
-                  alt="Ahmedy Hover"
+                  alt="AhmedyTheGr8 portrait in the studio control room"
                   className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 opacity-0 group-hover:opacity-100 transition-all duration-500"
+                  priority
+                  width={500}
+                  height={500}
                 />
 
                 <div className="absolute top-4 left-0 w-full p-6 z-20 pointer-events-none">
@@ -113,10 +120,24 @@ export default function AboutTabs() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <img src="/ahmedy-working-1.jpeg" alt="" className='w-full h-auto' />
+                    <Image
+                      src="/ahmedy-working-1.jpeg"
+                      alt="AhmedyTheGr8 mixing audio on the console at GR8NIK STUDIOS"
+                      className="w-full h-auto"
+                      priority
+                      width={500}
+                      height={500}
+                    />
                   </div>
                   <div>
-                    <img src="/ahmedy-working-2.jpeg" alt="" className='w-full h-auto' />
+                    <Image
+                      src="/ahmedy-working-2.jpeg"
+                      alt="AhmedyTheGr8 producing beats and fine-tuning tracks in Cairo"
+                      className="w-full h-auto"
+                      priority
+                      width={500}
+                      height={500}
+                    />
                   </div>
                 </div>
 
@@ -169,15 +190,21 @@ export default function AboutTabs() {
               <div className="w-full lg:w-1/3 flex justify-center items-center">
                 <div className="mic-aura-container relative group w-full max-w-sm cursor-pointer">
                   <div className="relative w-full h-full overflow-hidden">
-                    <img
+                    <Image
                       src="/MIC.png"
-                      alt="GR8 Microphone"
+                      alt="Studio Vocal Recording Microphone at GR8NIK STUDIOS"
                       className="w-full h-auto object-contain"
+                      priority
+                      width={500}
+                      height={500}
                     />
-                    <img
+                    <Image
                       src="/mic-w-bg.jpeg"
-                      alt="GR8 Microphone with Background"
+                      alt="Professional studio microphone in acoustic environment at GR8NIK STUDIOS"
                       className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      width={500}
+                      height={500}
+                      priority
                     />
                   </div>
                 </div>

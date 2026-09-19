@@ -56,7 +56,7 @@ export default function MusicVideosTab({ videos }: MusicVideosTabProps) {
                   >
                     <img
                       src={thumb}
-                      alt={mv.title}
+                      alt={`${mv.title} - Official Music Video release from GR8NIK STUDIOS`}
                       onError={(e) => {
                         const img = e.currentTarget as HTMLImageElement;
                         if (videoId && img.src.includes("maxresdefault")) {
