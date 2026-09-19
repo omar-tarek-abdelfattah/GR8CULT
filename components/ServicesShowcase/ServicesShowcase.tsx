@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
 import { Autoplay, Pagination, EffectCoverflow } from 'swiper/modules';
-import { Mic, SlidersHorizontal, Disc3, UserStar, Tv } from 'lucide-react';
+import { Mic, SlidersHorizontal, Disc3, UserStar, Tv, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 import 'swiper/css';
@@ -55,6 +57,8 @@ const services = [
 ];
 
 export default function ServicesShowcase() {
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+
   return (
     <section className="w-full py-24 border-b border-secondary bg-background relative overflow-hidden">
       {/* Background Accent */}
@@ -77,74 +81,99 @@ export default function ServicesShowcase() {
           </div>
         </div>
 
-        <Swiper
-          effect={'coverflow'}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={'auto'}
-          coverflowEffect={{
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 2.5,
-            slideShadows: false,
-          }}
-          autoplay={{
-            delay: 3500,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-            bulletClass: 'swiper-pagination-bullet !bg-secondary !opacity-50 !w-2 !h-2 !rounded-none transition-all duration-300 mx-1',
-            bulletActiveClass: '!bg-primary !opacity-100 !w-4'
-          }}
-          modules={[EffectCoverflow, Autoplay, Pagination]}
-          className="w-full pb-16"
-        >
-          {services.map((service) => {
-            const Icon = service.icon;
-            return (
-              <SwiperSlide key={service.id} className="max-w-[320px] md:max-w-[380px] w-full group">
-                {/* @ts-ignore */}
-                {({ isActive }) => (
-                  <div className={`
-                    relative overflow-hidden flex flex-col h-[420px] p-8 border transition-all duration-500 bg-[#050505]
-                    ${isActive ? 'border-primary shadow-[0_0_30px_-5px_rgba(214,0,0,0.3)]' : 'border-secondary/50 opacity-60 scale-95'}
-                  `}>
-                    {/* Background Icon */}
-                    <Icon className={`absolute -bottom-12 -right-12 w-96 h-96 transition-all duration-700 pointer-events-none
-                      ${isActive ? 'text-primary/20 rotate-12 scale-110' : 'text-secondary/10 -rotate-12'}
-                    `} />
+        {/* Carousel Container with Left & Right Navigation Buttons */}
+        <div className="relative w-full">
+          {/* Left Arrow Button */}
+          <button
+            type="button"
+            onClick={() => swiperInstance?.slidePrev()}
+            aria-label="Previous Service"
+            className="absolute -left-2 sm:left-0 md:-left-8 top-[210px] -translate-y-1/2 z-30 p-2 text-white/70 hover:text-primary transition-all duration-200 cursor-pointer group"
+          >
+            <ChevronLeft className="w-8 h-8 md:w-11 md:h-11 transition-transform group-hover:-translate-x-1 drop-shadow-lg" />
+          </button>
 
-                    <div className="relative z-10 flex justify-between items-start mb-8">
-                      <div className="p-3 border border-secondary/50 bg-[#111] rounded-sm">
-                        <Icon className="w-8 h-8 text-primary" />
+          {/* Right Arrow Button */}
+          <button
+            type="button"
+            onClick={() => swiperInstance?.slideNext()}
+            aria-label="Next Service"
+            className="absolute -right-2 sm:right-0 md:-right-8 top-[210px] -translate-y-1/2 z-30 p-2 text-white/70 hover:text-primary transition-all duration-200 cursor-pointer group"
+          >
+            <ChevronRight className="w-8 h-8 md:w-11 md:h-11 transition-transform group-hover:translate-x-1 drop-shadow-lg" />
+          </button>
+
+          <Swiper
+            onSwiper={setSwiperInstance}
+            loop={false}
+            effect={'coverflow'}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={'auto'}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2.5,
+              slideShadows: false,
+            }}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+              bulletClass: 'swiper-pagination-bullet !bg-secondary !opacity-50 !w-2 !h-2 !rounded-none transition-all duration-300 mx-1',
+              bulletActiveClass: '!bg-primary !opacity-100 !w-4'
+            }}
+            modules={[EffectCoverflow, Autoplay, Pagination]}
+            className="w-full pb-16"
+          >
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <SwiperSlide key={service.id} className="max-w-[320px] md:max-w-[380px] w-full group">
+                  {/* @ts-ignore */}
+                  {({ isActive }) => (
+                    <div className={`
+                      relative overflow-hidden flex flex-col h-[420px] p-8 border transition-all duration-500 bg-[#050505]
+                      ${isActive ? 'border-primary shadow-[0_0_30px_-5px_rgba(214,0,0,0.3)]' : 'border-secondary/50 opacity-60 scale-95'}
+                    `}>
+                      {/* Background Icon */}
+                      <Icon className={`absolute -bottom-12 -right-12 w-96 h-96 transition-all duration-700 pointer-events-none
+                        ${isActive ? 'text-primary/20 rotate-12 scale-110' : 'text-secondary/10 -rotate-12'}
+                      `} />
+
+                      <div className="relative z-10 flex justify-between items-start mb-8">
+                        <div className="p-3 border border-secondary/50 bg-[#111] rounded-sm">
+                          <Icon className="w-8 h-8 text-primary" />
+                        </div>
+                        <span className="font-space text-[10px] text-muted tracking-widest px-2 py-1 border border-secondary/30 bg-black">
+                          {service.tag}
+                        </span>
                       </div>
-                      <span className="font-space text-[10px] text-muted tracking-widest px-2 py-1 border border-secondary/30 bg-black">
-                        {service.tag}
-                      </span>
-                    </div>
 
-                    <div className="mt-auto relative z-10">
-                      <h3 className="font-bebas text-3xl tracking-wider text-white mb-4">
-                        {service.title}
-                      </h3>
-                      <p className="font-space text-sm text-muted leading-relaxed line-clamp-3">
-                        {service.description}
-                      </p>
-                    </div>
+                      <div className="mt-auto relative z-10">
+                        <h3 className="font-bebas text-3xl tracking-wider text-white mb-4">
+                          {service.title}
+                        </h3>
+                        <p className="font-space text-sm text-muted leading-relaxed line-clamp-3">
+                          {service.description}
+                        </p>
+                      </div>
 
-                    <div className={`relative z-10 mt-8 pt-6 border-t border-secondary/30 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                      <Link href="/#booking" className="font-space text-xs text-primary uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 w-max">
-                        BOOK NOW <span className="transition-transform group-hover:translate-x-1">-&gt;</span>
-                      </Link>
+                      <div className={`relative z-10 mt-8 pt-6 border-t border-secondary/30 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                        <Link href="/#booking" className="font-space text-xs text-primary uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 w-max">
+                          BOOK NOW <span className="transition-transform group-hover:translate-x-1">-&gt;</span>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+                  )}
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
 
         {/* Mobile View Rates Button */}
         <div className="mt-8 flex justify-center md:hidden">

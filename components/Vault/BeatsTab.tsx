@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { Play, Square, ExternalLink, Sparkles } from "lucide-react";
-import { FaYoutube } from "react-icons/fa";
+import { FaYoutube, FaWhatsapp } from "react-icons/fa";
 import { ShowcaseBeat, STATIC_BEAT_BARS, formatDuration } from "./types";
 
 interface BeatsTabProps {
@@ -239,6 +239,7 @@ export default function BeatsTab({
                     rel="noreferrer"
                     className="border border-secondary/70 text-muted hover:border-primary hover:text-white font-space text-xs px-6 py-3.5 tracking-widest transition-colors uppercase flex items-center gap-2"
                   >
+                    <FaWhatsapp className="w-4 h-4 text-primary" />
                     <span>INQUIRE / LEASE</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
@@ -370,9 +371,24 @@ export default function BeatsTab({
                       <span className="text-secondary">
                         {formatDuration(beat.durationMs)}
                       </span>
-                      <span className="text-primary hover:underline flex items-center gap-1">
-                        {isPlayingThisBeat ? "PLAYING IN TOP" : "LOAD IN TOP &gt;"}
-                      </span>
+                      <div className="flex items-center gap-3">
+                        <a
+                          href={`https://wa.me/+201011444140?text=${encodeURIComponent(
+                            `Hey GR8NIK Studios, I want to inquire about leasing the beat "${beat.title}" (${beat.bpm} BPM / ${beat.genre}).`
+                          )}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-muted hover:text-primary transition-colors flex items-center gap-1 hover:underline"
+                          title={`Inquire about ${beat.title} on WhatsApp`}
+                        >
+                          <FaWhatsapp className="w-3 h-3 text-primary" />
+                          <span>INQUIRE</span>
+                        </a>
+                        <span className="text-primary hover:underline flex items-center gap-1">
+                          {isPlayingThisBeat ? "PLAYING" : "LOAD &gt;"}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

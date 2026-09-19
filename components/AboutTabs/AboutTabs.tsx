@@ -236,7 +236,9 @@ export default function AboutTabs() {
                 <div className="flex flex-col gap-4 flex-grow justify-between">
                   {/* WhatsApp Link */}
                   <a
-                    href="https://wa.me/+201011444140"
+                    href={`https://wa.me/+201011444140?text=${encodeURIComponent(
+                      "Hey GR8NIK Studios, I'd like to inquire about booking a studio session and services."
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="border border-secondary bg-[#0a0a0a] p-5 flex items-center justify-between hover:border-primary transition-all duration-300 group"

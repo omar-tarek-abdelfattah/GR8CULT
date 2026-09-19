@@ -32,7 +32,13 @@ export default function Hero() {
           <Link href="/#booking" className="bg-primary text-white font-space text-xs uppercase tracking-widest px-8 py-4 hover:bg-secondary transition-colors rounded-none text-center border border-primary hover:border-secondary">
             LOCK IN A SESSION
           </Link>
-          <Link href="https://wa.me/+201011444140" target="_blank" className="flex items-center justify-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all rounded-none bg-background/50 backdrop-blur-sm group text-center">
+          <Link
+            href={`https://wa.me/+201011444140?text=${encodeURIComponent(
+              "Hey GR8NIK Studios, I'd like to inquire about booking a session and studio services."
+            )}`}
+            target="_blank"
+            className="flex items-center justify-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all rounded-none bg-background/50 backdrop-blur-sm group text-center"
+          >
             <Play className="w-3 h-3 fill-current group-hover:text-primary transition-colors shrink-0" />
             <span>COMMUNICATE WITH US</span>
           </Link>

@@ -54,7 +54,9 @@ export default function BookingMatrix() {
 
           {/* WhatsApp Link Button */}
           <a
-            href="https://wa.me/+201011444140"
+            href={`https://wa.me/+201011444140?text=${encodeURIComponent(
+              "Hey GR8NIK Studios, I'd like to book a studio session. Please let me know your availability and rates."
+            )}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 bg-[#0a0a0a] border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-5 hover:border-primary hover:text-white hover:bg-black transition-all group cursor-pointer"
