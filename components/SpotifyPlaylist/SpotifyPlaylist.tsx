@@ -58,18 +58,28 @@ export default function SpotifyPlaylist({
         {/* Title in Bebas Neue */}
         <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white uppercase leading-none mb-6">
           THE SOUND OF <br />
-          <span className="text-primary">GR8NIK STUDIOS.</span>
+          <span className="text-primary">GR8NIK.</span>
         </h2>
 
         {/* Motivating Copy */}
         <p className="font-space text-sm md:text-base text-gray-300 leading-relaxed max-w-xl mb-4 font-light">
-          Catch the latest trends and immerse yourself in the Gr8cult sound.
-          From underground anthems to surgical master tracks, explore the ever changing
-          discography and soundscape around our CULT.
+
+          The music coming out of the room.
+          <br />
+          Beats we've made.
+          <br />
+          Records we've worked on.
+          <br />
+          Artists we're building with.
+          <br />
+          Sounds we're discovering.
+          <br />
+
+          From Cairo's underground to wherever the music takes us
         </p>
 
         <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em] max-w-lg mb-8">
-          HEAVY 808S // CAIRO UNDERGROUND TO GLOBAL STAGES.
+          HEAVY 808S // REAL ARTISTS // REAL RECORDS.
         </p>
 
         {/* Tactical Spec Badges */}

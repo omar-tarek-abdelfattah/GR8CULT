@@ -10,7 +10,7 @@ import SpotifyPlaylist from '@/components/SpotifyPlaylist/SpotifyPlaylist';
 import './AboutTabs.css';
 
 const tabs = [
-  "THE MAN BEHIND IT",
+  "THE PERSON BEHIND GR8NIK",
   "OUR FUTURE",
   "JOIN THE CULT",
   "CONTACT US"
@@ -84,7 +84,7 @@ export default function AboutTabs() {
 
       {/* Tabs Content */}
       <div className="w-full min-h-[400px]">
-        {/* Tab 1: The Man Behind It */}
+        {/* Tab 1: THE PERSON BEHIND GR8NIK */}
         {activeTab === 0 && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex flex-col md:flex-row gap-8 items-start">
@@ -114,8 +114,18 @@ export default function AboutTabs() {
               </div>
               <div className="w-full md:w-2/3 pt-2">
                 <h2 className="font-bebas text-3xl md:text-4xl text-white tracking-wider m-0 drop-shadow-md">AhmedyTheGr8</h2>
-                <p className="font-space text-lg text-white leading-relaxed mb-4">
-                  Born from a relentless obsession with sonic perfection, GR8NIK emerged as a response to the compromised quality of modern independent Egyptian releases. The architect behind the cult has spent the better part of the last decade dissecting soundscapes, engineering records, and studying the visceral impact of frequency manipulation.
+                <p className="font-space text-lg text-white leading-relaxed mb-4">I'm Ahmedy — producer, artist, sound engineer and the person building GR8NIK.
+
+                  I started GR8NIK because I wanted a place where the entire process could happen in one world — making the beat, recording the artist, shaping the sound, building the visual identity and eventually putting the music out into the world.
+                  <br />
+                  <br />
+                  I'm still figuring it out.
+                  <br />
+                  <br />
+                  That's part of it.
+                  <br />
+                  <br />
+                  GR8NIK isn't supposed to feel like a traditional recording studio. It's a creative space for artists, producers and people who want to make something that actually sounds like them.
                 </p>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -142,10 +152,20 @@ export default function AboutTabs() {
                 </div>
 
                 <p className="font-space text-lg text-white leading-relaxed mb-4">
-                  "It’s not just a Fixed Preset or the clearest sound. It’s about manifesting an energy that outlives the creator and transcends the sense of hearing."
+
+                  Some days that's a record.
+
+                  Some days it's a beat.
+
+                  Some days it's a DJ session, a mix, a video, a new artist, or an idea that turns into something bigger.
                 </p>
-                <p className="font-space text-lg text-white leading-relaxed">
-                  Combining raw analog warmth with surgical digital precision, the goal has always been singular: to build an empire where artists don't just record music, but forge timeless cultural artifacts.
+                <p className="font-space text-lg text-white leading-relaxed font-bold">
+                  I'm not trying to make everything sound the same.
+                  I'm trying to help people find their sound.
+                  <br />
+                  <br />
+                  <br />
+                  THAT'S GR8NIK
                 </p>
               </div>
             </div>
@@ -160,28 +180,44 @@ export default function AboutTabs() {
               <div className="w-full lg:w-2/3">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="border border-secondary p-6 bg-[#0a0a0a]">
-                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 01 // THE FOUNDATION</h3>
+                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 01 // BUILD THE HOUSE</h3>
                     <p className="font-space text-md text-muted leading-relaxed">
-                      Establish the premier independent facility in Cairo. A sanctuary for artists demanding uncompromising audio fidelity. (STATUS: COMPLETE)
+                      Build GR8NIK into a studio where artists can actually make great music — from the first idea to the finished record.
+
+                      Recording. Production. Mixing. Beats. Content.
+                      A place built around the music, not just the equipment.
                     </p>
                   </div>
                   <div className="border border-secondary p-6 bg-[#0a0a0a]">
-                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 02 // THE ROSTER</h3>
+                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 02 // BUILD THE SOUND</h3>
                     <p className="font-space text-md text-muted leading-relaxed">
-                      Transition from a commercial facility to an independent label powerhouse, signing and developing the avant-garde voices of the next generation.
+                      GR8NIK grows beyond the room.
+
+                      We work with more artists, develop our own sound, release more music, build the GR8NIK catalog, and create a real community around the studio.
+
+                      The goal isn't to sign everyone.
+
+                      It's to find the artists who fit the world we're building.
                     </p>
                   </div>
                   <div className="border border-secondary p-6 bg-[#0a0a0a]">
-                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 03 // GLOBAL BROADCAST</h3>
+                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 03 // BUILD THE PLATFORM</h3>
                     <p className="font-space text-md text-muted leading-relaxed">
-                      Launch the GR8CULT media division. Live performance series, documentaries, and a global distribution network for cult affiliates.
+
+                      Turn everything happening around GR8NIK into a platform.
+
+                      Music. Artists. Sessions. Education. DJ culture. Sound design. Visuals.
+                      Beneath Cairo. YouTube. Live sessions. Original content.
+
+                      Give the scene somewhere to discover new people — and give the people inside GR8NIK somewhere to grow.
                     </p>
                   </div>
                   <div className="border border-secondary p-6 bg-[#0a0a0a] border-dashed">
-                    <h3 className="font-space text-lg tracking-widest text-muted mb-4 uppercase">[ CLASSIFIED DIRECTIVE ]</h3>
+                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">[ NEXT UP ]</h3>
                     <p className="font-space text-md text-secondary leading-relaxed">
-                      DATA ENCRYPTED. AWAITING CLEARANCE.
+                      We're building it one record, one artist, one session and one idea at a time.
                     </p>
+                    <p className="font-space text-md text-white leading-relaxed mt-2 font-bold">GR8NIK ISN'T FINISHED, THAT'S THE POINT.</p>
                   </div>
                 </div>
               </div>

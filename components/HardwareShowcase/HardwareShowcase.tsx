@@ -10,14 +10,14 @@ export default function HardwareShowcase() {
 
       <div className="container mx-auto px-4 md:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
-          
+
           {/* Left: Image Display */}
           <div className="w-full lg:w-1/2 relative group">
             <div className="hardware-image-container">
-              
+
               {/* Fallback pattern */}
               <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#d60000_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-              
+
               {/* Background image handler */}
               <div
                 className="hardware-image-bg"
@@ -35,17 +35,37 @@ export default function HardwareShowcase() {
           {/* Right: Text Description */}
           <div className="w-full lg:w-1/2 flex flex-col items-start gap-6">
             <h2 className="font-bebas text-5xl md:text-7xl tracking-tight uppercase text-white leading-none">
-              UNCOMPROMISING <br />
-              <span className="text-primary">SONIC EXCELLENCE.</span>
+              MAKE IT  <br />
+              <span className="text-primary">SOUND LIKE YOU.</span>
             </h2>
-            
-            <p className="font-space text-sm md:text-base text-muted leading-relaxed max-w-xl">
-              At GR8NIK STUDIO, we don't settle for "good enough." Our studio is armed with industry-standard, world-class analog and digital hardware designed to capture every frequency with absolute clarity. 
-            </p>
 
             <p className="font-space text-sm md:text-base text-muted leading-relaxed max-w-xl">
-              From the warmth of vintage tube compressors to the surgical precision of modern AD/DA converters, our vocal chains and mixing desk ensure that your sound translates perfectly from the studio to the stadiums. When you record here, you are getting the same sonic treatment as the industry's highest charting records.
-            </p>
+              Good equipment helps.
+              <br />
+              
+
+              Good engineering matters.
+              <br />
+
+              But neither one makes a great record by itself.
+              <br />
+              <br />
+
+              At GR8NIK, we care about the part that happens between the artist and the music — finding the right performance, making the right production decisions, fixing what needs fixing and knowing when to stop.
+              <br />
+              <br />
+
+              We don't want every artist to leave sounding like GR8NIK.
+              <br />
+              
+
+              We want you to leave sounding *more like yourself.*
+              <br />
+              
+
+              From recording and vocal production to beats, mixing, mastering and everything in between, we build around what the record actually needs.</p>
+
+            
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mt-8 w-full sm:w-auto">
               <Link href="/#booking" className="flex items-center gap-2 border border-primary text-primary px-8 py-4 font-space text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-colors rounded-none group">
