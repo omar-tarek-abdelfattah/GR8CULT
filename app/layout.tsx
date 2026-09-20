@@ -3,6 +3,8 @@ import { Bebas_Neue, JetBrains_Mono, Space_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
+import {GoogleAnalytics} from '@next/third-parties/google'
 
 const bebas = Bebas_Neue({
   variable: "--font-bebas",
@@ -33,8 +35,14 @@ export const metadata: Metadata = {
     "Premier recording, mixing, and mastering studio located in Mokattam, Cairo. Engineered by AhmedyTheGr8. Discover the Vault, book sessions, and join the GR8CULT.",
   keywords: [
     "GR8NIK STUDIOS",
+    "GR8NIK",
+    "GR8NIKSTUDIOS",
+    "gr8nikstudios",
     "GR8CULT",
+    "gr8cult",
+    "gr8nik",
     "AhmedyTheGr8",
+    "ahmedy",
     "Recording Studio Cairo",
     "Music Studio Mokattam",
     "Mixing and Mastering Cairo",
@@ -143,7 +151,9 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Analytics />
       </body>
+      <GoogleAnalytics gaId="G-NEP9Z768TZ" />
     </html>
   );
 }
