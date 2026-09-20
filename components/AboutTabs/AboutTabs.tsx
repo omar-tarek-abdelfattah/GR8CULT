@@ -131,19 +131,19 @@ export default function AboutTabs() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Image
-                      src="/ahmedy-working-1.jpeg"
-                      alt="AhmedyTheGr8 mixing audio on the console at GR8NIK STUDIOS"
-                      className="w-full h-auto"
+                      src="/ahmedy-guitar.jpeg"
+                      alt="AhmedyTheGr8 with his guitar at GR8NIK STUDIOS"
+                      className="object-cover w-[500px] h-[300px]"
                       priority
-                      width={500}
-                      height={500}
+                      width={400}
+                      height={400}
                     />
                   </div>
                   <div>
                     <Image
-                      src="/ahmedy-working-2.jpeg"
+                      src="/ahmedy-guitar-2.jpeg"
                       alt="AhmedyTheGr8 producing beats and fine-tuning tracks in Cairo"
-                      className="w-full h-auto"
+                      className="object-cover w-[500px] h-[300px]"
                       priority
                       width={500}
                       height={500}
@@ -316,7 +316,7 @@ export default function AboutTabs() {
 
                   {/* Phone Link */}
                   <a
-                    href="tel:+201092501573"
+                    href="tel:+201011444140"
                     className="border border-secondary bg-[#0a0a0a] p-5 flex items-center justify-between hover:border-primary transition-all duration-300 group"
                   >
                     <div className="flex items-center gap-4">

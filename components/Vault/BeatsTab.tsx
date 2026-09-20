@@ -159,21 +159,19 @@ export default function BeatsTab({
                       <div
                         className="absolute left-0 top-0 bottom-0 bg-primary/25 transition-all duration-75"
                         style={{
-                          width: `${
-                            duration > 0
+                          width: `${duration > 0
                               ? Math.min(100, (currentTime / duration) * 100)
                               : 0
-                          }%`,
+                            }%`,
                         }}
                       />
                       <div
                         className="absolute top-0 bottom-0 w-0.5 bg-primary shadow-[0_0_10px_rgba(214,0,0,1)] z-20"
                         style={{
-                          left: `${
-                            duration > 0
+                          left: `${duration > 0
                               ? Math.min(100, (currentTime / duration) * 100)
                               : 0
-                          }%`,
+                            }%`,
                         }}
                       />
 
@@ -186,11 +184,10 @@ export default function BeatsTab({
                           return (
                             <div
                               key={i}
-                              className={`w-full rounded-none transition-colors duration-150 ${
-                                isPassed
+                              className={`w-full rounded-none transition-colors duration-150 ${isPassed
                                   ? "bg-primary shadow-[0_0_6px_rgba(214,0,0,0.6)]"
                                   : "bg-secondary/40 group-hover/scrub:bg-secondary/70"
-                              }`}
+                                }`}
                               style={{ height: `${height}%` }}
                             />
                           );
@@ -294,11 +291,10 @@ export default function BeatsTab({
                 <div
                   key={beat.id}
                   onClick={() => onSelectBeat(beat)}
-                  className={`border bg-[#050505] group transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden ${
-                    isSelected
+                  className={`border bg-[#050505] group transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden ${isSelected
                       ? "border-primary shadow-[0_0_20px_rgba(214,0,0,0.25)]"
                       : "border-secondary/60 hover:border-primary"
-                  }`}
+                    }`}
                 >
                   {/* GR8NIK Thumbnail with Badges */}
                   <div className="w-full aspect-square bg-[#0a0a0a] relative border-b border-secondary/50 group-hover:border-primary/50 overflow-hidden">
@@ -414,7 +410,7 @@ export default function BeatsTab({
               </div>
 
               <a
-                href="https://www.youtube.com/channel/UCDSYjeJct4T7IJAVsgL8AwA"
+                href="https://www.youtube.com/@GR8NIK"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-[#FF0000] hover:bg-white text-white hover:text-black font-space text-xs tracking-widest uppercase transition-all shadow-[0_0_25px_rgba(255,0,0,0.4)] whitespace-nowrap cursor-pointer"
