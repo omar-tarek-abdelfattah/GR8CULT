@@ -42,9 +42,8 @@ export default function CinematicIntro() {
   return (
     <div
       onClick={handleDismiss}
-      className={`fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center overflow-hidden cursor-pointer select-none transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] ${
-        isSlidingUp ? "-translate-y-full" : "translate-y-0"
-      }`}
+      className={`fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center overflow-hidden cursor-pointer select-none transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] ${isSlidingUp ? "-translate-y-full" : "translate-y-0"
+        }`}
     >
       {/* Background Ambience: Subtle Studio Grid & Red Ambient Glow */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800c_1px,transparent_1px),linear-gradient(to_bottom,#8080800c_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
@@ -58,7 +57,7 @@ export default function CinematicIntro() {
           className="w-12 h-12 object-contain opacity-80 animate-pulse filter drop-shadow-[0_0_15px_rgba(214,0,0,0.6)]"
         />
 
-        <h1 className="font-bebas text-5xl sm:text-7xl md:text-8xl tracking-[0.16em] text-white uppercase flex items-center gap-3 drop-shadow-[0_0_20px_rgba(255,255,255,0.12)]">
+        <h1 className="font-bebas text-5xl sm:text-7xl md:text-8xl tracking-[0.16em] text-white uppercase flex items-center flex-col md:flex-row gap-3 drop-shadow-[0_0_20px_rgba(255,255,255,0.12)]">
           <span>WELCOME TO</span>
           <span className="text-primary drop-shadow-[0_0_30px_rgba(214,0,0,0.7)]">GR8NIK</span>
         </h1>
