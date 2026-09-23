@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { Play } from "lucide-react";
+import { Disc } from "lucide-react";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Mousewheel } from 'swiper/modules';
@@ -33,14 +33,15 @@ export default function Hero() {
             LOCK IN A SESSION
           </Link>
           <Link
-            href={`https://wa.me/+201011444140?text=${encodeURIComponent(
-              "Hey GR8NIK Studios, I'd like to inquire about booking a session and studio services."
-            )}`}
-            target="_blank"
-            className="flex items-center justify-center gap-3 border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-white transition-all rounded-none bg-background/50 backdrop-blur-sm group text-center"
+            href="/vault"
+            className="flex items-center justify-center gap-3 border border-secondary text-zinc-100 font-space text-xs uppercase tracking-widest px-8 py-4 hover:border-primary hover:bg-primary/15 hover:text-white hover:shadow-[0_0_20px_rgba(214,0,0,0.4)] transition-all rounded-none bg-background/50 backdrop-blur-sm group text-center"
           >
-            <Play className="w-3 h-3 fill-current group-hover:text-primary transition-colors shrink-0" />
-            <span>COMMUNICATE WITH US</span>
+            <span className="relative flex h-2 w-2 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-80" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_6px_#D60000]" />
+            </span>
+            <Disc className="w-3.5 h-3.5 text-primary group-hover:rotate-180 transition-transform duration-500 shrink-0" />
+            <span>ENTER THE VAULT</span>
           </Link>
         </div>
       </div>

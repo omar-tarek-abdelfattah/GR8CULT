@@ -23,10 +23,11 @@ const space = Space_Mono({
   subsets: ["latin"],
 });
 
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gr8nikstudios.com";
+const siteUrl = rawSiteUrl.startsWith("http") ? rawSiteUrl : `https://${rawSiteUrl}`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://gr8nikstudios.com"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "GR8NIK STUDIOS | The Culture Around Independent Egyptian Music",
     template: "%s | GR8NIK STUDIOS",

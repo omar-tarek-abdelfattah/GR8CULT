@@ -1,10 +1,14 @@
 'use client';
 
 import Link from "next/link";
-import { MapPin } from "lucide-react";
-import { FaTwitch, FaInstagram } from "react-icons/fa";
+import { MapPin, Disc } from "lucide-react";
+import { FaTwitch, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
+  const whatsappUrl = `https://wa.me/+201011444140?text=${encodeURIComponent(
+    "Hey GR8NIK Studios, I'd like to get in touch regarding studio sessions, beats, or general inquiries."
+  )}`;
+
   return (
     <footer className="relative w-full border-t border-secondary/60 bg-background mt-auto overflow-hidden">
       {/* Background Ambience: Subtle Grid & Red Glow */}
@@ -46,6 +50,47 @@ export default function Footer() {
             LOCATED IN <span className="text-zinc-200 font-bold">MOKATTAM</span> — SPECIFIC LOCATION WILL BE SHARED UPON BOOKING
           </span>
         </div>
+
+        {/* Slick Navigation Bar */}
+        <nav aria-label="Footer Navigation" className="w-full max-w-xl border-y border-secondary/40 py-3.5 px-4 bg-[#080808]/70 backdrop-blur-sm">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 font-space text-xs tracking-[0.25em] uppercase">
+            <Link
+              href="/"
+              className="text-muted hover:text-white transition-colors relative py-1"
+            >
+              HOME
+            </Link>
+
+            <Link
+              href="/vault"
+              className="group flex items-center gap-1.5 px-3 py-1 border border-primary/50 bg-primary/10 hover:border-primary hover:bg-primary/20 hover:shadow-[0_0_14px_rgba(214,0,0,0.5)] text-zinc-100 hover:text-white transition-all"
+            >
+              <span className="relative flex h-1.5 w-1.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-80" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary shadow-[0_0_4px_#D60000]" />
+              </span>
+              <span>VAULT</span>
+              <Disc className="w-3 h-3 text-primary group-hover:rotate-180 transition-transform duration-500" />
+            </Link>
+
+            <Link
+              href="/about"
+              className="text-muted hover:text-white transition-colors relative py-1"
+            >
+              ABOUT
+            </Link>
+
+            <Link
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-1.5 text-muted hover:text-emerald-400 transition-colors py-1"
+            >
+              <FaWhatsapp className="w-3.5 h-3.5 text-emerald-500 group-hover:scale-110 transition-transform shrink-0" />
+              <span>CONTACT US</span>
+            </Link>
+          </div>
+        </nav>
 
         {/* Socials */}
         <div className="flex flex-wrap items-center justify-center gap-3 max-w-xl">

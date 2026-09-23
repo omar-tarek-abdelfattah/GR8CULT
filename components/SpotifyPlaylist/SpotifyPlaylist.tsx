@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Disc } from "lucide-react";
 import { FaSpotify, FaInstagram, FaYoutube } from "react-icons/fa";
 
 interface SpotifyPlaylistProps {
@@ -109,10 +109,15 @@ export default function SpotifyPlaylist({
 
           <Link
             href="/vault"
-            className="flex items-center justify-center gap-3 border border-zinc-800 text-muted font-space text-xs uppercase tracking-widest px-7 py-4 hover:border-primary hover:text-white hover:bg-zinc-950 transition-all group cursor-pointer"
+            className="flex items-center justify-center gap-3 border border-primary/60 bg-primary/10 text-zinc-100 font-space text-xs uppercase tracking-widest px-7 py-4 hover:border-primary hover:bg-primary/20 hover:text-white hover:shadow-[0_0_22px_rgba(214,0,0,0.5)] transition-all group cursor-pointer"
           >
-            <span>EXPLORE VAULT</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <span className="relative flex h-2 w-2 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-80" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_6px_#D60000]" />
+            </span>
+            <Disc className="w-3.5 h-3.5 text-primary group-hover:rotate-180 transition-transform duration-500 shrink-0" />
+            <span>ENTER THE VAULT</span>
+            <ArrowRight className="w-4 h-4 text-primary transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
