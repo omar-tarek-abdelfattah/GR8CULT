@@ -6,12 +6,21 @@ export default function CinematicIntro() {
   const [isSlidingUp, setIsSlidingUp] = useState(false);
 
   useEffect(() => {
-    // Skip intro entirely for search engine crawlers, bots, and audit tools
+    // Skip intro entirely for search engine crawlers, Google-InspectionTool, bots, and audit tools
     if (typeof navigator !== "undefined") {
-      const isCrawler = /bot|googlebot|crawler|spider|robot|crawling|lighthouse|Googlebot/i.test(
-        navigator.userAgent
-      );
-      if (isCrawler) return;
+      const isCrawlerOrBot =
+        Boolean(navigator.webdriver) ||
+        /google|bot|crawler|spider|robot|crawling|lighthouse|inspection|inspect|headless|archive|mediapartners|slurp|seek|preview|prerender/i.test(
+          navigator.userAgent
+        );
+      if (isCrawlerOrBot) return;
+    }
+
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
     }
 
     try {

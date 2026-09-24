@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
-import {GoogleAnalytics} from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const bebas = Bebas_Neue({
   variable: "--font-bebas",
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/clean-crosshair-nobg.png",
+    apple: "/favicon.ico",
   },
 };
 
