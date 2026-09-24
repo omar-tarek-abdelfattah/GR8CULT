@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getTracksByIds, AHMEDY_TRACK_IDS } from "@/lib/spotify";
 import VaultClient from "@/components/Vault/VaultClient";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "The Vault | Discography, Exclusive Beats & Music Videos",
@@ -13,10 +14,10 @@ export const metadata: Metadata = {
     title: "The Vault // GR8NIK STUDIOS Discography & Beats",
     description:
       "Official releases, beats with stems, and official music videos from the GR8NIK sanctuary.",
-    url: "https://gr8nikstudios.com/vault",
+    url: `${SITE_URL}/vault`,
     images: [
       {
-        url: "/ahmedy-hero-bg.jpeg",
+        url: "/logo-nobg.png",
         width: 1200,
         height: 630,
         alt: "GR8NIK STUDIOS Vault Discography",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     title: "The Vault // GR8NIK STUDIOS Discography & Beats",
     description:
       "Official releases, beats with stems, and official music videos from the GR8NIK sanctuary.",
-    images: ["/ahmedy-hero-bg.jpeg"],
+    images: ["/logo-nobg.png"],
   },
 };
 

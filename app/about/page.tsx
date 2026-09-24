@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import AboutTabs from "@/components/AboutTabs/AboutTabs";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About AhmedyTheGr8 & GR8CULT",
@@ -12,10 +13,10 @@ export const metadata: Metadata = {
     title: "About AhmedyTheGr8 & GR8CULT | GR8NIK STUDIOS",
     description:
       "The architect behind the cult: AhmedyTheGr8. Learn about the studio facility, sonic philosophy, and future roadmap.",
-    url: "https://gr8nikstudios.com/about",
+    url: `${SITE_URL}/about`,
     images: [
       {
-        url: "/ahmedy-hero-2-bg.jpeg",
+        url: "/logo-nobg.png",
         width: 1200,
         height: 630,
         alt: "AhmedyTheGr8 - Founder and Chief Audio Engineer at GR8NIK STUDIOS",
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     title: "About AhmedyTheGr8 & GR8CULT | GR8NIK STUDIOS",
     description:
       "The architect behind the cult: AhmedyTheGr8. Sonic philosophy and studio roadmap.",
-    images: ["/ahmedy-hero-2-bg.jpeg"],
+    images: ["/logo-nobg.png"],
   },
 };
 

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer/Footer";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { SITE_URL } from "@/lib/site";
 
 const bebas = Bebas_Neue({
   variable: "--font-bebas",
@@ -23,11 +24,8 @@ const space = Space_Mono({
   subsets: ["latin"],
 });
 
-const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gr8nikstudios.com";
-const siteUrl = rawSiteUrl.startsWith("http") ? rawSiteUrl : `https://${rawSiteUrl}`;
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "GR8NIK STUDIOS | The Culture Around Independent Egyptian Music",
     template: "%s | GR8NIK STUDIOS",
@@ -53,8 +51,9 @@ export const metadata: Metadata = {
     "Independent Egyptian Rap",
     "Egyptian Hip Hop Studio",
     "Exclusive Beats Cairo",
+    "Premier recording studio"
   ],
-  authors: [{ name: "AhmedyTheGr8", url: "https://gr8nikstudios.com" }],
+  authors: [{ name: "AhmedyTheGr8", url: SITE_URL }],
   creator: "AhmedyTheGr8",
   publisher: "GR8NIK STUDIOS",
   alternates: {
@@ -63,14 +62,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://gr8nikstudios.com",
+    url: SITE_URL,
     siteName: "GR8NIK STUDIOS",
     title: "GR8NIK STUDIOS | Where Music Gets Made",
     description:
       "Premier recording, mixing, and mastering studio in Mokattam, Cairo. Engineered by AhmedyTheGr8. Home of the GR8CULT sound.",
     images: [
       {
-        url: "/ahmedy-hero-bg.jpeg",
+        url: "/logo-nobg.png",
         width: 1200,
         height: 630,
         alt: "GR8NIK STUDIOS - Mokattam, Cairo Recording Facility",
@@ -82,7 +81,7 @@ export const metadata: Metadata = {
     title: "GR8NIK STUDIOS | Cairo Recording & Production Facility",
     description:
       "Where music gets made. The culture around it. Premier studio facility in Mokattam, Cairo.",
-    images: ["/ahmedy-hero-bg.jpeg"],
+    images: ["/logo-nobg.png"],
     creator: "@gr8nikstudios",
   },
   robots: {
@@ -107,10 +106,10 @@ const studioJsonLd = {
   "@type": "LocalBusiness",
   "name": "GR8NIK STUDIOS",
   "alternateName": "GR8CULT",
-  "image": "https://gr8nikstudios.com/ahmedy-hero-bg.jpeg",
-  "logo": "https://gr8nikstudios.com/logo-nobg.png",
+  "image": `${SITE_URL}/g8-without-bg.png`,
+  "logo": `${SITE_URL}/logo-nobg.png`,
   "description": "Premier independent recording, mixing, and mastering studio located in Mokattam, Cairo. Engineered by AhmedyTheGr8.",
-  "url": "https://gr8nikstudios.com",
+  "url": SITE_URL,
   "telephone": "+201011444140",
   "address": {
     "@type": "PostalAddress",
@@ -125,7 +124,7 @@ const studioJsonLd = {
   },
   "sameAs": [
     "https://instagram.com/gr8nikstudios",
-    "https://twitch.tv",
+    "https://tiktok.com/@gr8nikstudios",
   ],
   "priceRange": "$$",
 };
