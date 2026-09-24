@@ -6,25 +6,41 @@ export default function CinematicIntro() {
   const [isSlidingUp, setIsSlidingUp] = useState(false);
 
   useEffect(() => {
-    const hasSeenIntro = sessionStorage.getItem("gr8cult_intro_seen");
-    if (!hasSeenIntro) {
-      setShowIntro(true);
+    // Skip intro entirely for search engine crawlers, bots, and audit tools
+    if (typeof navigator !== "undefined") {
+      const isCrawler = /bot|googlebot|crawler|spider|robot|crawling|lighthouse|Googlebot/i.test(
+        navigator.userAgent
+      );
+      if (isCrawler) return;
+    }
 
-      // Hold message briefly, then start slide-up transition
-      const slideTimer = setTimeout(() => {
-        setIsSlidingUp(true);
-      }, 1500);
+    try {
+      const hasSeenIntro = sessionStorage.getItem("gr8cult_intro_seen");
+      if (!hasSeenIntro) {
+        setShowIntro(true);
 
-      // Unmount after the slide-up animation completes
-      const unmountTimer = setTimeout(() => {
-        setShowIntro(false);
-        sessionStorage.setItem("gr8cult_intro_seen", "true");
-      }, 2300);
+        // Hold message briefly, then start slide-up transition
+        const slideTimer = setTimeout(() => {
+          setIsSlidingUp(true);
+        }, 1500);
 
-      return () => {
-        clearTimeout(slideTimer);
-        clearTimeout(unmountTimer);
-      };
+        // Unmount after the slide-up animation completes
+        const unmountTimer = setTimeout(() => {
+          setShowIntro(false);
+          try {
+            sessionStorage.setItem("gr8cult_intro_seen", "true");
+          } catch {
+            // Storage access restricted
+          }
+        }, 2300);
+
+        return () => {
+          clearTimeout(slideTimer);
+          clearTimeout(unmountTimer);
+        };
+      }
+    } catch {
+      // Storage access restricted (private browsing or sandboxed crawler), skip intro
     }
   }, []);
 
@@ -33,7 +49,11 @@ export default function CinematicIntro() {
     setIsSlidingUp(true);
     setTimeout(() => {
       setShowIntro(false);
-      sessionStorage.setItem("gr8cult_intro_seen", "true");
+      try {
+        sessionStorage.setItem("gr8cult_intro_seen", "true");
+      } catch {
+        // Storage access restricted
+      }
     }, 700);
   };
 

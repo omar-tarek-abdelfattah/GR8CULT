@@ -18,8 +18,8 @@ export default function Hero() {
 
       {/* Left side: Text Content */}
       <div className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left w-full max-w-2xl gap-6">
-        <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl tracking-tight text-white uppercase leading-none drop-shadow-2xl text-center md:text-left">
-          CRAFT THE SOUND.<br />
+        <h1 className="font-bebas text-6xl md:text-7xl lg:text-8xl tracking-tight text-white uppercase leading-none drop-shadow-2xl text-center md:text-left">
+          UNLEASH YOUR SOUND.<br />
           <span className="text-primary pseudo">JOIN GR8NIK</span>
         </h1>
 
