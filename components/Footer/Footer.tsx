@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
 
       <div className="relative z-10 container mx-auto px-4 py-16 flex flex-col items-center text-center gap-7">
-        
+
         {/* Brand Emblem & Logo */}
         <div className="flex flex-col items-center gap-3">
           <Link href="/" className="group flex flex-col items-center gap-2 cursor-pointer">
@@ -32,7 +32,7 @@ export default function Footer() {
               className="w-44 md:w-52 h-auto object-contain opacity-90 group-hover:opacity-100 drop-shadow-[0_0_25px_rgba(214,0,0,0.35)] transition-all duration-300"
             />
           </Link>
-          
+
           {/* Studio Radar / Status Indicator */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1 border border-secondary/50 bg-[#080808]/90 text-[11px] font-space tracking-[0.22em] text-muted uppercase">
             <span className="relative flex h-2 w-2">
@@ -121,7 +121,7 @@ export default function Footer() {
             <span>TIKTOK</span>
           </Link>
 
-          <Link
+          {/* <Link
             href="https://twitch.tv"
             target="_blank"
             rel="noreferrer"
@@ -129,7 +129,7 @@ export default function Footer() {
           >
             <FaTwitch className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
             <span>TWITCH</span>
-          </Link>
+          </Link> */}
         </div>
 
         {/* Payment Gateways */}

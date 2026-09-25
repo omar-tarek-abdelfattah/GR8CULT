@@ -3,31 +3,31 @@ import PricingSection from "@/components/Pricing/PricingSection";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Studio Packages & Rates | Recording, Mix & Master",
+  title: "Studio Services, Pricing & Process | GR8NIK STUDIOS",
   description:
-    "Explore transparent studio packages at GR8NIK STUDIOS in Mokattam, Cairo. Flagship Full Project package, Record + Mix + Master, and flexible Hourly Recording engineered by AhmedyTheGr8.",
+    "Explore transparent studio packages and rates at GR8NIK STUDIOS in Mokattam, Cairo. Vocal Recording (500 EGP/hr), Professional Finish (1,500 EGP), Professional Execution (2,000 EGP), Custom Beats (3,000–5,000 EGP+), Beat + Track Bundles, and Full Project production.",
   alternates: {
     canonical: "/pricing",
   },
   openGraph: {
-    title: "Studio Packages & Rates | GR8NIK STUDIOS Cairo",
+    title: "Services, Pricing, Process & FAQ | GR8NIK STUDIOS Cairo",
     description:
-      "Transparent studio rates for Full Project Production, Record + Mix + Master, and Hourly Recording booth sessions in Cairo. Direct booking via WhatsApp.",
+      "Transparent studio rates from single booth sessions to complete tracks built from scratch. Vocal Recording, Mix & Master, Professional Execution, Custom Beats, and Bundles at GR8NIK STUDIOS.",
     url: `${SITE_URL}/pricing`,
     images: [
       {
         url: "/logo-nobg.png",
         width: 1200,
         height: 630,
-        alt: "GR8NIK STUDIOS - Studio Packages and Rates in Cairo",
+        alt: "GR8NIK STUDIOS - Services, Pricing and Process in Cairo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Studio Packages & Rates | GR8NIK STUDIOS Cairo",
+    title: "Services, Pricing & Process | GR8NIK STUDIOS Cairo",
     description:
-      "Flagship Full Project production, Record + Mix + Master singles, and Hourly Recording booth time at GR8NIK STUDIOS in Mokattam.",
+      "Build the sound. Finish the record. Transparent recording, mixing, custom beat production, and complete project rates at GR8NIK STUDIOS.",
     images: ["/logo-nobg.png"],
   },
 };
@@ -50,33 +50,69 @@ const pricingJsonLd = {
   },
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "GR8NIK Studio Packages",
+    name: "GR8NIK Studio Services & Packages",
     itemListElement: [
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Full Project Production Package",
+          name: "Vocal Recording",
           description:
-            "Custom beat production, dedicated studio recording, pitch tuning, hybrid analog mix, and commercial master engineered by AhmedyTheGr8.",
+            "Professional vocal recording with mic selection, session setup, and engineer-assisted tracking at 500 EGP / HOUR (Minimum 2 hours).",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Record + Mix + Master Package",
+          name: "Mixing + Mastering (Professional Finish)",
           description:
-            "Dedicated vocal tracking session, vocal tuning, hybrid multi-stem mixing, and commercial streaming master for single releases.",
+            "Post-production vocal editing, processing, mixing, mastering, rough mix, and 1 free mix revision for 1,500 EGP.",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Hourly Recording Studio Time",
+          name: "Professional Execution",
           description:
-            "Flexible vocal booth recording hours with professional engineer, acoustic treatment, and multitrack WAV stem export.",
+            "From your beat to a finished record: vocal direction, recording, editing, mixing, mastering, and 1 free mix revision for 2,000 EGP.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Custom Beat Production",
+          description:
+            "Original custom production built specifically around your sound, references, and creative direction from 3,000–5,000 EGP+.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Untitled Beats (Greatest Beats Vol. 2)",
+          description:
+            "Discounted catalog drops of 10 selected GR8NIK signature beats for 1,500–2,000 EGP released via Untitled.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Beat + Track Bundle",
+          description:
+            "Core GR8NIK track package combining beat production, vocal direction, recording, editing, mix, master, and 1 free revision for 5,000–7,000 EGP+.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Full Project Production",
+          description:
+            "Complete creative process from idea to final master: creative direction, custom beat, recording, mix, master, and revisions for 6,000–8,000 EGP+.",
         },
       },
     ],
