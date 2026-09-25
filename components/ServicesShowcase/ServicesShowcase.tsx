@@ -75,7 +75,7 @@ export default function ServicesShowcase() {
             </p>
           </div>
           <div className="hidden md:block">
-            <Link href="/#booking" className="border border-secondary text-muted px-6 py-2 font-space text-[10px] uppercase tracking-widest hover:border-primary hover:text-white transition-colors bg-[#050505]">
+            <Link href="/pricing" className="border border-secondary text-muted px-6 py-2 font-space text-[10px] uppercase tracking-widest hover:border-primary hover:text-white transition-colors bg-[#050505]">
               VIEW RATES
             </Link>
           </div>

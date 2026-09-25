@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, ArrowUpRight, MapPin } from 'lucide-react';
-import { FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaYoutube, FaWhatsapp, FaTiktok } from 'react-icons/fa';
 import Image from 'next/image';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -330,6 +330,28 @@ export default function AboutTabs() {
                     </div>
                     <div className="flex items-center gap-2 font-space text-xs text-primary group-hover:text-white transition-colors">
                       <span className="hidden sm:inline">CALL DIRECT</span>
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </div>
+                  </a>
+
+                  {/* TikTok Channel Link */}
+                  <a
+                    href="https://www.tiktok.com/@gr8nikstudios"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-secondary bg-[#0a0a0a] p-5 flex items-center justify-between hover:border-primary transition-all duration-300 group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 border border-secondary/50 flex items-center justify-center bg-black group-hover:border-primary transition-colors flex-shrink-0">
+                        <FaTiktok className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">OFFICIAL TIKTOK</span>
+                        <h3 className="font-bebas text-xl text-white tracking-wider">@gr8nikstudios</h3>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 font-space text-xs text-primary group-hover:text-white transition-colors">
+                      <span className="hidden sm:inline">WATCH CONTENT</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
                   </a>

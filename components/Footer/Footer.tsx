@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MapPin, Disc } from "lucide-react";
-import { FaTwitch, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaTwitch, FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   const whatsappUrl = `https://wa.me/+201011444140?text=${encodeURIComponent(
@@ -74,6 +74,13 @@ export default function Footer() {
             </Link>
 
             <Link
+              href="/pricing"
+              className="text-muted hover:text-white transition-colors relative py-1"
+            >
+              PRICING
+            </Link>
+
+            <Link
               href="/about"
               className="text-muted hover:text-white transition-colors relative py-1"
             >
@@ -102,6 +109,16 @@ export default function Footer() {
           >
             <FaInstagram className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
             <span>INSTAGRAM</span>
+          </Link>
+
+          <Link
+            href="https://www.tiktok.com/@gr8nikstudios"
+            target="_blank"
+            rel="noreferrer"
+            className="group flex items-center gap-2 px-5 py-2.5 border border-secondary/60 bg-[#080808] hover:border-primary font-space text-xs tracking-widest text-muted hover:text-white transition-all duration-300"
+          >
+            <FaTiktok className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
+            <span>TIKTOK</span>
           </Link>
 
           <Link

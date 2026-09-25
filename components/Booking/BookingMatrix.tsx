@@ -1,4 +1,5 @@
 import { Calendar, ArrowUpRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function BookingMatrix() {
@@ -45,18 +46,13 @@ export default function BookingMatrix() {
         {/* 2 Buttons */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-5 w-full sm:w-auto">
           {/* Google Calendar Slots Button */}
-          <a
-            href={`https://wa.me/+201011444140?text=${encodeURIComponent(
-              "Hey GR8NIK Studios, I'd like to book a studio session. Please let me know your availability and rates."
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href='/pricing'
             className="flex items-center justify-center gap-3 bg-primary text-white font-space text-xs uppercase tracking-widest px-8 py-5 hover:bg-white hover:text-black transition-all border border-primary hover:border-white shadow-[0_0_25px_rgba(214,0,0,0.35)] group cursor-pointer"
           >
-            <FaWhatsapp className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span>BOOK VIA WHATSAPP</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+            <span>VIEW RATES</span>
+          </Link>
 
           {/* WhatsApp Link Button */}
           <a

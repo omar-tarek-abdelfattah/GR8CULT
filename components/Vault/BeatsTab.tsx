@@ -55,7 +55,10 @@ export default function BeatsTab({
     <>
       {/* Featured Showcase Beat Spotlight (Playback on Top) */}
       {activeBeat && (
-        <section className="border-b border-secondary p-4 md:p-8 bg-gradient-to-r from-[#0d0202] via-[#080808] to-background">
+        <section
+          id="vault-top-player"
+          className="scroll-mt-20 border-b border-secondary p-4 md:p-8 bg-gradient-to-r from-[#0d0202] via-[#080808] to-background"
+        >
           <div className="container mx-auto">
             <div className="w-full border border-primary/80 bg-[#0a0a0a] flex flex-col lg:flex-row relative group overflow-hidden shadow-[0_0_30px_rgba(214,0,0,0.15)]">
               {/* Top Accent Badges */}

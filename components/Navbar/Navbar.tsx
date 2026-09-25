@@ -10,8 +10,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const isHomeActive = pathname === "/";
   const isVaultActive = pathname === "/vault" || pathname?.startsWith("/vault/");
+  const isPricingActive = pathname === "/pricing" || pathname?.startsWith("/pricing/");
   const isAboutActive = pathname === "/about" || pathname?.startsWith("/about/");
 
   return (
@@ -40,13 +40,12 @@ export default function Navbar() {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-7">
           <Link
-            href="/"
-            className={`font-space text-sm uppercase tracking-[0.2em] transition-colors relative py-1 ${
-              isHomeActive ? "text-white font-bold" : "text-muted hover:text-white"
-            }`}
+            href="/about"
+            className={`font-space text-sm uppercase tracking-[0.2em] transition-colors relative py-1 ${isAboutActive ? "text-white font-bold" : "text-muted hover:text-white"
+              }`}
           >
-            HOME
-            {isHomeActive && (
+            ABOUT
+            {isAboutActive && (
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary shadow-[0_0_8px_#D60000]" />
             )}
           </Link>
@@ -54,18 +53,16 @@ export default function Navbar() {
           {/* Enticing Glowing Vault Nav Button */}
           <Link
             href="/vault"
-            className={`relative group/vault px-4 py-1.5 border font-space text-sm tracking-[0.22em] uppercase flex items-center gap-2.5 transition-all duration-300 rounded-none cursor-pointer ${
-              isVaultActive
+            className={`relative group/vault px-4 py-1.5 border font-space text-sm tracking-[0.22em] uppercase flex items-center gap-2.5 transition-all duration-300 rounded-none cursor-pointer ${isVaultActive
                 ? "border-primary bg-primary/25 text-white shadow-[0_0_22px_rgba(214,0,0,0.85),inset_0_0_12px_rgba(214,0,0,0.3)] ring-1 ring-primary font-bold"
                 : "border-primary/50 bg-primary/10 text-zinc-100 hover:border-primary hover:bg-primary/20 hover:text-white hover:shadow-[0_0_18px_rgba(214,0,0,0.55)]"
-            }`}
+              }`}
           >
             {/* Live radar / pulse beacon */}
             <span className="relative flex h-2 w-2 shrink-0">
               <span
-                className={`absolute inline-flex h-full w-full rounded-full bg-primary ${
-                  isVaultActive ? "animate-ping opacity-90" : "animate-pulse opacity-75"
-                }`}
+                className={`absolute inline-flex h-full w-full rounded-full bg-primary ${isVaultActive ? "animate-ping opacity-90" : "animate-pulse opacity-75"
+                  }`}
               />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_6px_#D60000]" />
             </span>
@@ -73,9 +70,8 @@ export default function Navbar() {
             <span className="relative z-10 flex items-center gap-2">
               <span className="tracking-[0.25em]">VAULT</span>
               <Disc
-                className={`w-3.5 h-3.5 text-primary transition-transform duration-700 ${
-                  isVaultActive ? "animate-spin" : "group-hover/vault:rotate-180"
-                }`}
+                className={`w-3.5 h-3.5 text-primary transition-transform duration-700 ${isVaultActive ? "animate-spin" : "group-hover/vault:rotate-180"
+                  }`}
               />
             </span>
 
@@ -86,16 +82,17 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/about"
-            className={`font-space text-sm uppercase tracking-[0.2em] transition-colors relative py-1 ${
-              isAboutActive ? "text-white font-bold" : "text-muted hover:text-white"
-            }`}
+            href="/pricing"
+            className={`font-space text-sm uppercase tracking-[0.2em] transition-colors relative py-1 ${isPricingActive ? "text-white font-bold" : "text-muted hover:text-white"
+              }`}
           >
-            ABOUT
-            {isAboutActive && (
+            PRICING
+            {isPricingActive && (
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary shadow-[0_0_8px_#D60000]" />
             )}
           </Link>
+
+
         </div>
 
         {/* Desktop CTA */}
@@ -112,11 +109,10 @@ export default function Navbar() {
           <Link
             href="/vault"
             aria-label="Enter The Vault directly"
-            className={`px-3 py-1.5 border font-space text-xs tracking-widest uppercase flex items-center gap-1.5 transition-all duration-300 rounded-none cursor-pointer ${
-              isVaultActive
+            className={`px-3 py-1.5 border font-space text-xs tracking-widest uppercase flex items-center gap-1.5 transition-all duration-300 rounded-none cursor-pointer ${isVaultActive
                 ? "border-primary bg-primary/30 text-white shadow-[0_0_16px_rgba(214,0,0,0.85)] ring-1 ring-primary font-bold"
                 : "border-primary/60 bg-primary/15 text-zinc-100 hover:border-primary hover:bg-primary/25 shadow-[0_0_10px_rgba(214,0,0,0.35)]"
-            }`}
+              }`}
           >
             <span className="relative flex h-1.5 w-1.5 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-80" />
@@ -143,28 +139,14 @@ export default function Navbar() {
         <div className="md:hidden w-full border-t border-secondary/60 bg-background/98 backdrop-blur-lg animate-in slide-in-from-top-2 duration-300">
           <div className="container mx-auto px-6 py-6 flex flex-col gap-6">
             <div className="flex flex-col gap-2.5 font-space text-sm tracking-[0.2em]">
-              <Link
-                href="/"
-                onClick={() => setIsOpen(false)}
-                className={`py-3 px-2 border-b transition-colors flex items-center justify-between ${
-                  isHomeActive
-                    ? "text-white border-primary font-bold"
-                    : "text-muted hover:text-white border-secondary/30 hover:border-primary"
-                }`}
-              >
-                <span>HOME</span>
-                <span className="text-primary text-xs">&gt;</span>
-              </Link>
-
               {/* Special Vault entry in drawer */}
               <Link
                 href="/vault"
                 onClick={() => setIsOpen(false)}
-                className={`py-3 px-3 border transition-all flex items-center justify-between ${
-                  isVaultActive
+                className={`py-3 px-3 border transition-all flex items-center justify-between ${isVaultActive
                     ? "border-primary bg-primary/20 text-white shadow-[0_0_15px_rgba(214,0,0,0.6)]"
                     : "border-primary/40 bg-primary/10 text-zinc-100 hover:border-primary hover:bg-primary/20"
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2 w-2 shrink-0">
@@ -180,13 +162,24 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/about"
+                href="/pricing"
                 onClick={() => setIsOpen(false)}
-                className={`py-3 px-2 border-b transition-colors flex items-center justify-between ${
-                  isAboutActive
+                className={`py-3 px-2 border-b transition-colors flex items-center justify-between ${isPricingActive
                     ? "text-white border-primary font-bold"
                     : "text-muted hover:text-white border-secondary/30 hover:border-primary"
-                }`}
+                  }`}
+              >
+                <span>PRICING</span>
+                <span className="text-primary text-xs">&gt;</span>
+              </Link>
+
+              <Link
+                href="/about"
+                onClick={() => setIsOpen(false)}
+                className={`py-3 px-2 border-b transition-colors flex items-center justify-between ${isAboutActive
+                    ? "text-white border-primary font-bold"
+                    : "text-muted hover:text-white border-secondary/30 hover:border-primary"
+                  }`}
               >
                 <span>ABOUT</span>
                 <span className="text-primary text-xs">&gt;</span>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, ArrowRight, Disc } from "lucide-react";
-import { FaSpotify, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaSpotify, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 
 interface SpotifyPlaylistProps {
   /**
@@ -136,6 +136,15 @@ export default function SpotifyPlaylist({
               >
                 <FaInstagram className="w-3.5 h-3.5 text-primary" />
                 <span>INSTAGRAM</span>
+              </a>
+              <a
+                href="https://www.tiktok.com/@gr8nikstudios"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 border border-zinc-800 text-muted font-space text-xs uppercase tracking-widest px-5 py-3 hover:border-primary hover:text-white transition-all bg-black"
+              >
+                <FaTiktok className="w-3.5 h-3.5 text-primary" />
+                <span>TIKTOK</span>
               </a>
               <a
                 href="https://www.youtube.com/channel/UCDSYjeJct4T7IJAVsgL8AwA"

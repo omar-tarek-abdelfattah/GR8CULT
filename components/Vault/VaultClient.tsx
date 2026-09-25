@@ -30,7 +30,34 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  const scrollToPlayer = () => {
+    if (typeof window === "undefined") return;
+    requestAnimationFrame(() => {
+      const playerElement = document.getElementById("vault-top-player");
+      if (playerElement) {
+        const navbarHeight = 64;
+        const breathingRoom = 16;
+        const elementPosition = playerElement.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition +
+          (window.scrollY || window.pageYOffset || document.documentElement.scrollTop) -
+          (navbarHeight + breathingRoom);
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: "smooth",
+        });
+      }
+    });
+  };
+
+  const handleSelectTrack = (track: SpotifyVaultTrack) => {
+    setActiveTrack(track);
+    scrollToPlayer();
+  };
+
   const handlePlayPreview = (track: SpotifyVaultTrack) => {
+    scrollToPlayer();
+
     if (activeTrack?.id === track.id && isPlayingPreview) {
       audioRef.current?.pause();
       setIsPlayingPreview(false);
@@ -59,6 +86,8 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
   };
 
   const handlePlayBeat = (beat: ShowcaseBeat) => {
+    scrollToPlayer();
+
     if (activeBeat?.id === beat.id && isPlayingPreview) {
       audioRef.current?.pause();
       setIsPlayingPreview(false);
@@ -239,7 +268,7 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
         <AllSongsTab
           tracks={tracks}
           activeTrack={activeTrack}
-          onSelectTrack={setActiveTrack}
+          onSelectTrack={handleSelectTrack}
           onPlayPreview={handlePlayPreview}
           isPlayingPreview={isPlayingPreview}
           showEmbedPlayer={showEmbedPlayer}
