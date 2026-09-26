@@ -143,6 +143,8 @@ const studioJsonLd = {
   "priceRange": "$$",
 };
 
+import { CalendarModalProvider } from "@/components/CalendarModal/CalendarModalContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -160,11 +162,13 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground selection:bg-primary selection:text-white">
-        <Navbar />
-        <main className="flex-grow flex flex-col">
-          {children}
-        </main>
-        <Footer />
+        <CalendarModalProvider>
+          <Navbar />
+          <main className="flex-grow flex flex-col">
+            {children}
+          </main>
+          <Footer />
+        </CalendarModalProvider>
         <Analytics />
       </body>
       <GoogleAnalytics gaId="G-NEP9Z768TZ" />

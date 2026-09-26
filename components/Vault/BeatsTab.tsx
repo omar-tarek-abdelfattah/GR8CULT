@@ -1,7 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
-import { Play, Square, ExternalLink, Sparkles } from "lucide-react";
+import Link from "next/link";
+import {
+  Play,
+  Square,
+  ExternalLink,
+  Sparkles,
+  Lock,
+  CheckCircle2,
+  ArrowUpRight,
+} from "lucide-react";
 import { FaYoutube, FaWhatsapp } from "react-icons/fa";
 import { ShowcaseBeat, STATIC_BEAT_BARS, formatDuration } from "./types";
 
@@ -163,8 +172,8 @@ export default function BeatsTab({
                         className="absolute left-0 top-0 bottom-0 bg-primary/25 transition-all duration-75"
                         style={{
                           width: `${duration > 0
-                              ? Math.min(100, (currentTime / duration) * 100)
-                              : 0
+                            ? Math.min(100, (currentTime / duration) * 100)
+                            : 0
                             }%`,
                         }}
                       />
@@ -172,8 +181,8 @@ export default function BeatsTab({
                         className="absolute top-0 bottom-0 w-0.5 bg-primary shadow-[0_0_10px_rgba(214,0,0,1)] z-20"
                         style={{
                           left: `${duration > 0
-                              ? Math.min(100, (currentTime / duration) * 100)
-                              : 0
+                            ? Math.min(100, (currentTime / duration) * 100)
+                            : 0
                             }%`,
                         }}
                       />
@@ -188,8 +197,8 @@ export default function BeatsTab({
                             <div
                               key={i}
                               className={`w-full rounded-none transition-colors duration-150 ${isPassed
-                                  ? "bg-primary shadow-[0_0_6px_rgba(214,0,0,0.6)]"
-                                  : "bg-secondary/40 group-hover/scrub:bg-secondary/70"
+                                ? "bg-primary shadow-[0_0_6px_rgba(214,0,0,0.6)]"
+                                : "bg-secondary/40 group-hover/scrub:bg-secondary/70"
                                 }`}
                               style={{ height: `${height}%` }}
                             />
@@ -295,8 +304,8 @@ export default function BeatsTab({
                   key={beat.id}
                   onClick={() => onSelectBeat(beat)}
                   className={`border bg-[#050505] group transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden ${isSelected
-                      ? "border-primary shadow-[0_0_20px_rgba(214,0,0,0.25)]"
-                      : "border-secondary/60 hover:border-primary"
+                    ? "border-primary shadow-[0_0_20px_rgba(214,0,0,0.25)]"
+                    : "border-secondary/60 hover:border-primary"
                     }`}
                 >
                   {/* GR8NIK Thumbnail with Badges */}
@@ -395,6 +404,102 @@ export default function BeatsTab({
             })}
           </div>
 
+          {/* Exclusive Beat Drops / Catalog Drop (Greatest Beats — Vol. 2) */}
+          <div className="mt-16 border border-primary/80 bg-gradient-to-b from-[#180303] via-[#090909] to-[#050505] p-6 sm:p-10 relative overflow-hidden shadow-[0_0_35px_rgba(214,0,0,0.2)]">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+              <div className="max-w-2xl">
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <span className="bg-primary text-white font-space text-[10px] tracking-widest px-3 py-1 uppercase font-bold flex items-center gap-1.5 shadow-[0_0_12px_rgba(214,0,0,0.4)]">
+                    <Lock className="w-3 h-3" />
+                    EXCLUSIVE VAULT DROP // APPLICATION ONLY
+                  </span>
+                  <span className="border border-secondary/60 bg-black/80 text-muted font-space text-[10px] tracking-widest px-2.5 py-1 uppercase">
+                    CATALOG SALE
+                  </span>
+                </div>
+
+                <h3 className="font-bebas text-4xl sm:text-5xl lg:text-6xl text-white tracking-wide uppercase m-0 leading-none">
+                  GREATEST BEATS <span className="text-primary">— VOL. 2</span>
+                </h3>
+
+                <div className="mt-3 flex items-baseline gap-3">
+                  <span className="font-bebas text-2xl sm:text-3xl text-primary tracking-wider">
+                    10 BEATS — 1,500–2,000 EGP
+                  </span>
+                  <span className="font-space text-xs text-muted uppercase tracking-wider">
+                    (LIMITED CATALOG BUNDLE)
+                  </span>
+                </div>
+
+                <p className="font-space text-xs sm:text-sm text-zinc-300 leading-relaxed mt-4">
+                  For artists who want an available catalog beat instead of a custom production.
+                  A limited collection of 10 signature GR8NIK beats available as an exclusive discounted catalog drop.
+                  Individual usage and licensing terms apply.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-5 font-space text-xs text-zinc-300">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>10 Curated studio-ready instrumentals</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Commercial licensing &amp; stems available</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Direct access by application only</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Regular weekly drops to approved artists</span>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-secondary/40 font-space text-xs text-muted flex flex-wrap items-center gap-2">
+                  <span>Want something made specifically for you?</span>
+                  <Link
+                    href="/pricing#custom-beat"
+                    className="text-primary hover:text-white uppercase tracking-wider underline flex items-center gap-1"
+                  >
+                    <span>Book a Custom Beat (from 3,000 EGP+)</span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Action Column */}
+              <div className="lg:w-80 flex flex-col justify-center gap-4 bg-black/70 border border-secondary/60 p-6">
+                <div>
+                  <span className="font-space text-[10px] text-zinc-400 uppercase tracking-widest block mb-1">
+                    HOW TO GET ACCESS:
+                  </span>
+                  <p className="font-space text-xs text-zinc-200 leading-relaxed">
+                    This drop is limited to serious artists. Send us a message on WhatsApp with your artist profile or references to apply for the pack.
+                  </p>
+                </div>
+
+                <a
+                  href={`https://wa.me/+201011444140?text=${encodeURIComponent(
+                    "Hey GR8NIK Studios, I'd like to apply for access to the exclusive Greatest Beats — Vol. 2 beat drop (10 beats catalog). Here is my artist profile and music link:"
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full py-4 px-5 bg-primary hover:bg-white text-white hover:text-black font-space text-xs uppercase tracking-widest flex items-center justify-center gap-2.5 transition-all font-bold shadow-[0_0_20px_rgba(214,0,0,0.4)] border border-primary hover:border-white cursor-pointer"
+                >
+                  <FaWhatsapp className="w-4 h-4 text-emerald-400" />
+                  <span>APPLY FOR BEAT DROP</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+
+                <span className="font-space text-[10px] text-muted text-center tracking-wider uppercase">
+                  Direct WhatsApp verification with Studio Manager
+                </span>
+              </div>
+            </div>
+          </div>
+
           {/* Link to YouTube Channel Banner */}
           <div className="mt-16 border border-secondary/60 bg-gradient-to-r from-[#0d0202] via-[#050505] to-[#0a0000] p-8 md:p-12 relative overflow-hidden group hover:border-primary transition-all duration-500">
             <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-[radial-gradient(ellipse_at_center,rgba(214,0,0,0.15),transparent_70%)] pointer-events-none" />
@@ -408,7 +513,7 @@ export default function BeatsTab({
                   WANT MORE INSTRUMENTALS?
                 </h3>
                 <p className="font-space text-xs md:text-sm text-muted tracking-widest uppercase mt-2">
-                  EXPLORE THE FULL VAULT OF EXCLUSIVE BEATS, RELEASES &amp; STUDIO SESSIONS ON OUR OFFICIAL YOUTUBE CHANNEL.
+                  EXPLORE THE VAULT OF BEATS, RELEASES &amp; STUDIO SESSIONS ON OUR OFFICIAL YOUTUBE CHANNEL.
                 </p>
               </div>
 

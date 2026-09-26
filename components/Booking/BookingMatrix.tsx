@@ -1,8 +1,13 @@
+'use client';
+
 import { Calendar, ArrowUpRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
+import { useCalendarModal } from "@/components/CalendarModal/CalendarModalContext";
 
 export default function BookingMatrix() {
+  const { openCalendar } = useCalendarModal();
+
   return (
     <section id="booking" className="relative w-full py-24 md:py-32 bg-background border-t border-secondary overflow-hidden">
       {/* Background radial glow & tactical grid */}
@@ -54,17 +59,16 @@ export default function BookingMatrix() {
             <span>VIEW RATES</span>
           </Link>
 
-          {/* WhatsApp Link Button */}
-          <a
-            href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3LvlOtrmBmmhsShjPRpw0gZjUH2IUfHPInqNnD0fEmuxQ2tAu28FSXvEE4AfdRtF6RpuQfr1z-"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* Open Calendar Modal Button */}
+          <button
+            type="button"
+            onClick={openCalendar}
             className="flex items-center justify-center gap-3 bg-[#0a0a0a] border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-5 hover:border-primary hover:text-white hover:bg-black transition-all group cursor-pointer"
           >
             <Calendar className="w-4 h-4 transition-transform group-hover:scale-110" />
             <span>VIEW CALENDAR SLOTS</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          </button>
         </div>
       </div>
     </section>

@@ -92,15 +92,6 @@ const pricingJsonLd = {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Untitled Beats (Greatest Beats Vol. 2)",
-          description:
-            "Discounted catalog drops of 10 selected GR8NIK signature beats for 1,500–2,000 EGP released via Untitled.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
           name: "Beat + Track Bundle",
           description:
             "Core GR8NIK track package combining beat production, vocal direction, recording, editing, mix, master, and 1 free revision for 5,000–7,000 EGP+.",

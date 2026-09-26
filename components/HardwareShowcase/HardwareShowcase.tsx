@@ -42,7 +42,7 @@ export default function HardwareShowcase() {
             <p className="font-space text-sm md:text-base text-muted leading-relaxed max-w-xl">
               Good equipment helps.
               <br />
-              
+
 
               Good engineering matters.
               <br />
@@ -57,18 +57,18 @@ export default function HardwareShowcase() {
 
               We don't want every artist to leave sounding like GR8NIK.
               <br />
-              
+
 
               We want you to leave sounding *more like yourself.*
               <br />
-              
+
 
               From recording and vocal production to beats, mixing, mastering and everything in between, we build around what the record actually needs.</p>
 
-            
+
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mt-8 w-full sm:w-auto">
-              <Link href="/#booking" className="flex items-center gap-2 border border-primary text-primary px-8 py-4 font-space text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-colors rounded-none group">
+              <Link href="/pricing" className="flex items-center gap-2 border border-primary text-primary px-8 py-4 font-space text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-colors rounded-none group">
                 RESERVE YOUR TIME
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>

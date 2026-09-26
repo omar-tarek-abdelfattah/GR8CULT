@@ -13,7 +13,7 @@ export default function NotFound() {
       <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 pointer-events-none select-none opacity-5">
         <Image
           src="/clean-crosshair-nobg.png"
-          alt=""
+          alt="gr8"
           width={384}
           height={384}
           aria-hidden="true"
@@ -23,7 +23,7 @@ export default function NotFound() {
       </div>
 
       <div className="relative z-10 container max-w-2xl mx-auto flex flex-col items-center text-center gap-6">
-        
+
         {/* Status Badge */}
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 border border-secondary/60 bg-[#080808]/90 text-[11px] font-space tracking-[0.25em] text-muted uppercase">
           <span className="relative flex h-2 w-2">
