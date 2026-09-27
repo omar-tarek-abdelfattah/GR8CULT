@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Disc } from "lucide-react";
 import HeroVideoSlider from "./HeroVideoSlider";
-import NeonGridBeams from "./NeonGridBeams";
 import './Hero.style.css';
 
 export default function Hero() {
@@ -9,9 +8,6 @@ export default function Hero() {
     <section className="relative w-full h-[80vh] flex flex-col lg:flex-row items-center justify-center gap-5 border-b border-secondary overflow-hidden bg-background px-4 md:px-12 py-12 lg:py-0">
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-
-      {/* Subtle Neon Light Pulses Passing Through the Grid */}
-      <NeonGridBeams />
 
       {/* Left side: Text Content */}
       <div className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left w-full max-w-2xl gap-6">
