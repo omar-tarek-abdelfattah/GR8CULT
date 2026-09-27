@@ -54,8 +54,8 @@ export default function Navbar() {
           <Link
             href="/vault"
             className={`relative group/vault px-4 py-1.5 border font-space text-sm tracking-[0.22em] uppercase flex items-center gap-2.5 transition-all duration-300 rounded-none cursor-pointer ${isVaultActive
-                ? "border-primary bg-primary/25 text-white shadow-[0_0_22px_rgba(214,0,0,0.85),inset_0_0_12px_rgba(214,0,0,0.3)] ring-1 ring-primary font-bold"
-                : "border-primary/50 bg-primary/10 text-zinc-100 hover:border-primary hover:bg-primary/20 hover:text-white hover:shadow-[0_0_18px_rgba(214,0,0,0.55)]"
+              ? "border-primary bg-primary/25 text-white shadow-[0_0_22px_rgba(214,0,0,0.85),inset_0_0_12px_rgba(214,0,0,0.3)] ring-1 ring-primary font-bold"
+              : "border-primary/50 bg-primary/10 text-zinc-100 hover:border-primary hover:bg-primary/20 hover:text-white hover:shadow-[0_0_18px_rgba(214,0,0,0.55)]"
               }`}
           >
             {/* Live radar / pulse beacon */}
@@ -97,7 +97,7 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <Link
-          href="/#booking"
+          href="/pricing"
           className="hidden md:inline-flex border border-primary text-primary px-6 py-2 font-space text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-colors rounded-none"
         >
           BOOK YOUR SESSION NOW !
@@ -110,8 +110,8 @@ export default function Navbar() {
             href="/vault"
             aria-label="Enter The Vault directly"
             className={`px-3 py-1.5 border font-space text-xs tracking-widest uppercase flex items-center gap-1.5 transition-all duration-300 rounded-none cursor-pointer ${isVaultActive
-                ? "border-primary bg-primary/30 text-white shadow-[0_0_16px_rgba(214,0,0,0.85)] ring-1 ring-primary font-bold"
-                : "border-primary/60 bg-primary/15 text-zinc-100 hover:border-primary hover:bg-primary/25 shadow-[0_0_10px_rgba(214,0,0,0.35)]"
+              ? "border-primary bg-primary/30 text-white shadow-[0_0_16px_rgba(214,0,0,0.85)] ring-1 ring-primary font-bold"
+              : "border-primary/60 bg-primary/15 text-zinc-100 hover:border-primary hover:bg-primary/25 shadow-[0_0_10px_rgba(214,0,0,0.35)]"
               }`}
           >
             <span className="relative flex h-1.5 w-1.5 shrink-0">
@@ -144,8 +144,8 @@ export default function Navbar() {
                 href="/vault"
                 onClick={() => setIsOpen(false)}
                 className={`py-3 px-3 border transition-all flex items-center justify-between ${isVaultActive
-                    ? "border-primary bg-primary/20 text-white shadow-[0_0_15px_rgba(214,0,0,0.6)]"
-                    : "border-primary/40 bg-primary/10 text-zinc-100 hover:border-primary hover:bg-primary/20"
+                  ? "border-primary bg-primary/20 text-white shadow-[0_0_15px_rgba(214,0,0,0.6)]"
+                  : "border-primary/40 bg-primary/10 text-zinc-100 hover:border-primary hover:bg-primary/20"
                   }`}
               >
                 <div className="flex items-center gap-2">
@@ -165,8 +165,8 @@ export default function Navbar() {
                 href="/pricing"
                 onClick={() => setIsOpen(false)}
                 className={`py-3 px-2 border-b transition-colors flex items-center justify-between ${isPricingActive
-                    ? "text-white border-primary font-bold"
-                    : "text-muted hover:text-white border-secondary/30 hover:border-primary"
+                  ? "text-white border-primary font-bold"
+                  : "text-muted hover:text-white border-secondary/30 hover:border-primary"
                   }`}
               >
                 <span>PRICING</span>
@@ -177,8 +177,8 @@ export default function Navbar() {
                 href="/about"
                 onClick={() => setIsOpen(false)}
                 className={`py-3 px-2 border-b transition-colors flex items-center justify-between ${isAboutActive
-                    ? "text-white border-primary font-bold"
-                    : "text-muted hover:text-white border-secondary/30 hover:border-primary"
+                  ? "text-white border-primary font-bold"
+                  : "text-muted hover:text-white border-secondary/30 hover:border-primary"
                   }`}
               >
                 <span>ABOUT</span>

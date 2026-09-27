@@ -38,41 +38,36 @@ export default function PricingHero() {
           >
             [ 01 Services &amp; Rates ]
           </a>
-          <a
-            href="#bundles-savings"
-            className="px-3 py-1.5 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
-          >
-            [ 02 Bundle Savings ]
-          </a>
+
           <a
             href="#guide"
             className="px-3 py-1.5 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 03 Which Service Do I Need? ]
+            [ 02 Which Service Do I Need? ]
           </a>
           <a
             href="#comparison"
             className="px-3 py-1.5 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 04 Matrix ]
+            [ 03 Matrix ]
           </a>
           <a
             href="#process"
             className="px-3 py-1.5 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 05 Process ]
+            [ 04 Process ]
           </a>
           <a
             href="#policies"
             className="px-3 py-1.5 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 06 Policies ]
+            [ 05 Policies ]
           </a>
           <a
             href="#faq"
             className="px-3 py-1.5 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 07 FAQ ]
+            [ 06 FAQ ]
           </a>
         </div>
       </div>
