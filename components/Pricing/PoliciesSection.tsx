@@ -102,91 +102,6 @@ export default function PoliciesSection() {
 
         {/* Policy Grids */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Deposit Policy */}
-          <div className="border border-primary/80 bg-gradient-to-br from-[#160202] to-[#090909] p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <ShieldAlert className="w-6 h-6 text-primary" />
-              <h4 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase m-0">
-                DEPOSIT POLICY
-              </h4>
-            </div>
-
-            <div className="inline-block py-1 px-3 bg-primary text-white font-space text-xs tracking-widest uppercase font-bold mb-4">
-              NO DEPOSIT = NO BOOKING
-            </div>
-
-            <p className="font-space text-xs text-zinc-200 leading-relaxed mb-3">
-              Selecting a slot does not mean the booking is confirmed. Your
-              session is only officially locked once the required deposit has
-              been received.
-            </p>
-            <p className="font-space text-xs text-zinc-400 leading-relaxed">
-              The deposit reserves your time and removes that slot from
-              availability for other clients.
-            </p>
-          </div>
-
-          {/* Cancellation Policy */}
-          <div className="border border-secondary/60 bg-[#090909] p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <AlertCircle className="w-6 h-6 text-primary" />
-              <h4 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase m-0">
-                CANCELLATION POLICY
-              </h4>
-            </div>
-
-            <div className="space-y-4 font-space text-xs">
-              <div className="p-3 bg-black border border-secondary/40">
-                <span className="text-white font-bold uppercase tracking-wider block mb-1">
-                  CANCEL WITHIN 24 HOURS
-                </span>
-                <span className="text-zinc-300">
-                  If you cancel within the first 24 HOURS, 50% of the deposit is
-                  refundable.
-                </span>
-              </div>
-
-              <div className="p-3 bg-black border border-primary/50">
-                <span className="text-primary font-bold uppercase tracking-wider block mb-1">
-                  AFTER 24 HOURS
-                </span>
-                <span className="text-zinc-300">
-                  After 24 hours, the deposit is completely{" "}
-                  <strong className="text-white">NON-REFUNDABLE</strong>.
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Rescheduling & Additional Time */}
-          <div className="border border-secondary/60 bg-[#090909] p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <Clock className="w-6 h-6 text-primary" />
-              <h4 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase m-0">
-                RESCHEDULING &amp; ADDITIONAL TIME
-              </h4>
-            </div>
-
-            <div className="space-y-3 font-space text-xs text-zinc-300 leading-relaxed">
-              <p>
-                <strong className="text-white uppercase tracking-wider block mb-1">
-                  RESCHEDULING:
-                </strong>
-                Need to change your session time? Contact us as early as
-                possible. Rescheduling is subject to available slots. A new
-                time is only confirmed after availability has been checked.
-              </p>
-              <div className="border-t border-secondary/30 pt-3">
-                <strong className="text-white uppercase tracking-wider block mb-1">
-                  ADDITIONAL TIME:
-                </strong>
-                Recording is 500 EGP / HOUR (Min. 2 hours). Any time beyond the
-                booked session is charged as Extra Time. Additional work outside
-                the agreed package is quoted separately before proceeding.
-              </div>
-            </div>
-          </div>
-
           {/* Final Delivery */}
           <div className="border border-secondary/60 bg-[#090909] p-6 sm:p-8">
             <div className="flex items-center gap-3 mb-4">
@@ -221,6 +136,93 @@ export default function PoliciesSection() {
               </div>
             </div>
           </div>
+
+          {/* Rescheduling & Additional Time */}
+          <div className="border border-secondary/60 bg-[#090909] p-6 sm:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Clock className="w-6 h-6 text-primary" />
+              <h4 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase m-0">
+                RESCHEDULING &amp; ADDITIONAL TIME
+              </h4>
+            </div>
+
+            <div className="space-y-3 font-space text-xs text-zinc-300 leading-relaxed">
+              <p>
+                <strong className="text-white uppercase tracking-wider block mb-1">
+                  RESCHEDULING:
+                </strong>
+                Need to change your session time? Contact us as early as
+                possible. Rescheduling is subject to available slots. A new
+                time is only confirmed after availability has been checked.
+              </p>
+              <div className="border-t border-secondary/30 pt-3">
+                <strong className="text-white uppercase tracking-wider block mb-1">
+                  ADDITIONAL TIME:
+                </strong>
+                Recording is 500 EGP / HOUR (Min. 2 hours). Any time beyond the
+                booked session is charged as Extra Time. Additional work outside
+                the agreed package is quoted separately before proceeding.
+              </div>
+            </div>
+          </div>
+          {/* Cancellation Policy */}
+          <div className="border border-secondary/60 bg-[#090909] p-6 sm:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <AlertCircle className="w-6 h-6 text-primary" />
+              <h4 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase m-0">
+                CANCELLATION POLICY
+              </h4>
+            </div>
+
+            <div className="space-y-4 font-space text-xs">
+              <div className="p-3 bg-black border border-secondary/40">
+                <span className="text-white font-bold uppercase tracking-wider block mb-1">
+                  CANCEL WITHIN 24 HOURS
+                </span>
+                <span className="text-zinc-300">
+                  If you cancel within the first 24 HOURS, 50% of the deposit is
+                  refundable.
+                </span>
+              </div>
+
+              <div className="p-3 bg-black border border-primary/50">
+                <span className="text-primary font-bold uppercase tracking-wider block mb-1">
+                  AFTER 24 HOURS
+                </span>
+                <span className="text-zinc-300">
+                  After 24 hours, the deposit is completely{" "}
+                  <strong className="text-white">NON-REFUNDABLE</strong>.
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+
+          {/* Deposit Policy */}
+          <div className="border border-primary/80 bg-gradient-to-br from-[#160202] to-[#090909] p-6 sm:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <ShieldAlert className="w-6 h-6 text-primary" />
+              <h4 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase m-0">
+                DEPOSIT POLICY
+              </h4>
+            </div>
+
+            <div className="inline-block py-1 px-3 bg-primary text-white font-space text-xs tracking-widest uppercase font-bold mb-4">
+              NO DEPOSIT = NO BOOKING
+            </div>
+
+            <p className="font-space text-xs text-zinc-200 leading-relaxed mb-3">
+              Selecting a slot does not mean the booking is confirmed. Your
+              session is only officially locked once the required deposit has
+              been received.
+            </p>
+            <p className="font-space text-xs text-zinc-400 leading-relaxed">
+              The deposit reserves your time and removes that slot from
+              availability for other clients.
+            </p>
+          </div>
+
         </div>
       </div>
     </section>

@@ -2,7 +2,6 @@
 
 import PricingHero from "./PricingHero";
 import PricingCatalog from "./PricingCatalog";
-import BundleSavings from "./BundleSavings";
 import DecisionGuide from "./DecisionGuide";
 import ComparisonMatrix from "./ComparisonMatrix";
 import ProcessSection from "./ProcessSection";
@@ -17,10 +16,9 @@ export default function PricingSection() {
       <PricingHero />
       <DecisionGuide />
       <PricingCatalog />
-      <BundleSavings />
       <ComparisonMatrix />
       <ProcessSection />
-      {/* <EquipmentSection /> */}
+      <EquipmentSection />
       <PoliciesSection />
       <FaqSection />
       <PricingCta />

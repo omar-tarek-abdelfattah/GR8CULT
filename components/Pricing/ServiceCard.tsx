@@ -14,20 +14,18 @@ export default function ServiceCard({ item }: ServiceCardProps) {
   return (
     <div
       id={item.id}
-      className={`relative flex flex-col justify-between transition-all duration-300 bg-[#090909] border ${
-        item.isFeatured
+      className={`relative flex flex-col justify-between transition-all duration-300 bg-[#090909] border ${item.isFeatured
           ? "border-primary shadow-[0_0_35px_rgba(214,0,0,0.25)] bg-gradient-to-b from-[#160202] via-[#0a0a0a] to-[#050505] ring-1 ring-primary/60 md:scale-[1.02]"
           : "border-secondary/60 hover:border-primary/60 shadow-lg"
-      }`}
+        }`}
     >
       {/* Badge */}
       {item.badge && (
         <div
-          className={`absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap font-space text-[10px] tracking-[0.2em] uppercase px-4 py-1 flex items-center gap-1.5 font-bold ${
-            item.isFeatured
+          className={`absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap font-space text-[10px] tracking-[0.2em] uppercase px-4 py-1 flex items-center gap-1.5 font-bold ${item.isFeatured
               ? "bg-primary text-white shadow-[0_0_15px_#D60000]"
               : "bg-secondary text-white border border-primary/40"
-          }`}
+            }`}
         >
           {item.badge}
         </div>
@@ -112,13 +110,12 @@ export default function ServiceCard({ item }: ServiceCardProps) {
             {item.notes.map((note, nIdx) => (
               <p
                 key={nIdx}
-                className={`font-space text-[11px] leading-relaxed ${
-                  note.includes("DOES NOT INCLUDE") ||
-                  note.includes("Additional") ||
-                  note.includes("scope")
+                className={`font-space text-[11px] leading-relaxed ${note.includes("DOES NOT INCLUDE") ||
+                    note.includes("Additional") ||
+                    note.includes("scope")
                     ? "text-amber-400/90"
                     : "text-zinc-400"
-                }`}
+                  }`}
               >
                 • {note}
               </p>
@@ -134,11 +131,10 @@ export default function ServiceCard({ item }: ServiceCardProps) {
           onClick={() =>
             openCalendar({ serviceName: item.title, price: item.price })
           }
-          className={`w-full py-3.5 px-5 font-space text-xs uppercase tracking-widest flex items-center justify-center gap-2.5 transition-all duration-300 group cursor-pointer ${
-            item.isFeatured
+          className={`w-full py-3.5 px-5 font-space text-xs uppercase tracking-widest flex items-center justify-center gap-2.5 transition-all duration-300 group cursor-pointer ${item.isFeatured
               ? "bg-primary hover:bg-white text-white hover:text-black shadow-[0_0_20px_rgba(214,0,0,0.5)] border border-primary hover:border-white font-bold"
               : "border border-secondary/80 hover:border-primary bg-black hover:bg-primary text-zinc-200 hover:text-white font-bold"
-          }`}
+            }`}
         >
           <Calendar className="w-4 h-4 text-primary group-hover:text-current transition-colors" />
           <span>CHOOSE AVAILABLE TIME SLOT</span>
