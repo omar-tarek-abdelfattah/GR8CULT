@@ -47,7 +47,7 @@ export default function HardwareShowcase() {
               Good engineering matters.
               <br />
 
-              But neither one makes a great record by itself.
+              But neither one makes a GR8 record by itself.
               <br />
               <br />
 

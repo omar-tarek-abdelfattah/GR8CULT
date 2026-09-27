@@ -182,7 +182,7 @@ export default function AboutTabs() {
                   <div className="border border-secondary p-6 bg-[#0a0a0a]">
                     <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 01 // BUILD THE HOUSE</h3>
                     <p className="font-space text-md text-muted leading-relaxed">
-                      Build GR8NIK into a studio where artists can actually make great music — from the first idea to the finished record.
+                      Build GR8NIK into a studio where artists can actually make GR8 music — from the first idea to the finished record.
 
                       Recording. Production. Mixing. Beats. Content.
                       A place built around the music, not just the equipment.

@@ -420,7 +420,7 @@ export default function BeatsTab({
                 </div>
 
                 <h3 className="font-bebas text-4xl sm:text-5xl lg:text-6xl text-white tracking-wide uppercase m-0 leading-none">
-                  GREATEST BEATS <span className="text-primary">— VOL. 2</span>
+                  GR8EST BEATS <span className="text-primary">— VOL. 2</span>
                 </h3>
 
                 <div className="mt-3 flex items-baseline gap-3">
@@ -482,7 +482,7 @@ export default function BeatsTab({
 
                 <a
                   href={`https://wa.me/+201011444140?text=${encodeURIComponent(
-                    "Hey GR8NIK Studios, I'd like to apply for access to the exclusive Greatest Beats — Vol. 2 beat drop (10 beats catalog). Here is my artist profile and music link:"
+                    "Hey GR8NIK Studios, I'd like to apply for access to the exclusive GR8TEST Beats — Vol. 2 beat drop (10 beats catalog). Here is my artist profile and music link:"
                   )}`}
                   target="_blank"
                   rel="noreferrer"
