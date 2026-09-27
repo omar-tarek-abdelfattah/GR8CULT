@@ -14,8 +14,8 @@ export default function PricingSection() {
   return (
     <div className="w-full bg-background min-h-screen text-foreground pb-24 selection:bg-primary selection:text-white">
       <PricingHero />
-      <DecisionGuide />
       <PricingCatalog />
+      <DecisionGuide />
       <ComparisonMatrix />
       <ProcessSection />
       <EquipmentSection />

@@ -21,22 +21,22 @@ export default function PricingCatalog() {
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-secondary/50 pb-6">
           <div>
-            <span className="font-space text-xs text-primary tracking-[0.25em] uppercase block mb-2">
+            <span className="font-space text-xs sm:text-sm text-primary tracking-[0.25em] uppercase block mb-2 font-semibold">
               STUDIO PACKAGES &amp; RATES
             </span>
-            <h2 className="font-bebas text-4xl sm:text-6xl text-white tracking-wider uppercase m-0">
+            <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-white tracking-wider uppercase m-0 leading-none">
               CORE PACKAGES
             </h2>
-            <p className="font-space text-xs text-muted tracking-widest uppercase mt-2">
+            <p className="font-space text-xs sm:text-sm text-muted tracking-widest uppercase mt-2">
               [ 3 STREAMLINED OPTIONS // TRANSPARENT PRICING // CAIRO ]
             </p>
           </div>
 
           {/* Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={() => setActiveCategory("all")}
-              className={`px-3.5 py-1.5 font-space text-[11px] uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-4 py-2 font-space text-xs sm:text-[13px] uppercase tracking-wider transition-all cursor-pointer ${
                 activeCategory === "all"
                   ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
                   : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
@@ -46,7 +46,7 @@ export default function PricingCatalog() {
             </button>
             <button
               onClick={() => setActiveCategory("service")}
-              className={`px-3.5 py-1.5 font-space text-[11px] uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-4 py-2 font-space text-xs sm:text-[13px] uppercase tracking-wider transition-all cursor-pointer ${
                 activeCategory === "service"
                   ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
                   : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
@@ -56,7 +56,7 @@ export default function PricingCatalog() {
             </button>
             <button
               onClick={() => setActiveCategory("bundle")}
-              className={`px-3.5 py-1.5 font-space text-[11px] uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-4 py-2 font-space text-xs sm:text-[13px] uppercase tracking-wider transition-all cursor-pointer ${
                 activeCategory === "bundle"
                   ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
                   : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
@@ -82,14 +82,14 @@ export default function PricingCatalog() {
           <div className="absolute top-0 right-0 w-96 h-full bg-primary/10 blur-[100px] pointer-events-none" />
 
           <div className="relative z-10 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-primary/40 font-space text-[10px] text-primary tracking-widest uppercase mb-3 font-bold">
-              <FaWhatsapp className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-black border border-primary/40 font-space text-xs text-primary tracking-widest uppercase mb-3 font-bold">
+              <FaWhatsapp className="w-4 h-4 text-emerald-400" />
               <span>CUSTOM SCOPE // ONLINE BOOKINGS</span>
             </div>
-            <h3 className="font-bebas text-3xl sm:text-4xl text-white tracking-wide uppercase m-0 leading-tight">
+            <h3 className="font-bebas text-3xl sm:text-4xl md:text-5xl text-white tracking-wide uppercase m-0 leading-tight">
               NEED A CUSTOM PACKAGE OR ONLINE BOOKING?
             </h3>
-            <p className="font-space text-xs sm:text-sm text-zinc-300 max-w-2xl mt-2 leading-relaxed">
+            <p className="font-space text-sm sm:text-base text-zinc-300 max-w-2xl mt-2 leading-relaxed">
               Looking for a custom multi-track EP/Album deal, bespoke sound design, commercial music, or prefer to coordinate and book your session directly online with our engineering team? Chat directly with us on WhatsApp.
             </p>
           </div>
@@ -99,7 +99,7 @@ export default function PricingCatalog() {
               href={CUSTOM_BOOKING_WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-space text-xs uppercase tracking-widest flex items-center justify-center gap-3 transition-all font-bold shadow-[0_0_25px_rgba(16,185,129,0.35)] border border-emerald-400/50 cursor-pointer"
+              className="w-full sm:w-auto px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-space text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all font-bold shadow-[0_0_25px_rgba(16,185,129,0.35)] border border-emerald-400/50 cursor-pointer"
             >
               <FaWhatsapp className="w-5 h-5 text-white" />
               <span>CHAT FOR CUSTOM OR ONLINE BOOKING</span>

@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { Disc } from "lucide-react";
 import HeroVideoSlider from "./HeroVideoSlider";
+import NeonGridBeams from "./NeonGridBeams";
 import './Hero.style.css';
 
 export default function Hero() {
   return (
     <section className="relative w-full h-[80vh] flex flex-col lg:flex-row items-center justify-center gap-5 border-b border-secondary overflow-hidden bg-background px-4 md:px-12 py-12 lg:py-0">
-      {/* Background Grid Pattern (simulating the UI mockup) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+
+      {/* Subtle Neon Light Pulses Passing Through the Grid */}
+      <NeonGridBeams />
 
       {/* Left side: Text Content */}
       <div className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left w-full max-w-2xl gap-6">
@@ -22,7 +26,7 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center md:justify-start gap-4 mt-8 w-full sm:w-auto">
-          <Link href="/#booking" className="bg-primary text-white font-space text-xs uppercase tracking-widest px-8 py-4 hover:bg-secondary transition-colors rounded-none text-center border border-primary hover:border-secondary">
+          <Link href="/pricing" className="bg-primary text-white font-space text-xs uppercase tracking-widest px-8 py-4 hover:bg-secondary transition-colors rounded-none text-center border border-primary hover:border-secondary">
             LOCK IN A SESSION
           </Link>
           <Link
@@ -44,4 +48,3 @@ export default function Hero() {
     </section>
   );
 }
-

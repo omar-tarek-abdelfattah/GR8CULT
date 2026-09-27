@@ -12,13 +12,13 @@ export default function DecisionGuide() {
     >
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-14">
-          <span className="font-space text-xs text-primary tracking-[0.25em] uppercase block mb-2">
+          <span className="font-space text-xs sm:text-sm text-primary tracking-[0.25em] uppercase block mb-2 font-semibold">
             DECISION ENGINE
           </span>
-          <h2 className="font-bebas text-4xl sm:text-6xl text-white tracking-wider uppercase m-0">
+          <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-white tracking-wider uppercase m-0 leading-none">
             WHICH SERVICE DO I NEED?
           </h2>
-          <p className="font-space text-xs text-muted tracking-widest uppercase mt-2">
+          <p className="font-space text-xs sm:text-sm text-muted tracking-widest uppercase mt-2">
             [ MATCH YOUR CURRENT STAGE TO THE EXACT PACKAGE ]
           </p>
         </div>
@@ -26,47 +26,58 @@ export default function DecisionGuide() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {decisionCards.map((d, index) => {
             const isRoute = d.linkId.startsWith("/");
+            const isFourthStretched = index === 3;
 
             return (
               <div
                 key={index}
-                className="border border-secondary/60 bg-[#090909] p-6 flex flex-col justify-between hover:border-primary/80 transition-all group"
+                className={`border border-secondary/60 bg-[#090909] p-6 sm:p-7 flex flex-col justify-between hover:border-primary/80 transition-all group ${
+                  isFourthStretched
+                    ? "lg:col-span-3 lg:flex-row lg:items-center lg:gap-8 bg-gradient-to-r from-[#120303] via-[#090909] to-[#0d0505]"
+                    : ""
+                }`}
               >
-                <div>
-                  <div className="flex items-center gap-2 font-space text-[10px] text-primary tracking-widest uppercase mb-3">
+                <div className={isFourthStretched ? "lg:flex-grow" : ""}>
+                  <div className="flex items-center gap-2 font-space text-xs text-primary tracking-widest uppercase mb-3 font-semibold">
                     <ArrowRight className="w-3.5 h-3.5" />
                     <span>SITUATION {index + 1}</span>
                   </div>
 
-                  <h4 className="font-bebas text-2xl text-white tracking-wide uppercase mb-3 group-hover:text-primary transition-colors">
-                    "{d.situation}"
+                  <h4 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase mb-3 group-hover:text-primary transition-colors">
+                    &ldquo;{d.situation}&rdquo;
                   </h4>
 
-                  <div className="py-1 px-2.5 bg-black border border-secondary/50 font-space text-xs text-emerald-400 font-bold tracking-wider inline-block mb-4">
+                  <div className="py-1.5 px-3 bg-black border border-secondary/50 font-space text-xs sm:text-sm text-emerald-400 font-bold tracking-wider inline-block mb-4">
                     {d.recommendation} — {d.price}
                   </div>
 
-                  <p className="font-space text-xs text-zinc-300 leading-relaxed">
+                  <p className="font-space text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-3xl">
                     {d.detail}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-secondary/40">
+                <div
+                  className={`mt-6 pt-4 border-t border-secondary/40 ${
+                    isFourthStretched
+                      ? "lg:mt-0 lg:pt-0 lg:border-t-0 lg:border-l lg:border-secondary/50 lg:pl-8 lg:shrink-0"
+                      : ""
+                  }`}
+                >
                   {isRoute ? (
                     <Link
                       href={d.linkId}
-                      className="font-space text-xs text-primary group-hover:text-white uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer"
+                      className="font-space text-xs sm:text-sm text-primary group-hover:text-white uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer font-bold"
                     >
                       <span>{d.cta}</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   ) : (
                     <a
                       href={`#${d.linkId}`}
-                      className="font-space text-xs text-primary group-hover:text-white uppercase tracking-wider flex items-center gap-2 transition-colors"
+                      className="font-space text-xs sm:text-sm text-primary group-hover:text-white uppercase tracking-wider flex items-center gap-2 transition-colors font-bold"
                     >
                       <span>{d.cta}</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </a>
                   )}
                 </div>

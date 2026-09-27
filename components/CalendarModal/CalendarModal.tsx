@@ -289,15 +289,15 @@ export default function CalendarModal({
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-space text-xs text-primary tracking-[0.2em] uppercase font-bold block">
+                <span className="font-space text-xs sm:text-sm text-primary tracking-[0.2em] uppercase font-bold block">
                   GR8NIK STUDIOS // LIVE CALENDAR
                 </span>
-                <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 bg-primary/20 border border-primary/40 font-space text-[9px] text-zinc-300 uppercase tracking-wider">
-                  <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 bg-primary/20 border border-primary/40 font-space text-[10px] text-zinc-300 uppercase tracking-wider font-semibold">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                   GOOGLE API SYNC
                 </span>
               </div>
-              <span className="font-space text-[10px] text-muted tracking-wider uppercase block mt-0.5">
+              <span className="font-space text-[11px] sm:text-xs text-muted tracking-wider uppercase block mt-0.5">
                 SELECT DATE &bull; CHOOSE SLOT &bull; RECEIVE CALENDAR INVITE &bull; LOCK ON WHATSAPP
               </span>
             </div>
@@ -307,14 +307,14 @@ export default function CalendarModal({
             <Link
               href="/pricing"
               onClick={onClose}
-              className="hidden sm:flex px-3 py-1.5 border border-secondary/50 bg-[#080808] hover:border-primary text-muted hover:text-white font-space text-[10px] uppercase tracking-wider transition-colors items-center gap-1.5 cursor-pointer"
+              className="hidden sm:flex px-3.5 py-1.5 border border-secondary/50 bg-[#080808] hover:border-primary text-muted hover:text-white font-space text-xs uppercase tracking-wider transition-colors items-center gap-1.5 cursor-pointer font-semibold"
             >
               <span>VIEW PACKAGES</span>
             </Link>
 
             <button
               onClick={onClose}
-              className="p-1.5 border border-secondary/50 bg-[#080808] hover:border-primary hover:bg-primary text-zinc-300 hover:text-white transition-all cursor-pointer"
+              className="p-2 border border-secondary/50 bg-[#080808] hover:border-primary hover:bg-primary text-zinc-300 hover:text-white transition-all cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
@@ -326,14 +326,14 @@ export default function CalendarModal({
         <div className="flex-grow overflow-y-auto p-4 sm:p-6 space-y-6">
           {/* Booking Success Banner if already submitted */}
           {bookingSuccess && (
-            <div className="p-4 border border-emerald-500/60 bg-emerald-950/30 flex items-center justify-between gap-3 text-emerald-300 animate-in fade-in">
+            <div className="p-4 sm:p-5 border border-emerald-500/60 bg-emerald-950/30 flex items-center justify-between gap-3 text-emerald-300 animate-in fade-in">
               <div className="flex items-center gap-3">
                 <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
-                <div className="font-space text-xs">
+                <div className="font-space text-xs sm:text-sm">
                   <p className="font-bold uppercase tracking-wider text-white">
                     CALENDAR INVITE SENT TO {artistEmail.toUpperCase()}!
                   </p>
-                  <p className="text-zinc-300 mt-0.5">
+                  <p className="text-zinc-300 mt-1 leading-relaxed">
                     Check your email inbox for the Google Calendar invite. Transfer your deposit on WhatsApp to officially confirm your slot.
                   </p>
                 </div>
@@ -342,7 +342,7 @@ export default function CalendarModal({
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-space text-[10px] uppercase tracking-widest font-bold flex items-center gap-1.5 shrink-0"
+                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-space text-xs uppercase tracking-widest font-bold flex items-center gap-1.5 shrink-0"
               >
                 <span>OPEN WHATSAPP</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -353,11 +353,11 @@ export default function CalendarModal({
           {/* STEP 1: Date Strip */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="font-space text-[11px] tracking-widest uppercase text-white font-bold flex items-center gap-2">
-                <CalendarIcon className="w-3.5 h-3.5 text-primary" />
+              <span className="font-space text-xs sm:text-sm tracking-widest uppercase text-white font-bold flex items-center gap-2">
+                <CalendarIcon className="w-4 h-4 text-primary" />
                 <span>STEP 1: SELECT SESSION DATE</span>
               </span>
-              <span className="font-space text-[10px] text-zinc-400">
+              <span className="font-space text-[11px] sm:text-xs text-zinc-400">
                 Cairo Time (Africa/Cairo)
               </span>
             </div>
@@ -372,19 +372,19 @@ export default function CalendarModal({
                     key={d.dateStr}
                     type="button"
                     onClick={() => handleSelectDate(d.dateStr)}
-                    className={`shrink-0 flex flex-col items-center justify-center min-w-[70px] sm:min-w-[82px] py-2.5 px-2 border transition-all cursor-pointer ${
+                    className={`shrink-0 flex flex-col items-center justify-center min-w-[72px] sm:min-w-[86px] py-2.5 px-2 border transition-all cursor-pointer ${
                       isSelected
                         ? "bg-primary text-white border-primary shadow-[0_0_20px_rgba(214,0,0,0.6)] font-bold scale-[1.03]"
                         : "bg-black/60 border-secondary/60 text-zinc-300 hover:border-primary/70 hover:text-white"
                     }`}
                   >
-                    <span className="font-space text-[10px] tracking-wider uppercase opacity-80">
+                    <span className="font-space text-[11px] tracking-wider uppercase opacity-90 font-semibold">
                       {d.isToday ? "TODAY" : d.isTomorrow ? "TOMORROW" : d.dayOfWeek}
                     </span>
                     <span className="font-bebas text-2xl sm:text-3xl tracking-wide my-0.5">
                       {d.dayNum}
                     </span>
-                    <span className="font-space text-[9px] tracking-widest uppercase opacity-70">
+                    <span className="font-space text-[10px] sm:text-[11px] tracking-widest uppercase opacity-75">
                       {d.monthStr}
                     </span>
                   </button>
@@ -396,11 +396,11 @@ export default function CalendarModal({
           {/* STEP 2: Slots Grid */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="font-space text-[11px] tracking-widest uppercase text-white font-bold flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5 text-primary" />
+              <span className="font-space text-xs sm:text-sm tracking-widest uppercase text-white font-bold flex items-center gap-2">
+                <Clock className="w-4 h-4 text-primary" />
                 <span>STEP 2: AVAILABLE SLOTS FOR {formattedSelectedDate.toUpperCase()}</span>
               </span>
-              <span className="font-space text-[10px] text-zinc-400">
+              <span className="font-space text-[11px] sm:text-xs text-zinc-400">
                 Min. 2-Hour Sessions
               </span>
             </div>
@@ -408,14 +408,14 @@ export default function CalendarModal({
             {isLoadingSlots ? (
               <div className="py-12 border border-secondary/40 bg-black/40 flex flex-col items-center justify-center gap-3">
                 <Loader2 className="w-6 h-6 text-primary animate-spin" />
-                <span className="font-space text-xs text-zinc-400 uppercase tracking-widest">
+                <span className="font-space text-xs sm:text-sm text-zinc-400 uppercase tracking-widest">
                   QUERYING GOOGLE CALENDAR FREEBUSY SLOTS...
                 </span>
               </div>
             ) : slotsError ? (
               <div className="p-5 border border-amber-500/40 bg-amber-950/20 flex items-start gap-3 text-amber-300">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                <div className="font-space text-xs">
+                <div className="font-space text-xs sm:text-sm">
                   <p className="font-bold uppercase tracking-wider mb-1">
                     Notice checking availability:
                   </p>
@@ -427,17 +427,17 @@ export default function CalendarModal({
               </div>
             ) : slots.length === 0 ? (
               <div className="py-10 border border-secondary/40 bg-black/50 text-center px-4">
-                <p className="font-bebas text-2xl text-zinc-300 tracking-wider uppercase mb-1">
+                <p className="font-bebas text-2xl sm:text-3xl text-zinc-300 tracking-wider uppercase mb-1">
                   NO OPEN SLOTS ON THIS DATE
                 </p>
-                <p className="font-space text-xs text-zinc-400 max-w-md mx-auto mb-4">
+                <p className="font-space text-xs sm:text-sm text-zinc-400 max-w-md mx-auto mb-4">
                   The studio schedule is fully booked for this day. Please choose another date or message us on WhatsApp for emergency slots.
                 </p>
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-space text-[11px] uppercase tracking-wider font-bold transition-all"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-space text-xs uppercase tracking-wider font-bold transition-all"
                 >
                   <FaWhatsapp className="w-4 h-4" />
                   <span>ASK FOR CUSTOM AVAILABILITY ON WHATSAPP</span>
@@ -453,22 +453,22 @@ export default function CalendarModal({
                       key={sIdx}
                       type="button"
                       onClick={() => setSelectedSlot(slot)}
-                      className={`p-3 border text-left flex flex-col justify-between transition-all cursor-pointer ${
+                      className={`p-3.5 border text-left flex flex-col justify-between transition-all cursor-pointer ${
                         isSelected
                           ? "bg-primary text-white border-primary shadow-[0_0_20px_rgba(214,0,0,0.5)] font-bold scale-[1.02]"
                           : "bg-black/60 border-secondary/60 text-zinc-300 hover:border-primary hover:text-white"
                       }`}
                     >
                       <div className="flex items-center justify-between w-full mb-1">
-                        <span className="font-space text-[10px] tracking-wider uppercase opacity-75">
+                        <span className="font-space text-[11px] tracking-wider uppercase opacity-80 font-semibold">
                           SLOT {sIdx + 1}
                         </span>
                         {isSelected && <CheckCircle className="w-3.5 h-3.5 text-white" />}
                       </div>
-                      <span className="font-space text-xs font-bold tracking-tight">
+                      <span className="font-space text-xs sm:text-sm font-bold tracking-tight">
                         {slot.timeLabel}
                       </span>
-                      <span className="font-space text-[9px] opacity-70 tracking-widest mt-1">
+                      <span className="font-space text-[10px] sm:text-[11px] opacity-75 tracking-widest mt-1">
                         {slot.durationHours} HOURS
                       </span>
                     </button>
@@ -480,23 +480,23 @@ export default function CalendarModal({
 
           {/* STEP 3: Session Details & Contact Input Form */}
           <div className="border-t border-secondary/50 pt-5">
-            <span className="font-space text-[11px] tracking-widest uppercase text-white font-bold flex items-center gap-2 mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <span className="font-space text-xs sm:text-sm tracking-widest uppercase text-white font-bold flex items-center gap-2 mb-3">
+              <Sparkles className="w-4 h-4 text-primary" />
               <span>STEP 3: PACKAGE &amp; EMAIL CONFIRMATION</span>
             </span>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
               {/* Package Selector */}
               <div>
-                <label className="font-space text-[9px] text-muted tracking-widest uppercase block mb-1">
+                <label className="font-space text-[10px] sm:text-[11px] text-muted tracking-widest uppercase block mb-1 font-semibold">
                   PACKAGE
                 </label>
                 <div className="relative flex items-center">
-                  <Music2 className="w-3.5 h-3.5 text-primary absolute left-2.5 pointer-events-none" />
+                  <Music2 className="w-4 h-4 text-primary absolute left-2.5 pointer-events-none" />
                   <select
                     value={service}
                     onChange={(e) => setService(e.target.value)}
-                    className="w-full pl-8 pr-2 py-2.5 bg-black border border-secondary/60 text-white font-space text-[11px] focus:border-primary focus:outline-none transition-colors"
+                    className="w-full pl-8 pr-2 py-3 bg-black border border-secondary/60 text-white font-space text-xs sm:text-sm focus:border-primary focus:outline-none transition-colors"
                   >
                     {AVAILABLE_SERVICES.map((s, idx) => (
                       <option key={idx} value={s} className="bg-black text-white">
@@ -509,17 +509,17 @@ export default function CalendarModal({
 
               {/* Artist Name */}
               <div>
-                <label className="font-space text-[9px] text-muted tracking-widest uppercase block mb-1">
+                <label className="font-space text-[10px] sm:text-[11px] text-muted tracking-widest uppercase block mb-1 font-semibold">
                   ARTIST / CLIENT NAME
                 </label>
                 <div className="relative flex items-center">
-                  <User className="w-3.5 h-3.5 text-primary absolute left-2.5 pointer-events-none" />
+                  <User className="w-4 h-4 text-primary absolute left-2.5 pointer-events-none" />
                   <input
                     type="text"
                     value={artistName}
                     onChange={(e) => setArtistName(e.target.value)}
                     placeholder="Your artist name or handle"
-                    className="w-full pl-8 pr-3 py-2.5 bg-black border border-secondary/60 text-white placeholder:text-zinc-600 font-space text-[11px] focus:border-primary focus:outline-none transition-colors"
+                    className="w-full pl-8 pr-3 py-3 bg-black border border-secondary/60 text-white placeholder:text-zinc-600 font-space text-xs sm:text-sm focus:border-primary focus:outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -527,15 +527,15 @@ export default function CalendarModal({
               {/* User Email Input */}
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="font-space text-[9px] text-muted tracking-widest uppercase block">
-                    EMAIL (CALENDAR INVITE SENT HERE)
+                  <label className="font-space text-[10px] sm:text-[11px] text-muted tracking-widest uppercase block font-semibold">
+                    EMAIL (INVITE SENT HERE)
                   </label>
-                  <span className="font-space text-[8px] text-emerald-400 uppercase tracking-wider font-bold">
+                  <span className="font-space text-[9px] sm:text-[10px] text-emerald-400 uppercase tracking-wider font-bold">
                     * REQUIRED
                   </span>
                 </div>
                 <div className="relative flex items-center">
-                  <Mail className="w-3.5 h-3.5 text-primary absolute left-2.5 pointer-events-none" />
+                  <Mail className="w-4 h-4 text-primary absolute left-2.5 pointer-events-none" />
                   <input
                     type="email"
                     value={artistEmail}
@@ -544,7 +544,7 @@ export default function CalendarModal({
                       if (emailError) setEmailError(null);
                     }}
                     placeholder="e.g. artist@gmail.com"
-                    className={`w-full pl-8 pr-3 py-2.5 bg-black border text-white placeholder:text-zinc-600 font-space text-[11px] focus:outline-none transition-colors ${
+                    className={`w-full pl-8 pr-3 py-3 bg-black border text-white placeholder:text-zinc-600 font-space text-xs sm:text-sm focus:outline-none transition-colors ${
                       emailError
                         ? "border-red-500 focus:border-red-500"
                         : "border-secondary/60 focus:border-primary"
@@ -553,11 +553,11 @@ export default function CalendarModal({
                   />
                 </div>
                 {emailError ? (
-                  <span className="font-space text-[9px] text-red-400 block mt-1">
+                  <span className="font-space text-[10px] sm:text-[11px] text-red-400 block mt-1">
                     {emailError}
                   </span>
                 ) : (
-                  <span className="font-space text-[9px] text-zinc-400 block mt-1">
+                  <span className="font-space text-[10px] sm:text-[11px] text-zinc-400 block mt-1">
                     Google Calendar will automatically email your session invitation here.
                   </span>
                 )}
@@ -571,13 +571,13 @@ export default function CalendarModal({
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-space text-xs text-white font-bold">
+                <span className="font-space text-sm sm:text-base text-white font-bold">
                   {selectedSlot
                     ? `${formattedSelectedDate} • ${selectedSlot.timeLabel}`
                     : "No slot selected yet (Please click an open slot above)"}
                 </span>
               </div>
-              <span className="font-space text-[10px] text-zinc-400 block mt-0.5">
+              <span className="font-space text-xs text-zinc-400 block mt-0.5">
                 Google Calendar invite will be emailed to your inbox. Complete deposit via Vodafone Cash / InstaPay to lock slot.
               </span>
             </div>
@@ -587,7 +587,7 @@ export default function CalendarModal({
                 type="button"
                 disabled={isSubmitting || !selectedSlot || !isEmailValid}
                 onClick={handleConfirmBooking}
-                className={`w-full sm:w-auto px-6 py-3 font-space text-xs uppercase tracking-widest flex items-center justify-center gap-2 font-bold transition-all ${
+                className={`w-full sm:w-auto px-6 py-3.5 font-space text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-2 font-bold transition-all ${
                   selectedSlot && isEmailValid
                     ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] cursor-pointer"
                     : "bg-zinc-800 text-zinc-500 border border-secondary/50 cursor-not-allowed"

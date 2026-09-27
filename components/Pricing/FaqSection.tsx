@@ -18,13 +18,13 @@ export default function FaqSection() {
     >
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-14">
-          <span className="font-space text-xs text-primary tracking-[0.25em] uppercase block mb-2">
+          <span className="font-space text-xs sm:text-sm text-primary tracking-[0.25em] uppercase block mb-2 font-semibold">
             FREQUENTLY ASKED QUESTIONS
           </span>
-          <h2 className="font-bebas text-4xl sm:text-6xl text-white tracking-wider uppercase m-0">
+          <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-white tracking-wider uppercase m-0 leading-none">
             SESSION INTELLIGENCE // FAQ
           </h2>
-          <p className="font-space text-xs text-muted tracking-widest uppercase mt-2">
+          <p className="font-space text-xs sm:text-sm text-muted tracking-widest uppercase mt-2">
             [ 17 ANSWERS TO EVERYTHING YOU NEED TO KNOW ]
           </p>
         </div>
@@ -39,17 +39,17 @@ export default function FaqSection() {
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 text-xs sm:text-sm text-white uppercase tracking-wider hover:text-primary transition-colors cursor-pointer"
+                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 text-sm sm:text-base text-white uppercase tracking-wider hover:text-primary transition-colors cursor-pointer font-bold"
                 >
                   <span>{faq.question}</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-primary shrink-0 transition-transform duration-300 ${
+                    className={`w-5 h-5 text-primary shrink-0 transition-transform duration-300 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs text-zinc-300 leading-relaxed border-t border-secondary/30">
+                  <div className="px-5 pb-5 pt-1 text-sm sm:text-[15px] text-zinc-300 leading-relaxed border-t border-secondary/30">
                     {faq.answer}
                   </div>
                 )}
