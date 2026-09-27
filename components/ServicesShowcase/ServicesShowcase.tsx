@@ -163,7 +163,7 @@ export default function ServicesShowcase() {
                       </div>
 
                       <div className={`relative z-10 mt-8 pt-6 border-t border-secondary/30 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                        <Link href="/#booking" className="font-space text-xs text-primary uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 w-max">
+                        <Link href="/pricing" className="font-space text-xs text-primary uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 w-max">
                           BOOK NOW <span className="transition-transform group-hover:translate-x-1">-&gt;</span>
                         </Link>
                       </div>

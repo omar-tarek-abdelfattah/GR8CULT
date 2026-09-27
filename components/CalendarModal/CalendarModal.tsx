@@ -32,6 +32,9 @@ interface CalendarSlot {
   timeLabel: string;
   date: string;
   durationHours: number;
+  available?: boolean;
+  isBooked?: boolean;
+  reason?: "booked" | "past" | "available";
 }
 
 const AVAILABLE_SERVICES = [
@@ -137,8 +140,7 @@ export default function CalendarModal({
           setService(matching);
         } else {
           setService(
-            `${initialSession.serviceName}${
-              initialSession.price ? ` (${initialSession.price})` : ""
+            `${initialSession.serviceName}${initialSession.price ? ` (${initialSession.price})` : ""
             }`
           );
         }
@@ -292,10 +294,7 @@ export default function CalendarModal({
                 <span className="font-space text-xs sm:text-sm text-primary tracking-[0.2em] uppercase font-bold block">
                   GR8NIK STUDIOS // LIVE CALENDAR
                 </span>
-                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 bg-primary/20 border border-primary/40 font-space text-[10px] text-zinc-300 uppercase tracking-wider font-semibold">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  GOOGLE API SYNC
-                </span>
+
               </div>
               <span className="font-space text-[11px] sm:text-xs text-muted tracking-wider uppercase block mt-0.5">
                 SELECT DATE &bull; CHOOSE SLOT &bull; RECEIVE CALENDAR INVITE &bull; LOCK ON WHATSAPP
@@ -372,11 +371,10 @@ export default function CalendarModal({
                     key={d.dateStr}
                     type="button"
                     onClick={() => handleSelectDate(d.dateStr)}
-                    className={`shrink-0 flex flex-col items-center justify-center min-w-[72px] sm:min-w-[86px] py-2.5 px-2 border transition-all cursor-pointer ${
-                      isSelected
+                    className={`shrink-0 flex flex-col items-center justify-center min-w-[72px] sm:min-w-[86px] py-2.5 px-2 border transition-all cursor-pointer ${isSelected
                         ? "bg-primary text-white border-primary shadow-[0_0_20px_rgba(214,0,0,0.6)] font-bold scale-[1.03]"
                         : "bg-black/60 border-secondary/60 text-zinc-300 hover:border-primary/70 hover:text-white"
-                    }`}
+                      }`}
                   >
                     <span className="font-space text-[11px] tracking-wider uppercase opacity-90 font-semibold">
                       {d.isToday ? "TODAY" : d.isTomorrow ? "TOMORROW" : d.dayOfWeek}
@@ -395,14 +393,22 @@ export default function CalendarModal({
 
           {/* STEP 2: Slots Grid */}
           <div>
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
               <span className="font-space text-xs sm:text-sm tracking-widest uppercase text-white font-bold flex items-center gap-2">
                 <Clock className="w-4 h-4 text-primary" />
                 <span>STEP 2: AVAILABLE SLOTS FOR {formattedSelectedDate.toUpperCase()}</span>
               </span>
-              <span className="font-space text-[11px] sm:text-xs text-zinc-400">
-                Min. 2-Hour Sessions
-              </span>
+              <div className="flex items-center gap-3 font-space text-[10px] sm:text-[11px]">
+                <span className="flex items-center gap-1.5 text-zinc-300 font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+                  <span>OPEN</span>
+                </span>
+                <span className="flex items-center gap-1.5 text-zinc-400 font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-red-500 inline-block" />
+                  <span className="line-through decoration-red-500 decoration-1 text-zinc-400">BOOKED</span>
+                </span>
+                <span className="text-zinc-500 hidden sm:inline">&bull; Min. 2h</span>
+              </div>
             </div>
 
             {isLoadingSlots ? (
@@ -444,36 +450,103 @@ export default function CalendarModal({
                 </a>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
-                {slots.map((slot, sIdx) => {
-                  const isSelected = selectedSlot?.start === slot.start;
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                  {slots.map((slot, sIdx) => {
+                    const isSelected = selectedSlot?.start === slot.start;
+                    const isBooked = slot.available === false || slot.isBooked === true;
 
-                  return (
-                    <button
-                      key={sIdx}
-                      type="button"
-                      onClick={() => setSelectedSlot(slot)}
-                      className={`p-3.5 border text-left flex flex-col justify-between transition-all cursor-pointer ${
-                        isSelected
-                          ? "bg-primary text-white border-primary shadow-[0_0_20px_rgba(214,0,0,0.5)] font-bold scale-[1.02]"
-                          : "bg-black/60 border-secondary/60 text-zinc-300 hover:border-primary hover:text-white"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between w-full mb-1">
-                        <span className="font-space text-[11px] tracking-wider uppercase opacity-80 font-semibold">
-                          SLOT {sIdx + 1}
+                    return (
+                      <button
+                        key={sIdx}
+                        type="button"
+                        disabled={isBooked}
+                        aria-disabled={isBooked}
+                        onClick={() => {
+                          if (!isBooked) {
+                            setSelectedSlot(slot);
+                          }
+                        }}
+                        title={
+                          isBooked
+                            ? "This slot is already booked and unavailable"
+                            : `Select ${slot.timeLabel}`
+                        }
+                        className={`relative overflow-hidden p-3.5 border text-left flex flex-col justify-between transition-all select-none ${isBooked
+                            ? "bg-[#090909] border-zinc-800/80 text-zinc-500 cursor-not-allowed opacity-65"
+                            : isSelected
+                              ? "bg-primary text-white border-primary shadow-[0_0_20px_rgba(214,0,0,0.5)] font-bold scale-[1.02] cursor-pointer"
+                              : "bg-black/60 border-secondary/60 text-zinc-300 hover:border-primary hover:text-white cursor-pointer"
+                          }`}
+                      >
+                        {/* Crossed red strike line overlay for booked slots */}
+                        {isBooked && (
+                          <div
+                            aria-hidden="true"
+                            className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden"
+                          >
+                            <div className="w-[140%] h-[1.5px] bg-red-600/75 -rotate-[16deg] shadow-[0_0_6px_rgba(220,38,38,0.7)]" />
+                          </div>
+                        )}
+
+                        <div className="flex items-center justify-between w-full mb-1 relative z-10">
+                          <span
+                            className={`font-space text-[11px] tracking-wider uppercase font-semibold ${isBooked ? "text-zinc-500" : "opacity-80"
+                              }`}
+                          >
+                            SLOT {sIdx + 1}
+                          </span>
+                          {isBooked ? (
+                            <span className="inline-flex items-center px-1.5 py-0.5 bg-red-950/80 border border-red-800/60 font-space text-[9px] text-red-400 font-bold uppercase tracking-wider">
+                              BOOKED
+                            </span>
+                          ) : isSelected ? (
+                            <CheckCircle className="w-3.5 h-3.5 text-white" />
+                          ) : null}
+                        </div>
+
+                        <span
+                          className={`font-space text-xs sm:text-sm font-bold tracking-tight relative z-10 ${isBooked
+                              ? "line-through decoration-red-500 decoration-[1.5px] text-zinc-400"
+                              : ""
+                            }`}
+                        >
+                          {slot.timeLabel}
                         </span>
-                        {isSelected && <CheckCircle className="w-3.5 h-3.5 text-white" />}
-                      </div>
-                      <span className="font-space text-xs sm:text-sm font-bold tracking-tight">
-                        {slot.timeLabel}
-                      </span>
-                      <span className="font-space text-[10px] sm:text-[11px] opacity-75 tracking-widest mt-1">
-                        {slot.durationHours} HOURS
-                      </span>
-                    </button>
-                  );
-                })}
+
+                        <span
+                          className={`font-space text-[10px] sm:text-[11px] tracking-widest mt-1 relative z-10 ${isBooked ? "text-red-500/80 font-bold" : "opacity-75"
+                            }`}
+                        >
+                          {isBooked ? "BOOKED // UNAVAILABLE" : `${slot.durationHours} HOURS`}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* If all slots for this date are booked, show an intuitive WhatsApp inquiry banner */}
+                {slots.length > 0 && slots.every((s) => s.available === false || s.isBooked === true) && (
+                  <div className="p-4 border border-zinc-800 bg-[#090909] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left mt-3">
+                    <div>
+                      <p className="font-bebas text-lg sm:text-xl text-zinc-300 tracking-wide uppercase">
+                        ALL SLOTS FOR THIS DATE ARE FULLY BOOKED
+                      </p>
+                      <p className="font-space text-xs text-zinc-400 mt-0.5">
+                        Pick another upcoming date from Step 1, or message us on WhatsApp for emergency or off-hours sessions.
+                      </p>
+                    </div>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-space text-xs uppercase tracking-wider font-bold transition-all shrink-0 cursor-pointer"
+                    >
+                      <FaWhatsapp className="w-4 h-4" />
+                      <span>INQUIRE ON WHATSAPP</span>
+                    </a>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -544,11 +617,10 @@ export default function CalendarModal({
                       if (emailError) setEmailError(null);
                     }}
                     placeholder="e.g. artist@gmail.com"
-                    className={`w-full pl-8 pr-3 py-3 bg-black border text-white placeholder:text-zinc-600 font-space text-xs sm:text-sm focus:outline-none transition-colors ${
-                      emailError
+                    className={`w-full pl-8 pr-3 py-3 bg-black border text-white placeholder:text-zinc-600 font-space text-xs sm:text-sm focus:outline-none transition-colors ${emailError
                         ? "border-red-500 focus:border-red-500"
                         : "border-secondary/60 focus:border-primary"
-                    }`}
+                      }`}
                     required
                   />
                 </div>
@@ -587,11 +659,10 @@ export default function CalendarModal({
                 type="button"
                 disabled={isSubmitting || !selectedSlot || !isEmailValid}
                 onClick={handleConfirmBooking}
-                className={`w-full sm:w-auto px-6 py-3.5 font-space text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-2 font-bold transition-all ${
-                  selectedSlot && isEmailValid
+                className={`w-full sm:w-auto px-6 py-3.5 font-space text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-2 font-bold transition-all ${selectedSlot && isEmailValid
                     ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] cursor-pointer"
                     : "bg-zinc-800 text-zinc-500 border border-secondary/50 cursor-not-allowed"
-                }`}
+                  }`}
               >
                 {isSubmitting ? (
                   <>

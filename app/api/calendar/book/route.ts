@@ -28,6 +28,39 @@ export async function POST(req: NextRequest) {
     const clientName = artistName ? artistName.trim() : "Artist Client";
     const userEmail = email.trim();
 
+    // Check if slot has already been booked
+    try {
+      const freeBusyRes = await calendar.freebusy.query({
+        requestBody: {
+          timeMin: start,
+          timeMax: end,
+          timeZone: "Africa/Cairo",
+          items: [{ id: calendarId }],
+        },
+      });
+
+      const busyList = freeBusyRes.data.calendars?.[calendarId]?.busy || [];
+      const hasConflict = busyList.some((range) => {
+        if (!range.start || !range.end) return false;
+        const bStart = new Date(range.start).getTime();
+        const bEnd = new Date(range.end).getTime();
+        const reqStart = new Date(start).getTime();
+        const reqEnd = new Date(end).getTime();
+        return reqStart < bEnd && reqEnd > bStart;
+      });
+
+      if (hasConflict) {
+        return NextResponse.json(
+          {
+            error: "This slot was just booked by someone else. Please select another slot.",
+          },
+          { status: 409 }
+        );
+      }
+    } catch (fbErr: any) {
+      console.warn("FreeBusy conflict check notice:", fbErr?.message || fbErr);
+    }
+
     // 1. Insert Hold event onto the Studio Google Calendar
     const event = await calendar.events.insert({
       calendarId,
