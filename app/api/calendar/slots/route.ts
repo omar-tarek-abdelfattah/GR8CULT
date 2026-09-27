@@ -7,6 +7,25 @@ const STUDIO_START_HOUR = 12;
 const STUDIO_END_HOUR = 24;
 const DEFAULT_SESSION_HOURS = 2; // Minimum booking is 2 hours
 
+function getCairoOffset(dateStr: string): string {
+  try {
+    const d = new Date(`${dateStr}T12:00:00Z`);
+    const str = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Africa/Cairo",
+      timeZoneName: "shortOffset",
+    }).format(d);
+    const match = str.match(/GMT([+-]\d+)/);
+    if (match) {
+      const hours = parseInt(match[1], 10);
+      const sign = hours >= 0 ? "+" : "-";
+      return `${sign}${String(Math.abs(hours)).padStart(2, "0")}:00`;
+    }
+  } catch (e) {
+    console.warn("Could not determine Cairo offset, falling back to +02:00", e);
+  }
+  return "+02:00";
+}
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -29,7 +48,6 @@ export async function GET(req: NextRequest) {
     const calendar = getCalendarClient();
 
     // Query bounds for the given day in UTC (covering Cairo timezone)
-    // Cairo is UTC+2 or UTC+3
     const dayStart = new Date(`${dateParam}T00:00:00Z`);
     const dayEnd = new Date(`${dateParam}T23:59:59Z`);
     dayStart.setHours(dayStart.getHours() - 4);
@@ -52,28 +70,33 @@ export async function GET(req: NextRequest) {
       console.warn("FreeBusy query warning, falling back to empty busy list:", fbErr?.message || fbErr);
     }
 
-    // Generate potential slots for the day
-    const [year, month, day] = dateParam.split("-").map(Number);
+    // Generate slots for the day with dynamic Cairo timezone offset
+    const cairoOffset = getCairoOffset(dateParam);
     const now = new Date();
+    const minBookingLeadTime = new Date(now.getTime() + 60 * 60 * 1000);
     const slots = [];
+
+    const formatTime = (d: Date) =>
+      d.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "Africa/Cairo",
+      });
 
     for (let hour = STUDIO_START_HOUR; hour <= STUDIO_END_HOUR - durationHours; hour++) {
       // Build start and end dates in Cairo local time
-      // We format with Cairo offset
-      const startIso = `${dateParam}T${String(hour).padStart(2, "0")}:00:00+02:00`;
+      const startIso = `${dateParam}T${String(hour).padStart(2, "0")}:00:00${cairoOffset}`;
       const endHour = hour + durationHours;
-      const endIso = `${dateParam}T${String(endHour).padStart(2, "0")}:00:00+02:00`;
+      const endIso = `${dateParam}T${String(endHour).padStart(2, "0")}:00:00${cairoOffset}`;
 
       const slotStartDate = new Date(startIso);
       const slotEndDate = new Date(endIso);
 
-      // Must be at least 1 hour in the future
-      const minBookingLeadTime = new Date(now.getTime() + 60 * 60 * 1000);
-      if (slotStartDate < minBookingLeadTime) {
-        continue;
-      }
+      // Must be at least 1 hour in the future to book
+      const isPast = slotStartDate < minBookingLeadTime;
 
-      // Check overlap against busy ranges
+      // Check overlap against busy ranges from Google Calendar
       const isBusy = busyRanges.some((range) => {
         if (!range.start || !range.end) return false;
         const bStart = new Date(range.start).getTime();
@@ -81,24 +104,18 @@ export async function GET(req: NextRequest) {
         return slotStartDate.getTime() < bEnd && slotEndDate.getTime() > bStart;
       });
 
-      if (!isBusy) {
-        // Format human readable label (e.g. "2:00 PM – 4:00 PM")
-        const formatTime = (d: Date) =>
-          d.toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true,
-            timeZone: "Africa/Cairo",
-          });
+      const isUnavailable = isBusy || isPast;
 
-        slots.push({
-          start: slotStartDate.toISOString(),
-          end: slotEndDate.toISOString(),
-          timeLabel: `${formatTime(slotStartDate)} - ${formatTime(slotEndDate)}`,
-          date: dateParam,
-          durationHours,
-        });
-      }
+      slots.push({
+        start: slotStartDate.toISOString(),
+        end: slotEndDate.toISOString(),
+        timeLabel: `${formatTime(slotStartDate)} - ${formatTime(slotEndDate)}`,
+        date: dateParam,
+        durationHours,
+        available: !isUnavailable,
+        isBooked: isUnavailable,
+        reason: isBusy ? "booked" : isPast ? "past" : "available",
+      });
     }
 
     return NextResponse.json({
