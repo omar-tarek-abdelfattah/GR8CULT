@@ -1,145 +1,126 @@
 'use client';
 
-import { CheckCircle2, Flame, ArrowUpRight, Calendar } from "lucide-react";
+import { Flame, ArrowUpRight, Sparkles, Calendar } from "lucide-react";
 import { ServiceItem } from "./types";
 import { useCalendarModal } from "@/components/CalendarModal/CalendarModalContext";
 
 interface ServiceCardProps {
   item: ServiceItem;
+  onSelect: (item: ServiceItem) => void;
 }
 
-export default function ServiceCard({ item }: ServiceCardProps) {
+export default function ServiceCard({ item, onSelect }: ServiceCardProps) {
   const { openCalendar } = useCalendarModal();
+
+  const handleBookClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    openCalendar({ serviceName: item.title, price: item.price });
+  };
 
   return (
     <div
       id={item.id}
-      className={`relative flex flex-col justify-between transition-all duration-300 bg-[#090909] border ${item.isFeatured
-        ? "border-primary shadow-[0_0_35px_rgba(214,0,0,0.25)] bg-gradient-to-b from-[#160202] via-[#0a0a0a] to-[#050505] ring-1 ring-primary/60 md:scale-[1.02]"
-        : "border-secondary/60 hover:border-primary/60 shadow-lg"
-        }`}
+      role="button"
+      tabIndex={0}
+      onClick={() => onSelect(item)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect(item);
+        }
+      }}
+      aria-label={`View details for ${item.title}`}
+      className={`group relative flex flex-col justify-between p-5 sm:p-6 transition-all duration-300 cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-primary ${
+        item.isFeatured
+          ? "bg-gradient-to-b from-[#180303] via-[#0d0a0a] to-[#070707] border border-primary shadow-[0_0_25px_rgba(214,0,0,0.25)] hover:shadow-[0_0_35px_rgba(214,0,0,0.45)] hover:border-primary"
+          : "bg-[#090909] border border-secondary/60 hover:border-primary/80 hover:bg-[#0e0e0e] shadow-md hover:shadow-[0_0_20px_rgba(214,0,0,0.15)]"
+      }`}
     >
-      {/* Badge */}
-      {item.badge && (
-        <div
-          className={`absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap font-space text-xs tracking-[0.2em] uppercase px-4 py-1 flex items-center gap-1.5 font-bold ${item.isFeatured
-              ? "bg-primary text-white shadow-[0_0_15px_#D60000]"
-              : "bg-secondary text-white border border-primary/40"
-            }`}
-        >
-          {item.badge}
-        </div>
-      )}
+      {/* Top Meta Bar */}
+      <div>
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-space text-xs tracking-[0.2em] text-primary font-bold">
+              {item.number}
+            </span>
+            {item.badge && (
+              <span
+                className={`font-space text-[10px] tracking-wider uppercase px-2 py-0.5 font-bold ${
+                  item.isFeatured
+                    ? "bg-primary text-white"
+                    : "bg-secondary/70 border border-primary/40 text-zinc-200"
+                }`}
+              >
+                {item.badge}
+              </span>
+            )}
+            {item.whatItOffers && (
+              <span className="font-space text-[12px] sm:text-[13px] tracking-wider uppercase px-2.5 py-0.5 bg-black/80 border border-secondary/50 text-emerald-400 font-bold">
+                {item.whatItOffers}
+              </span>
+            )}
+          </div>
 
-      {/* Header */}
-      <div className="p-6 sm:p-7 border-b border-secondary/50">
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <span className="font-space text-xs sm:text-sm tracking-[0.25em] text-primary font-bold">
-            {item.number} — {item.title}
-          </span>
           {item.isFeatured && (
-            <Flame className="w-4 h-4 text-primary animate-pulse" />
+            <div className="flex items-center gap-1 text-primary text-xs font-space font-bold shrink-0">
+              <Flame className="w-4 h-4 animate-pulse" />
+              <span className="hidden sm:inline tracking-wider">FEATURED</span>
+            </div>
           )}
         </div>
 
-        <h3 className="font-bebas text-3xl sm:text-4xl lg:text-[2.6rem] text-white tracking-wide m-0 leading-tight">
-          {item.subtitle}
+        {/* Title & Subtitle */}
+        <h3 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase m-0 leading-tight group-hover:text-primary transition-colors">
+          {item.title}
         </h3>
+        <p className="font-space text-[15px] sm:text-[16px] text-zinc-400 uppercase tracking-wider mt-0.5 mb-2 line-clamp-1">
+          {item.subtitle}
+        </p>
 
-        <div className="mt-4 flex flex-wrap items-baseline gap-2.5">
-          <span className="font-bebas text-3xl sm:text-4xl text-primary tracking-wider">
-            {item.price}
-          </span>
-          {item.oldPrice && (
-            <span className="font-space text-xs sm:text-sm text-muted line-through tracking-wider">
-              {item.oldPrice} EGP
+        {/* Small Description */}
+        <p className="font-space text-[13px] sm:text-[14px] text-zinc-300 leading-relaxed line-clamp-2 min-h-[32px]">
+          {item.shortDescription || item.includes[0]}
+        </p>
+      </div>
+
+      {/* Price & Clickable Footer Bar */}
+      <div className="mt-4 pt-3 border-t border-secondary/40">
+        <div className="flex items-baseline justify-between gap-2 mb-2.5">
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <span className="font-bebas text-2xl sm:text-3xl text-primary tracking-wider">
+              {item.price}
+            </span>
+            {item.oldPrice && (
+              <span className="font-space text-xs text-muted line-through tracking-wider">
+                {item.oldPrice} EGP
+              </span>
+            )}
+          </div>
+
+          {item.priceNote && (
+            <span className="py-0.5 px-2 bg-black/70 border border-secondary/50 font-space text-[10px] sm:text-[11px] text-zinc-300 tracking-wider text-right">
+              {item.priceNote}
             </span>
           )}
         </div>
 
-        {item.priceNote && (
-          <div className="mt-2 py-1 px-2.5 bg-black/60 border border-secondary/40 font-space text-xs text-zinc-300 tracking-wider inline-block">
-            {item.priceNote}
-          </div>
-        )}
-      </div>
+        {/* Action Prompt */}
+        <div className="flex items-center justify-between text-xs font-space uppercase tracking-wider pt-2 border-t border-secondary/30">
+          <span className="text-zinc-400 group-hover:text-white transition-colors flex items-center gap-1.5 font-medium">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <span>View Full Details</span>
+          </span>
 
-      {/* Body Content */}
-      <div className="p-6 sm:p-7 flex-grow space-y-6">
-        {/* You bring / We handle callout if present */}
-        {(item.youBring || item.weHandle) && (
-          <div className="p-3.5 bg-black/70 border border-secondary/50 font-space text-xs sm:text-[13px] space-y-2.5">
-            {item.youBring && (
-              <div>
-                <span className="text-primary font-bold uppercase tracking-wider block mb-0.5">
-                  YOU BRING:
-                </span>
-                <span className="text-zinc-200">{item.youBring}</span>
-              </div>
-            )}
-            {item.weHandle && (
-              <div>
-                <span className="text-emerald-400 font-bold uppercase tracking-wider block mb-0.5">
-                  WE HANDLE:
-                </span>
-                <span className="text-zinc-200">{item.weHandle}</span>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Includes List */}
-        <div>
-          <div className="font-space text-xs tracking-[0.2em] text-zinc-400 uppercase mb-3 flex items-center gap-1.5 font-bold">
-            <CheckCircle2 className="w-4 h-4 text-primary" />
-            <span>INCLUDES:</span>
-          </div>
-          <ul className="space-y-2.5 font-space text-xs sm:text-sm text-zinc-200">
-            {item.includes.map((inc, idx) => (
-              <li key={idx} className="flex items-start gap-2.5">
-                <span className="mt-1.5 w-1.5 h-1.5 bg-primary shrink-0" />
-                <span className="leading-relaxed">{inc}</span>
-              </li>
-            ))}
-          </ul>
+          <button
+            type="button"
+            onClick={handleBookClick}
+            className="px-3.5 py-1.5 bg-primary hover:bg-white text-white hover:text-black font-space text-[11px] sm:text-xs uppercase tracking-wider font-bold flex items-center gap-1.5 transition-all shadow-[0_0_12px_rgba(214,0,0,0.35)] cursor-pointer"
+          >
+            <Calendar className="w-3.5 h-3.5" />
+            <span>Book Slot</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
         </div>
-
-        {/* Notes Callouts */}
-        {item.notes && item.notes.length > 0 && (
-          <div className="border-t border-secondary/40 pt-4 space-y-2">
-            {item.notes.map((note, nIdx) => (
-              <p
-                key={nIdx}
-                className={`font-space text-xs leading-relaxed ${note.includes("DOES NOT INCLUDE") ||
-                    note.includes("Additional") ||
-                    note.includes("scope")
-                    ? "text-amber-400/90 font-medium"
-                    : "text-zinc-400"
-                  }`}
-              >
-                • {note}
-              </p>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Actions Footer */}
-      <div className="p-6 sm:p-7 pt-0">
-        <button
-          type="button"
-          onClick={() =>
-            openCalendar({ serviceName: item.title, price: item.price })
-          }
-          className={`w-full py-4 px-5 font-space text-xs sm:text-[13px] uppercase tracking-widest flex items-center justify-center gap-2.5 transition-all duration-300 group cursor-pointer ${item.isFeatured
-              ? "bg-primary hover:bg-white text-white hover:text-black shadow-[0_0_20px_rgba(214,0,0,0.5)] border border-primary hover:border-white font-bold"
-              : "border border-secondary/80 hover:border-primary bg-black hover:bg-primary text-zinc-200 hover:text-white font-bold"
-            }`}
-        >
-          <Calendar className={`w-4 h-4 ${item.isFeatured ? "text-white group-hover:text-black" : "text-primary group-hover:text-white transition-colors"}`} />
-          <span>CHOOSE AVAILABLE TIME SLOT</span>
-          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </button>
       </div>
     </div>
   );

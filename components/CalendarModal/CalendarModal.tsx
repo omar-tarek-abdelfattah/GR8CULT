@@ -39,6 +39,7 @@ interface CalendarSlot {
 
 const AVAILABLE_SERVICES = [
   "Recording Only (500 EGP / HR)",
+  "Mix & Master Stems (40 - 50 USD / ~2,000 - 2,500 EGP)",
   "Rec + Mix + Master (2,000 EGP)",
   "Beat + Rec + Mix + Master (3,000 EGP)",
 ];
@@ -275,7 +276,7 @@ export default function CalendarModal({
       role="dialog"
       aria-modal="true"
       aria-label="Google Calendar Live Time Slots"
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[110] flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
