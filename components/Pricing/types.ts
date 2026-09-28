@@ -4,6 +4,8 @@ export interface ServiceItem {
   category: "service" | "bundle";
   title: string;
   subtitle: string;
+  whatItOffers?: string;
+  shortDescription?: string;
   price: string;
   oldPrice?: string;
   priceNote?: string;

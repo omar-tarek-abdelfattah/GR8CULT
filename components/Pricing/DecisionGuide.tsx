@@ -23,21 +23,21 @@ export default function DecisionGuide() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {decisionCards.map((d, index) => {
             const isRoute = d.linkId.startsWith("/");
-            const isFourthStretched = index === 3;
+            const isFifthStretched = index === 4;
 
             return (
               <div
                 key={index}
                 className={`border border-secondary/60 bg-[#090909] p-6 sm:p-7 flex flex-col justify-between hover:border-primary/80 transition-all group ${
-                  isFourthStretched
-                    ? "lg:col-span-3 lg:flex-row lg:items-center lg:gap-8 bg-gradient-to-r from-[#120303] via-[#090909] to-[#0d0505]"
+                  isFifthStretched
+                    ? "md:col-span-2 md:flex-row md:items-center md:gap-8 bg-gradient-to-r from-[#120303] via-[#090909] to-[#0d0505]"
                     : ""
                 }`}
               >
-                <div className={isFourthStretched ? "lg:flex-grow" : ""}>
+                <div className={isFifthStretched ? "md:flex-grow" : ""}>
                   <div className="flex items-center gap-2 font-space text-xs text-primary tracking-widest uppercase mb-3 font-semibold">
                     <ArrowRight className="w-3.5 h-3.5" />
                     <span>SITUATION {index + 1}</span>
@@ -58,8 +58,8 @@ export default function DecisionGuide() {
 
                 <div
                   className={`mt-6 pt-4 border-t border-secondary/40 ${
-                    isFourthStretched
-                      ? "lg:mt-0 lg:pt-0 lg:border-t-0 lg:border-l lg:border-secondary/50 lg:pl-8 lg:shrink-0"
+                    isFifthStretched
+                      ? "md:mt-0 md:pt-0 md:border-t-0 md:border-l md:border-secondary/50 md:pl-8 md:shrink-0"
                       : ""
                   }`}
                 >

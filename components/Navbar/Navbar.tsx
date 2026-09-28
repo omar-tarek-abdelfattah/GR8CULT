@@ -15,7 +15,7 @@ export default function Navbar() {
   const isAboutActive = pathname === "/about" || pathname?.startsWith("/about/");
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-secondary bg-background/95 backdrop-blur-md overflow-y-hidden">
+    <nav className="sticky top-0 z-40 w-full border-b border-secondary bg-background/95 backdrop-blur-md overflow-y-hidden">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Brand */}
         <Link
