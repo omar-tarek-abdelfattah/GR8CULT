@@ -19,11 +19,11 @@ export const STATIC_MUSIC_VIDEOS: MusicVideo[] = [
   },
   {
     id: "mv-2",
-    title: "PHOBIA TEASER",
-    artist: "MAHDY MADNESS",
-    youtubeUrl: "https://youtu.be/R_dfBWS68Fo?si=gHJVYt5LXTgDEgCK",
+    title: "MAFEESH MNO ASEF",
+    artist: "HAMOICONIC",
+    youtubeUrl: "https://youtu.be/bIisWWI7_3g?si=7ZfL_RJaq5-e6WHT",
     releaseDate: "2026",
-    role: "SOUND DESIGN",
+    role: "DIRECTOR",
   },
   {
     id: "mv-3",
@@ -35,11 +35,11 @@ export const STATIC_MUSIC_VIDEOS: MusicVideo[] = [
   },
   {
     id: "mv-4",
-    title: "AHO GEH YA WLAD",
-    artist: "Ahmedythegr8",
-    youtubeUrl: "https://youtu.be/_qcgrHATozI?si=0pNehW0dvLU6EzKz",
-    releaseDate: "2023",
-    role: "WRITING/ RECORDING/ PRODUCING",
+    title: "PHOBIA TEASER",
+    artist: "MAHDY MADNESS",
+    youtubeUrl: "https://youtu.be/R_dfBWS68Fo?si=gHJVYt5LXTgDEgCK",
+    releaseDate: "2026",
+    role: "SOUND DESIGN",
   },
 ];
 
