@@ -1,19 +1,64 @@
 'use client';
 
-import { useState } from "react";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { ArrowUpRight, Sparkles, Coins, Heart, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import ServiceCard from "./ServiceCard";
 import ServiceDetailsModal from "./ServiceDetailsModal";
 import { servicesData, CUSTOM_BOOKING_WHATSAPP_URL } from "./pricingData";
 import { ServiceItem } from "./types";
+import { usePricingCurrency } from "./PricingCurrencyContext";
 
 export default function PricingCatalog() {
+  const { currency, setCurrency } = usePricingCurrency();
   const [activeCategory, setActiveCategory] = useState<
     "all" | "service" | "bundle"
   >("all");
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Easter egg: 3 consecutive USD clicks
+  const [usdClicks, setUsdClicks] = useState(0);
+  const [showJayOverlay, setShowJayOverlay] = useState(false);
+  const usdClickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Auto-dismiss easter egg overlay after 5 seconds
+  useEffect(() => {
+    if (showJayOverlay) {
+      const timer = setTimeout(() => {
+        setShowJayOverlay(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showJayOverlay]);
+
+  const handleUsdClick = () => {
+    setCurrency("USD");
+    const nextCount = usdClicks + 1;
+    if (nextCount >= 3) {
+      setUsdClicks(0);
+      setShowJayOverlay(true);
+      if (usdClickTimeoutRef.current) clearTimeout(usdClickTimeoutRef.current);
+    } else {
+      setUsdClicks(nextCount);
+      if (usdClickTimeoutRef.current) clearTimeout(usdClickTimeoutRef.current);
+      usdClickTimeoutRef.current = setTimeout(() => {
+        setUsdClicks(0);
+      }, 3000);
+    }
+  };
+
+  const handleEgpClick = () => {
+    setCurrency("EGP");
+    setUsdClicks(0);
+    if (usdClickTimeoutRef.current) clearTimeout(usdClickTimeoutRef.current);
+  };
 
   const filteredServices = servicesData.filter((s) => {
     if (activeCategory === "all") return true;
@@ -29,7 +74,7 @@ export default function PricingCatalog() {
     <section id="services" className="py-12 lg:py-16 relative z-10 scroll-mt-14">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header & Filter Row */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-secondary/50 pb-5">
+        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-5 mb-8 border-b border-secondary/50 pb-5">
           <div>
             <span className="font-space text-xs sm:text-sm text-primary tracking-[0.25em] uppercase block mb-1 font-semibold">
               STUDIO PACKAGES &amp; RATES
@@ -43,38 +88,74 @@ export default function PricingCatalog() {
             </p>
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              onClick={() => setActiveCategory("all")}
-              className={`px-3.5 py-1.5 font-space text-xs uppercase tracking-wider transition-all cursor-pointer ${
-                activeCategory === "all"
-                  ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
-                  : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
-              }`}
-            >
-              All Packages ({servicesData.length})
-            </button>
-            <button
-              onClick={() => setActiveCategory("service")}
-              className={`px-3.5 py-1.5 font-space text-xs uppercase tracking-wider transition-all cursor-pointer ${
-                activeCategory === "service"
-                  ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
-                  : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
-              }`}
-            >
-              Tracking &amp; Stems
-            </button>
-            <button
-              onClick={() => setActiveCategory("bundle")}
-              className={`px-3.5 py-1.5 font-space text-xs uppercase tracking-wider transition-all cursor-pointer ${
-                activeCategory === "bundle"
-                  ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
-                  : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
-              }`}
-            >
-              Complete Bundles
-            </button>
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setActiveCategory("all")}
+                className={`px-3.5 py-1.5 font-space text-xs uppercase tracking-wider transition-all cursor-pointer ${
+                  activeCategory === "all"
+                    ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
+                    : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
+                }`}
+              >
+                All Packages ({servicesData.length})
+              </button>
+              <button
+                onClick={() => setActiveCategory("service")}
+                className={`px-3.5 py-1.5 font-space text-xs uppercase tracking-wider transition-all cursor-pointer ${
+                  activeCategory === "service"
+                    ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
+                    : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
+                }`}
+              >
+                Tracking &amp; Stems
+              </button>
+              <button
+                onClick={() => setActiveCategory("bundle")}
+                className={`px-3.5 py-1.5 font-space text-xs uppercase tracking-wider transition-all cursor-pointer ${
+                  activeCategory === "bundle"
+                    ? "bg-primary text-white border border-primary font-bold shadow-[0_0_12px_rgba(214,0,0,0.4)]"
+                    : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
+                }`}
+              >
+                Complete Bundles
+              </button>
+            </div>
+
+            {/* Currency Switcher */}
+            <div className="flex items-center gap-2 bg-[#090909] border border-secondary/70 p-1">
+              <span className="font-space text-[10px] text-zinc-400 uppercase tracking-widest pl-2 font-bold flex items-center gap-1.5">
+                <Coins className="w-3.5 h-3.5 text-primary" />
+                <span>CURRENCY:</span>
+              </span>
+              <div className="inline-flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={handleEgpClick}
+                  className={`px-3 py-1 font-space text-xs uppercase tracking-wider transition-all cursor-pointer font-bold ${
+                    currency === "EGP"
+                      ? "bg-primary text-white shadow-[0_0_12px_rgba(214,0,0,0.45)] border border-primary"
+                      : "text-zinc-400 hover:text-white border border-transparent"
+                  }`}
+                  aria-pressed={currency === "EGP"}
+                >
+                  EGP
+                </button>
+                <button
+                  type="button"
+                  onClick={handleUsdClick}
+                  className={`px-3 py-1 font-space text-xs uppercase tracking-wider transition-all cursor-pointer font-bold ${
+                    currency === "USD"
+                      ? "bg-primary text-white shadow-[0_0_12px_rgba(214,0,0,0.45)] border border-primary"
+                      : "text-zinc-400 hover:text-white border border-transparent"
+                  }`}
+                  aria-pressed={currency === "USD"}
+                >
+                  USD
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -84,6 +165,7 @@ export default function PricingCatalog() {
             <ServiceCard
               key={item.id}
               item={item}
+              currency={currency}
               onSelect={handleSelectService}
             />
           ))}
@@ -129,7 +211,66 @@ export default function PricingCatalog() {
         item={selectedService}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        currency={currency}
       />
+
+      {/* Easter Egg Overlay: Thank you Jay ❤️ */}
+      {showJayOverlay &&
+        mounted &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Thank you Jay"
+            onClick={() => setShowJayOverlay(false)}
+            className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 cursor-pointer"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-md w-full bg-[#0a0a0a] border-2 border-primary p-7 sm:p-9 text-center shadow-[0_0_80px_rgba(214,0,0,0.5)] cursor-default overflow-hidden animate-in zoom-in-95 duration-200"
+            >
+              {/* Top Accent Strip & Radial Ambient Glow */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+              <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-primary/25 rounded-full blur-3xl pointer-events-none" />
+
+              <button
+                type="button"
+                onClick={() => setShowJayOverlay(false)}
+                className="absolute top-3 right-3 text-zinc-400 hover:text-white p-2 transition-colors cursor-pointer"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex justify-center mb-3">
+                <Heart className="w-14 h-14 text-primary fill-primary animate-pulse filter drop-shadow-[0_0_20px_rgba(214,0,0,0.9)]" />
+              </div>
+
+              <span className="font-space text-[10px] tracking-[0.3em] text-primary uppercase block mb-1.5 font-bold">
+                SECRET MESSAGE
+              </span>
+
+              <h3 className="font-bebas text-4xl sm:text-5xl text-white tracking-wider uppercase m-0 leading-tight flex items-center justify-center gap-2">
+                <span>THANK YOU JAYTOI</span>
+                <span className="text-primary text-3xl sm:text-4xl animate-bounce">❤️</span>
+              </h3>
+
+              <p className="font-space text-xs sm:text-sm text-zinc-300 tracking-wider uppercase mt-3 leading-relaxed">
+                Big love. Keep being you.
+                www.jay.com soon 
+              </p>
+
+              <button
+                type="button"
+                onClick={() => setShowJayOverlay(false)}
+                className="mt-6 px-6 py-2.5 bg-primary hover:bg-white text-white hover:text-black font-space text-xs uppercase tracking-widest font-bold transition-all shadow-[0_0_15px_rgba(214,0,0,0.4)] cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          </div>,
+          document.body
+        )}
     </section>
   );
 }

@@ -5,6 +5,8 @@ import {
   ProcessStep,
   StudioEquipment,
   FaqItem,
+  Currency,
+  ServicePriceInfo,
 } from "./types";
 
 export const CALENDAR_BOOKING_URL =
@@ -14,6 +16,21 @@ export const WHATSAPP_PHONE_NUMBER = "+201011444140";
 
 export const CUSTOM_BOOKING_WHATSAPP_URL =
   "https://wa.me/+201011444140?text=Hey%20GR8NIK%20Studios%2C%20I%20want%20to%20inquire%20about%20a%20custom%20package%20or%20book%20a%20session%20online.";
+
+export function getServicePricing(
+  item: ServiceItem,
+  currency: Currency
+): ServicePriceInfo {
+  if (item.pricingByCurrency && item.pricingByCurrency[currency]) {
+    return item.pricingByCurrency[currency];
+  }
+  return {
+    price: item.price,
+    equivalent: "",
+    oldPrice: item.oldPrice,
+    priceNote: item.priceNote,
+  };
+}
 
 export const servicesData: ServiceItem[] = [
   {
@@ -27,6 +44,18 @@ export const servicesData: ServiceItem[] = [
     price: "500 EGP / HOUR",
     priceNote: "MINIMUM BOOKING: 2 HOURS",
     badge: "STUDIO TIME",
+    pricingByCurrency: {
+      EGP: {
+        price: "500 EGP / HOUR",
+        equivalent: "~10 USD / HR",
+        priceNote: "MINIMUM BOOKING: 2 HOURS",
+      },
+      USD: {
+        price: "10 USD / HOUR",
+        equivalent: "~500 EGP / HR",
+        priceNote: "MINIMUM BOOKING: 2 HOURS",
+      },
+    },
     includes: [
       "Professional vocal booth session & acoustic isolation",
       "Tailored microphone selection matched to your vocal tone",
@@ -36,11 +65,13 @@ export const servicesData: ServiceItem[] = [
     ],
     notes: [
       "Typical recording workflow is completed within 2–3 hours for most songs.",
-      "Additional studio time is charged at: 500 EGP / HOUR.",
+      "Additional studio time is charged at: 500 EGP / 10 USD per hour.",
       "Post-production mixing and mastering are not included in this hourly rate.",
     ],
     whatsappMessage:
-      "Hey GR8NIK Studios, I want to book a Recording Only session (500 EGP/hour, min 2 hours). What is your upcoming availability?",
+      "Hey GR8NIK Studios, I want to book a Recording Only session (500 EGP / 10 USD per hour, min 2 hours). What is your upcoming availability?",
+    whatsappMessageUsd:
+      "Hey GR8NIK Studios, I want to book a Recording Only session ($10 USD / hour, min 2 hours). What is your upcoming availability?",
     ctaText: "BOOK RECORDING SESSION",
   },
   {
@@ -51,9 +82,21 @@ export const servicesData: ServiceItem[] = [
     subtitle: "MULTI-TRACK STEMS → FINISHED RECORD",
     whatItOffers: "MIX + MASTER (STEMS)",
     shortDescription: "Multi-track stem mixing, surgical vocal tuning, spatial FX, and commercial club-ready master.",
-    price: "40 – 50 USD",
-    priceNote: "EQUIVALENT TO ~2,000 – 2,500 EGP",
+    price: "2,000 – 2,500 EGP",
+    priceNote: "STEMS ONLY",
     badge: "STEMS ONLY",
+    pricingByCurrency: {
+      EGP: {
+        price: "2,000 – 2,500 EGP",
+        equivalent: "~40 – 50 USD",
+        priceNote: "STEMS ONLY",
+      },
+      USD: {
+        price: "40 – 50 USD",
+        equivalent: "~2,000 – 2,500 EGP",
+        priceNote: "STEMS ONLY",
+      },
+    },
     includes: [
       "Multi-track stem balancing & hybrid analog/digital summing",
       "Surgical vocal tuning, timing alignment & pitch correction",
@@ -67,12 +110,14 @@ export const servicesData: ServiceItem[] = [
     weHandle: "Stem Balancing → Surgical FX & Tuning → Hybrid Mix → Commercial Master.",
     notes: [
       "Designed for artists who recorded elsewhere and need an industry-standard stem mix & master.",
-      "Rate is 40 – 50 USD per song (equivalent to ~2,000 – 2,500 EGP depending on stem count & complexity).",
+      "Rate is 2,000 – 2,500 EGP / 40 – 50 USD per song depending on stem count & complexity.",
       "Online & remote delivery available with rapid digital turnaround.",
       "Includes 1 free revision round to ensure your sonic vision is fully met.",
     ],
     whatsappMessage:
-      "Hey GR8NIK Studios, I want to book the Mix & Mastering Stems package (40 - 50 USD / ~2,000 - 2,500 EGP). I have my audio stems ready.",
+      "Hey GR8NIK Studios, I want to book the Mix & Mastering Stems package (2,000 - 2,500 EGP / 40 - 50 USD). I have my audio stems ready.",
+    whatsappMessageUsd:
+      "Hey GR8NIK Studios, I want to book the Mix & Mastering Stems package (40 - 50 USD). I have my audio stems ready.",
     ctaText: "BOOK STEM MIX & MASTER",
   },
   {
@@ -87,6 +132,20 @@ export const servicesData: ServiceItem[] = [
     oldPrice: "4,000",
     priceNote: "SAVE 2,000 EGP (WAS 4,000 EGP)",
     badge: "POPULAR SINGLE DEAL",
+    pricingByCurrency: {
+      EGP: {
+        price: "2,000 EGP",
+        equivalent: "~40 USD",
+        oldPrice: "4,000 EGP",
+        priceNote: "SAVE 2,000 EGP (WAS 4,000 EGP)",
+      },
+      USD: {
+        price: "40 USD",
+        equivalent: "~2,000 EGP",
+        oldPrice: "80 USD",
+        priceNote: "SAVE 40 USD (WAS 80 USD)",
+      },
+    },
     includes: [
       "1-on-1 vocal direction & coaching in-booth",
       "Professional studio vocal recording session",
@@ -105,7 +164,9 @@ export const servicesData: ServiceItem[] = [
       "Includes vocal direction to ensure the best possible performance.",
     ],
     whatsappMessage:
-      "Hey GR8NIK Studios, I want to book the Rec + Mix + Master package (2,000 EGP instead of 4,000 EGP). I have my beat and lyrics ready.",
+      "Hey GR8NIK Studios, I want to book the Rec + Mix + Master package (2,000 EGP / 40 USD instead of 4,000 EGP / 80 USD). I have my beat and lyrics ready.",
+    whatsappMessageUsd:
+      "Hey GR8NIK Studios, I want to book the Rec + Mix + Master package ($40 USD instead of $80 USD). I have my beat and lyrics ready.",
     ctaText: "BOOK REC + MIX + MASTER",
   },
   {
@@ -118,9 +179,23 @@ export const servicesData: ServiceItem[] = [
     shortDescription: "Custom beat crafted from scratch, vocal coaching, recording, full mixing, and commercial master.",
     price: "3,000 EGP",
     oldPrice: "6,000",
-    priceNote: "SAVE 3,000 EGP (WAS 6,000 EGP — 50% OFF)",
+    priceNote: "SAVE 3,000 EGP (50% OFF)",
     badge: "★ ALL-IN-ONE RECORD PACKAGE ★",
     isFeatured: true,
+    pricingByCurrency: {
+      EGP: {
+        price: "3,000 EGP",
+        equivalent: "~60 USD",
+        oldPrice: "6,000 EGP",
+        priceNote: "SAVE 3,000 EGP (50% OFF)",
+      },
+      USD: {
+        price: "60 USD",
+        equivalent: "~3,000 EGP",
+        oldPrice: "120 USD",
+        priceNote: "SAVE 60 USD (WAS 120 USD — 50% OFF)",
+      },
+    },
     includes: [
       "Custom beat production crafted specifically for your voice & sound",
       "Song arrangement, signature sound design & drum programming",
@@ -140,7 +215,9 @@ export const servicesData: ServiceItem[] = [
       "Our most complete single-track package at half the standard separate rate.",
     ],
     whatsappMessage:
-      "Hey GR8NIK Studios, I want to book the complete Beat + Rec + Mix + Master package (3,000 EGP instead of 6,000 EGP). I'm ready to build my record from scratch.",
+      "Hey GR8NIK Studios, I want to book the complete Beat + Rec + Mix + Master package (3,000 EGP / 60 USD instead of 6,000 EGP / 120 USD). I'm ready to build my record from scratch.",
+    whatsappMessageUsd:
+      "Hey GR8NIK Studios, I want to book the complete Beat + Rec + Mix + Master package ($60 USD instead of $120 USD). I'm ready to build my record from scratch.",
     ctaText: "BOOK FULL RECORD PACKAGE",
   },
 ];
@@ -149,6 +226,7 @@ export const comparisonTable: ComparisonRow[] = [
   {
     service: "Recording Only",
     price: "500 EGP / HR",
+    priceUsd: "10 USD / HR (~500 EGP)",
     recording: "✓ (Min. 2 Hrs)",
     vocalDirection: "Session Assist",
     beat: "—",
@@ -159,7 +237,8 @@ export const comparisonTable: ComparisonRow[] = [
   },
   {
     service: "Mix & Master (Stems)",
-    price: "40 – 50 USD (~2,000–2,500 EGP)",
+    price: "2,000–2,500 EGP (~40–50 USD)",
+    priceUsd: "40 – 50 USD (~2,000–2,500 EGP)",
     recording: "—",
     vocalDirection: "—",
     beat: "YOUR STEMS",
@@ -171,6 +250,7 @@ export const comparisonTable: ComparisonRow[] = [
   {
     service: "Rec + Mix + Master",
     price: "2,000 EGP (was 4,000)",
+    priceUsd: "40 USD (was 80) [~2,000 EGP]",
     recording: "✓",
     vocalDirection: "✓",
     beat: "YOUR BEAT",
@@ -183,6 +263,7 @@ export const comparisonTable: ComparisonRow[] = [
   {
     service: "Beat + Rec + Mix + Master",
     price: "3,000 EGP (was 6,000)",
+    priceUsd: "60 USD (was 120) [~3,000 EGP]",
     recording: "✓",
     vocalDirection: "✓",
     beat: "CUSTOM BEAT",
@@ -199,6 +280,7 @@ export const decisionCards: DecisionCard[] = [
     situation: "I ONLY NEED STUDIO RECORDING TIME.",
     recommendation: "Recording Only",
     price: "500 EGP / HOUR",
+    priceUsd: "10 USD / HOUR (~500 EGP)",
     detail:
       "Minimum 2 hours. Professional vocal recording booth with engineer-assisted tracking, mic selection, and raw stem export.",
     linkId: "recording-only",
@@ -207,7 +289,8 @@ export const decisionCards: DecisionCard[] = [
   {
     situation: "I HAVE MY STEMS AND NEED MIXING & MASTERING.",
     recommendation: "Mix & Mastering (Stems)",
-    price: "40 – 50 USD (~2,000–2,500 EGP)",
+    price: "2,000 – 2,500 EGP (~40–50 USD)",
+    priceUsd: "40 – 50 USD (~2,000–2,500 EGP)",
     detail:
       "Send your multi-track audio stems. We handle hybrid analog/digital mixing, vocal tuning, spatial FX, and club-ready master.",
     linkId: "mix-master-stems",
@@ -217,6 +300,7 @@ export const decisionCards: DecisionCard[] = [
     situation: "I HAVE THE BEAT AND NEED TO RECORD & FINISH.",
     recommendation: "Rec + Mix + Master",
     price: "2,000 EGP (was 4,000)",
+    priceUsd: "40 USD (was 80) [~2,000 EGP]",
     detail:
       "You bring the beat. We handle in-booth vocal direction, tracking, editing, hybrid mixing, mastering & 1 free revision.",
     linkId: "rec-mix-master",
@@ -226,6 +310,7 @@ export const decisionCards: DecisionCard[] = [
     situation: "I WANT A COMPLETE TRACK BUILT FROM ZERO.",
     recommendation: "Beat + Rec + Mix + Master",
     price: "3,000 EGP (was 6,000)",
+    priceUsd: "60 USD (was 120) [~3,000 EGP]",
     detail:
       "All-in-one complete production: custom beat, vocal direction, studio recording session, full mix, and commercial master.",
     linkId: "beat-rec-mix-master",
@@ -235,6 +320,7 @@ export const decisionCards: DecisionCard[] = [
     situation: "I NEED A CUSTOM PROJECT OR ONLINE BOOKING.",
     recommendation: "Custom / Online Inquiries",
     price: "WhatsApp Consult",
+    priceUsd: "WhatsApp Consult",
     detail:
       "EP / Album deals, bespoke sound design, commercial music, or direct online session booking with our engineering team.",
     linkId: "custom-booking",

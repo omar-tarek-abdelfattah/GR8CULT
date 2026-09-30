@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { decisionCards } from "./pricingData";
+import { usePricingCurrency } from "./PricingCurrencyContext";
 
 export default function DecisionGuide() {
+  const { currency } = usePricingCurrency();
+
   return (
     <section
       id="guide"
@@ -27,6 +30,7 @@ export default function DecisionGuide() {
           {decisionCards.map((d, index) => {
             const isRoute = d.linkId.startsWith("/");
             const isFifthStretched = index === 4;
+            const displayPrice = currency === "USD" && d.priceUsd ? d.priceUsd : d.price;
 
             return (
               <div
@@ -48,7 +52,7 @@ export default function DecisionGuide() {
                   </h4>
 
                   <div className="py-1.5 px-3 bg-black border border-secondary/50 font-space text-xs sm:text-sm text-emerald-400 font-bold tracking-wider inline-block mb-4">
-                    {d.recommendation} — {d.price}
+                    {d.recommendation} — {displayPrice}
                   </div>
 
                   <p className="font-space text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-3xl">
