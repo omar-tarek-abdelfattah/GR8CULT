@@ -1,3 +1,12 @@
+export type Currency = "EGP" | "USD";
+
+export interface ServicePriceInfo {
+  price: string;
+  equivalent: string;
+  oldPrice?: string;
+  priceNote?: string;
+}
+
 export interface ServiceItem {
   id: string;
   number: string;
@@ -16,12 +25,18 @@ export interface ServiceItem {
   weHandle?: string;
   notes?: string[];
   whatsappMessage: string;
+  whatsappMessageUsd?: string;
   ctaText: string;
+  pricingByCurrency?: {
+    EGP: ServicePriceInfo;
+    USD: ServicePriceInfo;
+  };
 }
 
 export interface ComparisonRow {
   service: string;
   price: string;
+  priceUsd?: string;
   recording: string;
   vocalDirection: string;
   beat: string;
@@ -36,6 +51,7 @@ export interface DecisionCard {
   situation: string;
   recommendation: string;
   price: string;
+  priceUsd?: string;
   detail: string;
   linkId: string;
   cta: string;

@@ -1,20 +1,30 @@
 'use client';
 
 import { Flame, ArrowUpRight, Sparkles, Calendar } from "lucide-react";
-import { ServiceItem } from "./types";
+import { ServiceItem, Currency } from "./types";
+import { getServicePricing } from "./pricingData";
+import { usePricingCurrency } from "./PricingCurrencyContext";
 import { useCalendarModal } from "@/components/CalendarModal/CalendarModalContext";
 
 interface ServiceCardProps {
   item: ServiceItem;
   onSelect: (item: ServiceItem) => void;
+  currency?: Currency;
 }
 
-export default function ServiceCard({ item, onSelect }: ServiceCardProps) {
+export default function ServiceCard({ item, onSelect, currency: propCurrency }: ServiceCardProps) {
   const { openCalendar } = useCalendarModal();
+  const { currency: contextCurrency } = usePricingCurrency();
+  const activeCurrency = propCurrency || contextCurrency || "EGP";
+
+  const pricing = getServicePricing(item, activeCurrency);
 
   const handleBookClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    openCalendar({ serviceName: item.title, price: item.price });
+    openCalendar({
+      serviceName: item.title,
+      price: pricing.equivalent ? `${pricing.price} (${pricing.equivalent})` : pricing.price,
+    });
   };
 
   return (
@@ -88,18 +98,23 @@ export default function ServiceCard({ item, onSelect }: ServiceCardProps) {
         <div className="flex items-baseline justify-between gap-2 mb-2.5">
           <div className="flex items-baseline gap-2 flex-wrap">
             <span className="font-bebas text-2xl sm:text-3xl text-primary tracking-wider">
-              {item.price}
+              {pricing.price}
             </span>
-            {item.oldPrice && (
-              <span className="font-space text-xs text-muted line-through tracking-wider">
-                {item.oldPrice} EGP
+            {pricing.equivalent && (
+              <span className="font-space text-[10px] sm:text-[11px] px-2 py-0.5 bg-black/80 border border-secondary/60 text-zinc-300 tracking-wider font-semibold self-center">
+                {pricing.equivalent}
+              </span>
+            )}
+            {pricing.oldPrice && (
+              <span className="font-space text-xs text-muted line-through tracking-wider self-center">
+                {pricing.oldPrice}
               </span>
             )}
           </div>
 
-          {item.priceNote && (
+          {pricing.priceNote && (
             <span className="py-0.5 px-2 bg-black/70 border border-secondary/50 font-space text-[10px] sm:text-[11px] text-zinc-300 tracking-wider text-right">
-              {item.priceNote}
+              {pricing.priceNote}
             </span>
           )}
         </div>

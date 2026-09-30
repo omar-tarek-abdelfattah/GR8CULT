@@ -1,8 +1,11 @@
 'use client';
 
 import { comparisonTable } from "./pricingData";
+import { usePricingCurrency } from "./PricingCurrencyContext";
 
 export default function ComparisonMatrix() {
+  const { currency } = usePricingCurrency();
+
   return (
     <section
       id="comparison"
@@ -71,7 +74,7 @@ export default function ComparisonMatrix() {
                     <span>{row.service}</span>
                   </td>
                   <td className="p-4 sm:p-5 font-bold text-primary text-base sm:text-lg">
-                    {row.price}
+                    {currency === "USD" && row.priceUsd ? row.priceUsd : row.price}
                   </td>
                   <td className="p-4 sm:p-5 text-center font-medium">{row.recording}</td>
                   <td className="p-4 sm:p-5 text-center font-medium">{row.vocalDirection}</td>

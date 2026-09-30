@@ -4,23 +4,28 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, CheckCircle2, Calendar, ArrowUpRight, Flame, Layers, PackageCheck, AlertCircle } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import { ServiceItem } from "./types";
+import { ServiceItem, Currency } from "./types";
 import { useCalendarModal } from "@/components/CalendarModal/CalendarModalContext";
-import { WHATSAPP_PHONE_NUMBER } from "./pricingData";
+import { WHATSAPP_PHONE_NUMBER, getServicePricing } from "./pricingData";
+import { usePricingCurrency } from "./PricingCurrencyContext";
 
 interface ServiceDetailsModalProps {
   item: ServiceItem | null;
   isOpen: boolean;
   onClose: () => void;
+  currency?: Currency;
 }
 
 export default function ServiceDetailsModal({
   item,
   isOpen,
   onClose,
+  currency: propCurrency,
 }: ServiceDetailsModalProps) {
   const [mounted, setMounted] = useState(false);
   const { openCalendar } = useCalendarModal();
+  const { currency: contextCurrency } = usePricingCurrency();
+  const activeCurrency = propCurrency || contextCurrency || "EGP";
 
   useEffect(() => {
     setMounted(true);
@@ -47,16 +52,23 @@ export default function ServiceDetailsModal({
 
   if (!isOpen || !item || !mounted) return null;
 
+  const pricing = getServicePricing(item, activeCurrency);
+
   const handleBookSession = () => {
     onClose();
     openCalendar({
       serviceName: item.title,
-      price: item.price,
+      price: pricing.equivalent ? `${pricing.price} (${pricing.equivalent})` : pricing.price,
     });
   };
 
+  const currentWhatsappMessage =
+    activeCurrency === "USD" && item.whatsappMessageUsd
+      ? item.whatsappMessageUsd
+      : item.whatsappMessage;
+
   const whatsappHref = `https://wa.me/${WHATSAPP_PHONE_NUMBER.replace(/\+/g, "")}?text=${encodeURIComponent(
-    item.whatsappMessage
+    currentWhatsappMessage
   )}`;
 
   return createPortal(
@@ -117,18 +129,23 @@ export default function ServiceDetailsModal({
           </p>
 
           {/* Pricing bar */}
-          <div className="mt-4 pt-3 border-t border-secondary/40 flex flex-wrap items-baseline gap-3">
+          <div className="mt-4 pt-3 border-t border-secondary/40 flex flex-wrap items-center gap-3">
             <span className="font-bebas text-3xl sm:text-4xl text-primary tracking-wider">
-              {item.price}
+              {pricing.price}
             </span>
-            {item.oldPrice && (
-              <span className="font-space text-sm text-muted line-through tracking-wider">
-                {item.oldPrice} EGP
+            {pricing.equivalent && (
+              <span className="py-1 px-2.5 bg-black/80 border border-secondary/60 font-space text-xs text-zinc-200 tracking-wider font-semibold">
+                {pricing.equivalent}
               </span>
             )}
-            {item.priceNote && (
+            {pricing.oldPrice && (
+              <span className="font-space text-sm text-muted line-through tracking-wider">
+                {pricing.oldPrice}
+              </span>
+            )}
+            {pricing.priceNote && (
               <span className="py-1 px-2.5 bg-black/80 border border-secondary/60 font-space text-xs text-zinc-200 tracking-wider">
-                {item.priceNote}
+                {pricing.priceNote}
               </span>
             )}
           </div>
