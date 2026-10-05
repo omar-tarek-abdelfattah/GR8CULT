@@ -1,8 +1,13 @@
 'use client';
 
 import { Sparkles } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function PricingHero() {
+  const { locale } = useLanguage();
+
+  const isAr = locale === 'ar';
+
   return (
     <section className="border-b border-secondary/60 pt-20 pb-16 relative overflow-hidden bg-gradient-to-b from-[#140202] via-[#080808] to-background">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[160px] pointer-events-none" />
@@ -11,23 +16,37 @@ export default function PricingHero() {
       <div className="container mx-auto px-4 relative z-10 text-center max-w-5xl">
         <div className="inline-flex items-center gap-2 px-4 py-2 border border-primary/50 bg-primary/10 text-primary font-space text-xs sm:text-[13px] tracking-[0.25em] uppercase mb-6 shadow-[0_0_15px_rgba(214,0,0,0.25)]">
           <Sparkles className="w-4 h-4" />
-          <span>GR8NIK STUDIOS // SERVICES / PRICING / PROCESS / FAQ</span>
+          <span>
+            {isAr
+              ? "استوديو GR8NIK // الخدمات / الأسعار / المراحل / الأسئلة الشائعة"
+              : "GR8NIK STUDIOS // SERVICES / PRICING / PROCESS / FAQ"}
+          </span>
         </div>
 
-        <h1 className="font-bebas text-5xl sm:text-7xl md:text-8xl lg:text-[5.5rem] tracking-tight uppercase text-white mb-6 leading-none">
-          BUILD THE SOUND. <br className="hidden sm:inline" />
-          <span className="text-primary">FINISH THE RECORD.</span>
+        <h1 className="font-bebas text-5xl sm:text-7xl md:text-8xl lg:text-[5.5rem] tracking-tight uppercase text-white mb-6 mt-3 leading-none">
+          {isAr ? (
+            <>
+              اصنع صوتك الحقيقي. <br className="hidden sm:inline" />
+              <span className="text-primary mt-6">وفنّش تراكك صح.</span>
+            </>
+          ) : (
+            <>
+              BUILD THE SOUND. <br className="hidden sm:inline" />
+              <span className="text-primary mt-6">FINISH THE RECORD.</span>
+            </>
+          )}
         </h1>
 
         <p className="font-space text-base sm:text-lg md:text-xl text-zinc-200 max-w-3xl mx-auto leading-relaxed mb-4">
-          GR8NIK STUDIOS is built for artists who want their music developed,
-          recorded and finished with one clear creative direction.
+          {isAr
+            ? "استوديو GR8NIK معمول للفنانين اللي عايزين يطوروا مزيكتهم ويسجلوها ويفنشوها برؤية واضحة."
+            : "GR8NIK STUDIOS is built for artists who want their music developed, recorded and finished with one clear creative direction."}
         </p>
 
         <p className="font-space text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-8">
-          Book exactly what you need — from a single recording session to a
-          complete track built from scratch. Every service is available
-          individually, while bundles combine multiple services at a better project rate.
+          {isAr
+            ? "احجز اللي محتاجه بالظبط — من أول سيشن تسجيل لوحده لحد تراك كامل بيتبني من الصفر. كل خدمة متاحة لوحدها، أو في باقات بتوفرلك في سعر المشروع."
+            : "Book exactly what you need — from a single recording session to a complete track built from scratch. Every service is available individually, while bundles combine multiple services at a better project rate."}
         </p>
 
         {/* Quick Anchor Navigation */}
@@ -36,38 +55,38 @@ export default function PricingHero() {
             href="#services"
             className="px-3.5 py-2 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 01 Services &amp; Rates ]
+            {isAr ? "[ ٠١ الخدمات والأسعار ]" : "[ 01 Services & Rates ]"}
           </a>
 
           <a
             href="#guide"
             className="px-3.5 py-2 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 02 Which Service Do I Need? ]
+            {isAr ? "[ ٠٢ اختار الخدمة الصح ]" : "[ 02 Which Service Do I Need? ]"}
           </a>
           <a
             href="#comparison"
             className="px-3.5 py-2 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 03 Matrix ]
+            {isAr ? "[ ٠٣ مقارنة الباقات ]" : "[ 03 Matrix ]"}
           </a>
           <a
             href="#process"
             className="px-3.5 py-2 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 04 Process ]
+            {isAr ? "[ ٠٤ مراحل الشغل ]" : "[ 04 Process ]"}
           </a>
           <a
             href="#policies"
             className="px-3.5 py-2 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 05 Policies ]
+            {isAr ? "[ ٠٥ سياسات الحجز ]" : "[ 05 Policies ]"}
           </a>
           <a
             href="#faq"
             className="px-3.5 py-2 border border-secondary/60 bg-black/60 hover:border-primary hover:text-white transition-colors"
           >
-            [ 06 FAQ ]
+            {isAr ? "[ ٠٦ الأسئلة الشائعة ]" : "[ 06 FAQ ]"}
           </a>
         </div>
       </div>

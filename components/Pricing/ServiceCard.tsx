@@ -5,6 +5,7 @@ import { ServiceItem, Currency } from "./types";
 import { getServicePricing } from "./pricingData";
 import { usePricingCurrency } from "./PricingCurrencyContext";
 import { useCalendarModal } from "@/components/CalendarModal/CalendarModalContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ServiceCardProps {
   item: ServiceItem;
@@ -13,6 +14,8 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({ item, onSelect, currency: propCurrency }: ServiceCardProps) {
+  const { locale } = useLanguage();
+  const isAr = locale === "ar";
   const { openCalendar } = useCalendarModal();
   const { currency: contextCurrency } = usePricingCurrency();
   const activeCurrency = propCurrency || contextCurrency || "EGP";
@@ -39,8 +42,8 @@ export default function ServiceCard({ item, onSelect, currency: propCurrency }: 
           onSelect(item);
         }
       }}
-      aria-label={`View details for ${item.title}`}
-      className={`group relative flex flex-col justify-between p-5 sm:p-6 transition-all duration-300 cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-primary ${
+      aria-label={isAr ? `عرض تفاصيل ${item.title}` : `View details for ${item.title}`}
+      className={`group relative flex flex-col justify-between p-5 sm:p-6 transition-all duration-300 cursor-pointer text-start focus:outline-none focus:ring-2 focus:ring-primary ${
         item.isFeatured
           ? "bg-gradient-to-b from-[#180303] via-[#0d0a0a] to-[#070707] border border-primary shadow-[0_0_25px_rgba(214,0,0,0.25)] hover:shadow-[0_0_35px_rgba(214,0,0,0.45)] hover:border-primary"
           : "bg-[#090909] border border-secondary/60 hover:border-primary/80 hover:bg-[#0e0e0e] shadow-md hover:shadow-[0_0_20px_rgba(214,0,0,0.15)]"
@@ -74,7 +77,9 @@ export default function ServiceCard({ item, onSelect, currency: propCurrency }: 
           {item.isFeatured && (
             <div className="flex items-center gap-1 text-primary text-xs font-space font-bold shrink-0">
               <Flame className="w-4 h-4 animate-pulse" />
-              <span className="hidden sm:inline tracking-wider">FEATURED</span>
+              <span className="hidden sm:inline tracking-wider">
+                {isAr ? "الأكثر طلباً" : "FEATURED"}
+              </span>
             </div>
           )}
         </div>
@@ -123,7 +128,7 @@ export default function ServiceCard({ item, onSelect, currency: propCurrency }: 
         <div className="flex items-center justify-between text-xs font-space uppercase tracking-wider pt-2 border-t border-secondary/30">
           <span className="text-zinc-400 group-hover:text-white transition-colors flex items-center gap-1.5 font-medium">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span>View Full Details</span>
+            <span>{isAr ? "شوف كل التفاصيل" : "View Full Details"}</span>
           </span>
 
           <button
@@ -132,7 +137,7 @@ export default function ServiceCard({ item, onSelect, currency: propCurrency }: 
             className="px-3.5 py-1.5 bg-primary hover:bg-white text-white hover:text-black font-space text-[11px] sm:text-xs uppercase tracking-wider font-bold flex items-center gap-1.5 transition-all shadow-[0_0_12px_rgba(214,0,0,0.35)] cursor-pointer"
           >
             <Calendar className="w-3.5 h-3.5" />
-            <span>Book Slot</span>
+            <span>{isAr ? "احجز ميعادك" : "Book Slot"}</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
         </div>

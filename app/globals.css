@@ -10,6 +10,7 @@
   --font-bebas: var(--font-bebas), sans-serif;
   --font-jetbrains: var(--font-jetbrains), monospace;
   --font-space: var(--font-space), monospace;
+  --font-cairo: var(--font-cairo), sans-serif;
 
   --font-sans: var(--font-jetbrains), monospace;
 }
@@ -18,3 +19,24 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
 }
+
+/* RTL Typography & Direction Overrides */
+[dir="rtl"] {
+  font-family: var(--font-cairo), sans-serif;
+}
+
+[dir="rtl"] .font-bebas {
+  font-family: var(--font-cairo), sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+[dir="rtl"] .font-space {
+  font-family: var(--font-cairo), monospace;
+  letter-spacing: 0.04em;
+}
+
+[dir="rtl"] .font-jetbrains {
+  font-family: var(--font-cairo), monospace;
+}
+

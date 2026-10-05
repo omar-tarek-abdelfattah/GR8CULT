@@ -2,9 +2,14 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { faqsData } from "./pricingData";
+import { faqsData as faqsDataEn } from "./pricingData";
+import { faqsDataAr } from "./pricingDataAr";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function FaqSection() {
+  const { locale } = useLanguage();
+  const isAr = locale === "ar";
+  const currentFaqs = isAr ? faqsDataAr : faqsDataEn;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
@@ -19,18 +24,20 @@ export default function FaqSection() {
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-14">
           <span className="font-space text-xs sm:text-sm text-primary tracking-[0.25em] uppercase block mb-2 font-semibold">
-            FREQUENTLY ASKED QUESTIONS
+            {isAr ? "الأسئلة اللي بتتكرر" : "FREQUENTLY ASKED QUESTIONS"}
           </span>
           <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-white tracking-wider uppercase m-0 leading-none">
-            SESSION INTELLIGENCE // FAQ
+            {isAr ? "تفاصيل السيشن // الأسئلة الشائعة" : "SESSION INTELLIGENCE // FAQ"}
           </h2>
           <p className="font-space text-xs sm:text-sm text-muted tracking-widest uppercase mt-2">
-            [ 17 ANSWERS TO EVERYTHING YOU NEED TO KNOW ]
+            {isAr
+              ? `[ إجابات لكل سؤال ممكن يجي في بالك عن الاستوديو ]`
+              : `[ ${currentFaqs.length} ANSWERS TO EVERYTHING YOU NEED TO KNOW ]`}
           </p>
         </div>
 
         <div className="space-y-3 font-space">
-          {faqsData.map((faq, index) => {
+          {currentFaqs.map((faq, index) => {
             const isOpen = openFaq === index;
             return (
               <div
@@ -39,7 +46,7 @@ export default function FaqSection() {
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 text-sm sm:text-base text-white uppercase tracking-wider hover:text-primary transition-colors cursor-pointer font-bold"
+                  className="w-full p-5 sm:p-6 text-start flex items-center justify-between gap-4 text-sm sm:text-base text-white uppercase tracking-wider hover:text-primary transition-colors cursor-pointer font-bold"
                 >
                   <span>{faq.question}</span>
                   <ChevronDown
@@ -49,7 +56,7 @@ export default function FaqSection() {
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-sm sm:text-[15px] text-zinc-300 leading-relaxed border-t border-secondary/30">
+                  <div className="px-5 pb-5 pt-1 text-sm sm:text-[15px] text-zinc-300 leading-relaxed border-t border-secondary/30 text-start">
                     {faq.answer}
                   </div>
                 )}

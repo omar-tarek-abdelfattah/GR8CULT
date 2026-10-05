@@ -9,12 +9,48 @@ export const metadata: Metadata = {
     "Explore official records, instrumental beats, stems, and high-definition music videos engineered and produced at GR8NIK STUDIOS in Cairo.",
   alternates: {
     canonical: "/vault",
+    languages: {
+      "en": "/vault",
+      "ar-EG": "/vault?lang=ar",
+      "ar": "/vault?lang=ar",
+      "x-default": "/vault",
+    },
   },
+  keywords: [
+    "The Vault GR8NIK",
+    "Exclusive Beats Cairo",
+    "Beats with Stems Egypt",
+    "Egyptian Rap Discography",
+    "AhmedyTheGr8 Produced Tracks",
+    "Underground Egyptian Rap Beats",
+    "Hip Hop Instrumentals Cairo",
+    "GR8EST BEATS",
+    "GR8EST BEATS VOL2",
+    "GR8NIK STUDIOS Discography",
+    "خزنة استوديو GR8NIK",
+    "ذا فولت",
+    "بيتات راب مصري",
+    "بيتات راب للبيع",
+    "بيتات حصرية مع التراكات",
+    "شراء بيتات راب",
+    "الحان وتوزيع راب مصري",
+    "أعمال استوديو GR8NIK",
+    "تراكات أحمدي ذا جريت",
+    "أغاني راب مصري جديدة",
+    "فيديوهات كليب راب مصري",
+    "قائمة اغاني استوديو GR8NIK",
+    "دسكغرافيا استوديو GR8NIK",
+    "أعمال ميكس وماستر راب مصري",
+    "موسيقى تحت الأرض القاهرة",
+    "GR8NIK فولت"
+  ],
   openGraph: {
     title: "The Vault // GR8NIK STUDIOS Discography & Beats",
     description:
       "Official releases, beats with stems, and official music videos from the GR8NIK sanctuary.",
     url: `${SITE_URL}/vault`,
+    locale: "en_US",
+    alternateLocale: ["ar_EG", "ar"],
     images: [
       {
         url: "/logo-nobg.png",

@@ -2,11 +2,12 @@
 
 import { Calendar, ArrowUpRight, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { FaWhatsapp } from "react-icons/fa";
 import { useCalendarModal } from "@/components/CalendarModal/CalendarModalContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BookingMatrix() {
   const { openCalendar } = useCalendarModal();
+  const { dict } = useLanguage();
 
   return (
     <section id="booking" className="relative w-full py-24 md:py-32 bg-background border-t border-secondary overflow-hidden">
@@ -21,32 +22,29 @@ export default function BookingMatrix() {
         {/* Tactical Tag */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 border border-primary/50 bg-primary/10 text-primary font-space text-[11px] tracking-[0.25em] uppercase mb-8">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>SESSION INITIATION // BOOK NOW</span>
+          <span>{dict.booking.tag}</span>
         </div>
 
         {/* Direct Call to Action Title */}
         <h2 className="font-bebas text-5xl sm:text-6xl md:text-8xl tracking-tight text-primary uppercase leading-none mb-6">
-          GOT A RECORD TO MAKE?<br />
-          <span className="text-white">CLAIM YOUR TIME.</span>
+          {dict.booking.title1}<br />
+          <span className="text-white">{dict.booking.title2}</span>
         </h2>
 
         {/* Motivating Copy */}
         <p className="font-space text-base md:text-xl text-gray-200 leading-relaxed max-w-2xl mb-4 font-light">
-          Bring the idea <br />
-          We'll figure out the rest
+          {dict.booking.sub1} <br />
+          {dict.booking.sub2}
         </p>
         <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em] max-w-xl mb-12">
-          Whether you're recording a vocal, building a beat from scratch, finishing a mix, or just need somewhere to work — tell us what you're trying to make.
-
-          We'll tell you what makes sense.
-
+          {dict.booking.desc}
         </p>
 
         <p className="font-space text-xs text-muted lowercase tracking-[0.1em] mb-1">
-          *prices depend on the service and what you need, text us to enquire
+          {dict.booking.priceNote1}
         </p>
         <p className="font-space text-xs text-muted lowercase tracking-[0.1em] mb-8">
-          *the exact studio location is shared after booking
+          {dict.booking.priceNote2}
         </p>
         {/* 2 Buttons */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-5 w-full sm:w-auto">
@@ -56,7 +54,7 @@ export default function BookingMatrix() {
             className="flex items-center justify-center gap-3 bg-primary text-white font-space text-xs uppercase tracking-widest px-8 py-5 hover:bg-white hover:text-black transition-all border border-primary hover:border-white shadow-[0_0_25px_rgba(214,0,0,0.35)] group cursor-pointer"
           >
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            <span>VIEW RATES</span>
+            <span>{dict.booking.viewRates}</span>
           </Link>
 
           {/* Open Calendar Modal Button */}
@@ -66,7 +64,7 @@ export default function BookingMatrix() {
             className="flex items-center justify-center gap-3 bg-[#0a0a0a] border border-secondary text-muted font-space text-xs uppercase tracking-widest px-8 py-5 hover:border-primary hover:text-white hover:bg-black transition-all group cursor-pointer"
           >
             <Calendar className="w-4 h-4 transition-transform group-hover:scale-110" />
-            <span>VIEW CALENDAR SLOTS</span>
+            <span>{dict.booking.viewCalendar}</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
         </div>

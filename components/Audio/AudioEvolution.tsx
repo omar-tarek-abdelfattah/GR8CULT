@@ -1,33 +1,34 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { Play, Square, Volume2 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
-const stages = [
+const rawStages = [
   {
     id: "01_RAW_VOCALS",
-    label: "RAW VOCALS",
-    desc: "UNPROCESSED CAPTURE",
+    key: "rawVocals",
+    descKey: "rawDesc",
     src: "https://d2flaqome864xs.cloudfront.net/raw-only.wav",
     heightMultiplier: 0.5,
   },
   {
     id: "02_MIXED_VOCALS",
-    label: "MIXED VOCALS",
-    desc: "TUNED, EQ'D & COMPRESSED",
+    key: "mixedVocals",
+    descKey: "mixedDesc",
     src: "https://d2flaqome864xs.cloudfront.net/mix-only.wav",
     heightMultiplier: 0.7,
   },
   {
     id: "03_BEAT_ONLY",
-    label: "BEAT ONLY",
-    desc: "INSTRUMENTAL FOUNDATION",
+    key: "beatOnly",
+    descKey: "beatDesc",
     src: "https://d2flaqome864xs.cloudfront.net/beat-only.wav",
     heightMultiplier: 0.85,
   },
   {
     id: "04_FINAL_PRODUCT",
-    label: "FINAL PRODUCT",
-    desc: "COMPLETE MASTERED RECORD",
+    key: "finalProduct",
+    descKey: "finalDesc",
     src: "https://d2flaqome864xs.cloudfront.net/final-product.wav",
     heightMultiplier: 1.0,
   },
@@ -42,10 +43,42 @@ const BASE_WAVEFORM_HEIGHTS = Array.from({ length: 48 }).map((_, i) => {
 });
 
 export default function AudioEvolution() {
+  const { dict } = useLanguage();
   const [activeStage, setActiveStage] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+
+  const stages = [
+    {
+      id: "01_RAW_VOCALS",
+      label: dict.audio.stages.rawVocals,
+      desc: dict.audio.stages.rawDesc,
+      src: rawStages[0].src,
+      heightMultiplier: rawStages[0].heightMultiplier,
+    },
+    {
+      id: "02_MIXED_VOCALS",
+      label: dict.audio.stages.mixedVocals,
+      desc: dict.audio.stages.mixedDesc,
+      src: rawStages[1].src,
+      heightMultiplier: rawStages[1].heightMultiplier,
+    },
+    {
+      id: "03_BEAT_ONLY",
+      label: dict.audio.stages.beatOnly,
+      desc: dict.audio.stages.beatDesc,
+      src: rawStages[2].src,
+      heightMultiplier: rawStages[2].heightMultiplier,
+    },
+    {
+      id: "04_FINAL_PRODUCT",
+      label: dict.audio.stages.finalProduct,
+      desc: dict.audio.stages.finalDesc,
+      src: rawStages[3].src,
+      heightMultiplier: rawStages[3].heightMultiplier,
+    },
+  ];
 
   const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
   const isSeekingRef = useRef<boolean>(false);
@@ -127,7 +160,7 @@ export default function AudioEvolution() {
         if (!audio) return;
         audio.currentTime = targetTime;
         audio.muted = idx !== activeStage;
-        audio.play().catch(() => {});
+        audio.play().catch(() => { });
       });
       setIsPlaying(true);
     }
@@ -242,10 +275,10 @@ export default function AudioEvolution() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
             <h2 className="font-bebas text-4xl sm:text-5xl tracking-wider uppercase text-white m-0">
-              AUDIO VAULT // A-B TEST
+              {dict.audio.title1} // <span className="text-primary">{dict.audio.title2}</span>
             </h2>
-            <p className="font-space text-xs text-muted tracking-widest uppercase mt-1">
-              REAL-TIME PRODUCTION // MULTI-STAGE COMPARISON
+            <p className="font-space text-xs text-muted tracking-widest uppercase mt-4">
+              {dict.audio.subtitle}
             </p>
           </div>
 

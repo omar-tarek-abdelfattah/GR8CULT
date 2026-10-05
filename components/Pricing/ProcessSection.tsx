@@ -1,8 +1,14 @@
 'use client';
 
-import { processSteps } from "./pricingData";
+import { processSteps as processStepsEn } from "./pricingData";
+import { processStepsAr } from "./pricingDataAr";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ProcessSection() {
+  const { locale } = useLanguage();
+  const isAr = locale === "ar";
+  const currentSteps = isAr ? processStepsAr : processStepsEn;
+
   return (
     <section
       id="process"
@@ -11,21 +17,23 @@ export default function ProcessSection() {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-14">
           <span className="font-space text-xs sm:text-sm text-primary tracking-[0.25em] uppercase block mb-2 font-semibold">
-            THE WORKFLOW
+            {isAr ? "مراحل الشغل" : "THE WORKFLOW"}
           </span>
           <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-white tracking-wider uppercase m-0 leading-none">
-            THE GR8NIK PROCESS
+            {isAr ? "مراحل الإنتاج في GR8NIK" : "THE GR8NIK PROCESS"}
           </h2>
           <p className="font-space text-xs sm:text-sm text-muted tracking-widest uppercase mt-2">
-            [ 8 TACTICAL STAGES FROM INITIAL REFERENCE TO FINAL MASTER ]
+            {isAr
+              ? "[ ٨ مراحل هندسية وإبداعية من أول الفكرة لحد الفاينال ماستر ]"
+              : "[ 8 TACTICAL STAGES FROM INITIAL REFERENCE TO FINAL MASTER ]"}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {processSteps.map((step) => (
+          {currentSteps.map((step) => (
             <div
               key={step.num}
-              className="border border-secondary/50 bg-[#090909] p-6 sm:p-7 flex flex-col justify-between hover:border-primary transition-colors group"
+              className="border border-secondary/50 bg-[#090909] p-6 sm:p-7 flex flex-col justify-between hover:border-primary transition-colors group text-start"
             >
               <div>
                 <div className="font-bebas text-4xl sm:text-5xl text-primary mb-3">

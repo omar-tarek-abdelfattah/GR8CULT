@@ -6,11 +6,15 @@ import { ArrowUpRight, Sparkles, Coins, Heart, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import ServiceCard from "./ServiceCard";
 import ServiceDetailsModal from "./ServiceDetailsModal";
-import { servicesData, CUSTOM_BOOKING_WHATSAPP_URL } from "./pricingData";
+import { servicesData as servicesDataEn, CUSTOM_BOOKING_WHATSAPP_URL } from "./pricingData";
+import { servicesDataAr, CUSTOM_BOOKING_WHATSAPP_URL_AR } from "./pricingDataAr";
 import { ServiceItem } from "./types";
 import { usePricingCurrency } from "./PricingCurrencyContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function PricingCatalog() {
+  const { locale } = useLanguage();
+  const isAr = locale === "ar";
   const { currency, setCurrency } = usePricingCurrency();
   const [activeCategory, setActiveCategory] = useState<
     "all" | "service" | "bundle"
@@ -60,7 +64,9 @@ export default function PricingCatalog() {
     if (usdClickTimeoutRef.current) clearTimeout(usdClickTimeoutRef.current);
   };
 
-  const filteredServices = servicesData.filter((s) => {
+  const currentServicesData = isAr ? servicesDataAr : servicesDataEn;
+
+  const filteredServices = currentServicesData.filter((s) => {
     if (activeCategory === "all") return true;
     return s.category === activeCategory;
   });
@@ -70,6 +76,10 @@ export default function PricingCatalog() {
     setIsModalOpen(true);
   };
 
+  const customBookingUrl = isAr
+    ? CUSTOM_BOOKING_WHATSAPP_URL_AR
+    : CUSTOM_BOOKING_WHATSAPP_URL;
+
   return (
     <section id="services" className="py-12 lg:py-16 relative z-10 scroll-mt-14">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -77,14 +87,18 @@ export default function PricingCatalog() {
         <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-5 mb-8 border-b border-secondary/50 pb-5">
           <div>
             <span className="font-space text-xs sm:text-sm text-primary tracking-[0.25em] uppercase block mb-1 font-semibold">
-              STUDIO PACKAGES &amp; RATES
+              {isAr ? "باقات وأسعار الاستوديو" : "STUDIO PACKAGES & RATES"}
             </span>
             <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl text-white tracking-wider uppercase m-0 leading-none">
-              CORE PACKAGES
+              {isAr ? "الباقات الأساسية" : "CORE PACKAGES"}
             </h2>
             <p className="font-space text-xs text-muted tracking-widest uppercase mt-1.5 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
-              <span>4 STREAMLINED TIERS // CLICK ANY TIER FOR FULL DETAILS &amp; BOOKING</span>
+              <span>
+                {isAr
+                  ? "٤ باقات واضحة // دوس على أي باقة للتفاصيل والحجز"
+                  : "4 STREAMLINED TIERS // CLICK ANY TIER FOR FULL DETAILS & BOOKING"}
+              </span>
             </p>
           </div>
 
@@ -99,7 +113,9 @@ export default function PricingCatalog() {
                     : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
                 }`}
               >
-                All Packages ({servicesData.length})
+                {isAr
+                  ? `كل الباقات (${currentServicesData.length})`
+                  : `All Packages (${currentServicesData.length})`}
               </button>
               <button
                 onClick={() => setActiveCategory("service")}
@@ -109,7 +125,7 @@ export default function PricingCatalog() {
                     : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
                 }`}
               >
-                Tracking &amp; Stems
+                {isAr ? "تسجيل وستيمز" : "Tracking & Stems"}
               </button>
               <button
                 onClick={() => setActiveCategory("bundle")}
@@ -119,7 +135,7 @@ export default function PricingCatalog() {
                     : "border border-secondary/60 bg-black/40 text-muted hover:text-white hover:border-primary/50"
                 }`}
               >
-                Complete Bundles
+                {isAr ? "باقات كاملة" : "Complete Bundles"}
               </button>
             </div>
 
@@ -127,7 +143,7 @@ export default function PricingCatalog() {
             <div className="flex items-center gap-2 bg-[#090909] border border-secondary/70 p-1">
               <span className="font-space text-[10px] text-zinc-400 uppercase tracking-widest pl-2 font-bold flex items-center gap-1.5">
                 <Coins className="w-3.5 h-3.5 text-primary" />
-                <span>CURRENCY:</span>
+                <span>{isAr ? "العملة:" : "CURRENCY:"}</span>
               </span>
               <div className="inline-flex items-center gap-1">
                 <button
@@ -181,25 +197,35 @@ export default function PricingCatalog() {
           <div className="relative z-10 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-primary/40 font-space text-[11px] text-primary tracking-widest uppercase mb-2 font-bold">
               <FaWhatsapp className="w-3.5 h-3.5 text-emerald-400" />
-              <span>CUSTOM SCOPE // ONLINE BOOKINGS</span>
+              <span>
+                {isAr
+                  ? "مشاريع مخصصة // حجز أونلاين"
+                  : "CUSTOM SCOPE // ONLINE BOOKINGS"}
+              </span>
             </div>
             <h3 className="font-bebas text-2xl sm:text-3xl md:text-4xl text-white tracking-wide uppercase m-0 leading-tight">
-              NEED A CUSTOM PACKAGE OR BESPOKE PROJECT?
+              {isAr
+                ? "محتاج باقة مخصصة أو بروجكت كامل؟"
+                : "NEED A CUSTOM PACKAGE OR BESPOKE PROJECT?"}
             </h3>
             <p className="font-space text-xs sm:text-sm text-zinc-300 max-w-2xl mt-1 leading-relaxed">
-              Looking for a custom multi-track EP/Album deal, bespoke sound design, commercial music, or prefer to coordinate directly online with our engineering team? Chat with us on WhatsApp.
+              {isAr
+                ? "لو بتدور على باقة لألبوم أو EP، ساوند ديزاين مخصص، مزيكا إعلانات، أو حابب تنسق أونلاين علطول مع مهندسي الاستوديو.. ابعتلنا ع الواتساب."
+                : "Looking for a custom multi-track EP/Album deal, bespoke sound design, commercial music, or prefer to coordinate directly online with our engineering team? Chat with us on WhatsApp."}
             </p>
           </div>
 
           <div className="relative z-10 shrink-0 w-full md:w-auto">
             <a
-              href={CUSTOM_BOOKING_WHATSAPP_URL}
+              href={customBookingUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full md:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-space text-xs uppercase tracking-widest flex items-center justify-center gap-2.5 transition-all font-bold shadow-[0_0_20px_rgba(16,185,129,0.35)] border border-emerald-400/50 cursor-pointer"
             >
               <FaWhatsapp className="w-4 h-4 text-white" />
-              <span>CHAT FOR CUSTOM BOOKING</span>
+              <span>
+                {isAr ? "كلمنا ع الواتساب للتفاصيل" : "CHAT FOR CUSTOM BOOKING"}
+              </span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
