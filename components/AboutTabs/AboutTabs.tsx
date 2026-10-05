@@ -7,19 +7,21 @@ import Image from 'next/image';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import SpotifyPlaylist from '@/components/SpotifyPlaylist/SpotifyPlaylist';
+import { useLanguage } from '@/context/LanguageContext';
 import './AboutTabs.css';
-
-const tabs = [
-  "THE PERSON BEHIND GR8NIK",
-  "OUR FUTURE",
-  "JOIN THE CULT",
-  "CONTACT US"
-];
 
 export default function AboutTabs() {
   const [activeTab, setActiveTab] = useState(0);
+  const { dict, isRTL } = useLanguage();
   const contactMapContainer = useRef<HTMLDivElement>(null);
   const contactMap = useRef<mapboxgl.Map | null>(null);
+
+  const tabs = [
+    dict.about.tabPerson,
+    dict.about.tabFuture,
+    dict.about.tabJoin,
+    dict.about.tabContact
+  ];
 
   /*
   useEffect(() => {
@@ -109,24 +111,16 @@ export default function AboutTabs() {
                 />
 
                 <div className="absolute top-4 left-0 w-full p-6 z-20 pointer-events-none">
-                  <h2 className="font-bebas text-3xl md:text-5xl text-white tracking-wider m-0">VISIONARY // ARCHITECT</h2>
+                  <h2 className="font-bebas text-3xl md:text-5xl text-white tracking-wider m-0">{dict.about.visionary}</h2>
                 </div>
               </div>
               <div className="w-full md:w-2/3 pt-2">
                 <h2 className="font-bebas text-3xl md:text-4xl text-white tracking-wider m-0 drop-shadow-md">AhmedyTheGr8</h2>
-                <p className="font-space text-lg text-white leading-relaxed mb-4">I'm Ahmedy — producer, artist, sound engineer and the person building GR8NIK.
-
-                  I started GR8NIK because I wanted a place where the entire process could happen in one world — making the beat, recording the artist, shaping the sound, building the visual identity and eventually putting the music out into the world.
-                  <br />
-                  <br />
-                  I'm still figuring it out.
-                  <br />
-                  <br />
-                  That's part of it.
-                  <br />
-                  <br />
-                  GR8NIK isn't supposed to feel like a traditional recording studio. It's a creative space for artists, producers and people who want to make something that actually sounds like them.
-                </p>
+                <div className="font-space text-lg text-white leading-relaxed mb-4 space-y-4">
+                  <p>{dict.about.bioIntro}</p>
+                  <p>{dict.about.bioFiguring}</p>
+                  <p>{dict.about.bioSpace}</p>
+                </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -151,22 +145,15 @@ export default function AboutTabs() {
                   </div>
                 </div>
 
-                <p className="font-space text-lg text-white leading-relaxed mb-4">
-
-                  Some days that's a record.
-
-                  Some days it's a beat.
-
-                  Some days it's a DJ session, a mix, a video, a new artist, or an idea that turns into something bigger.
-                </p>
-                <p className="font-space text-lg text-white leading-relaxed font-bold">
-                  I'm not trying to make everything sound the same.
-                  I'm trying to help people find their sound.
-                  <br />
-                  <br />
-                  <br />
-                  THAT'S GR8NIK
-                </p>
+                <div className="font-space text-lg text-white leading-relaxed my-4 space-y-4">
+                  <p>{dict.about.bioDaily}</p>
+                  <p className="font-bold">
+                    {dict.about.bioPhilosophy}
+                    <br />
+                    <br />
+                    <span className="text-primary">{dict.about.bioEnding}</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -175,49 +162,34 @@ export default function AboutTabs() {
         {/* Tab 2: Our Future */}
         {activeTab === 1 && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <h2 className="font-bebas text-4xl text-white mb-6 tracking-wider">ROADMAP // EXPANSION</h2>
+            <h2 className="font-bebas text-4xl text-white mb-6 tracking-wider">{dict.about.roadmapTitle}</h2>
             <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
               <div className="w-full lg:w-2/3">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="border border-secondary p-6 bg-[#0a0a0a]">
-                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 01 // BUILD THE HOUSE</h3>
+                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">{dict.about.phase1Title}</h3>
                     <p className="font-space text-md text-muted leading-relaxed">
-                      Build GR8NIK into a studio where artists can actually make GR8 music — from the first idea to the finished record.
-
-                      Recording. Production. Mixing. Beats. Content.
-                      A place built around the music, not just the equipment.
+                      {dict.about.phase1Desc}
                     </p>
                   </div>
                   <div className="border border-secondary p-6 bg-[#0a0a0a]">
-                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 02 // BUILD THE SOUND</h3>
+                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">{dict.about.phase2Title}</h3>
                     <p className="font-space text-md text-muted leading-relaxed">
-                      GR8NIK grows beyond the room.
-
-                      We work with more artists, develop our own sound, release more music, build the GR8NIK catalog, and create a real community around the studio.
-
-                      The goal isn't to sign everyone.
-
-                      It's to find the artists who fit the world we're building.
+                      {dict.about.phase2Desc}
                     </p>
                   </div>
                   <div className="border border-secondary p-6 bg-[#0a0a0a]">
-                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">PHASE 03 // BUILD THE PLATFORM</h3>
+                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">{dict.about.phase3Title}</h3>
                     <p className="font-space text-md text-muted leading-relaxed">
-
-                      Turn everything happening around GR8NIK into a platform.
-
-                      Music. Artists. Sessions. Education. DJ culture. Sound design. Visuals.
-                      Beneath Cairo. YouTube. Live sessions. Original content.
-
-                      Give the scene somewhere to discover new people — and give the people inside GR8NIK somewhere to grow.
+                      {dict.about.phase3Desc}
                     </p>
                   </div>
                   <div className="border border-secondary p-6 bg-[#0a0a0a] border-dashed">
-                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">[ NEXT UP ]</h3>
+                    <h3 className="font-space text-lg tracking-widest text-primary mb-4 uppercase">{dict.about.nextUpTitle}</h3>
                     <p className="font-space text-md text-secondary leading-relaxed">
-                      We're building it one record, one artist, one session and one idea at a time.
+                      {dict.about.nextUpDesc}
                     </p>
-                    <p className="font-space text-md text-white leading-relaxed mt-2 font-bold">GR8NIK ISN'T FINISHED, THAT'S THE POINT.</p>
+                    <p className="font-space text-md text-white leading-relaxed mt-2 font-bold">{dict.about.notFinished}</p>
                   </div>
                 </div>
               </div>
@@ -263,9 +235,9 @@ export default function AboutTabs() {
               {/* Left Column: Direct Contact Links */}
               <div className="w-full lg:w-1/2 flex flex-col justify-between">
                 <div>
-                  <h2 className="font-bebas text-4xl text-white mb-2 tracking-wider">DIRECT CONTACT </h2>
+                  <h2 className="font-bebas text-4xl text-white mb-2 tracking-wider">{dict.about.directContact}</h2>
                   <p className="font-space text-sm text-muted uppercase tracking-[0.2em] mb-6">
-                    [ STUDIO INQUIRIES &amp; BOOKINGS ]
+                    {dict.about.contactSub}
                   </p>
                 </div>
 
@@ -284,12 +256,12 @@ export default function AboutTabs() {
                         <FaWhatsapp className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">PRIMARY CHANNEL</span>
-                        <h3 className="font-bebas text-xl text-white tracking-wider">WHATSAPP CHAT</h3>
+                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">{dict.about.primaryChannel}</span>
+                        <h3 className="font-bebas text-xl text-white tracking-wider">{dict.about.whatsappChat}</h3>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 font-space text-xs text-primary group-hover:text-white transition-colors">
-                      <span className="hidden sm:inline">START CHAT</span>
+                      <span className="hidden sm:inline">{dict.about.startChat}</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
                   </a>
@@ -304,12 +276,12 @@ export default function AboutTabs() {
                         <Mail className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">OFFICIAL GMAIL</span>
+                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">{dict.about.officialGmail}</span>
                         <h3 className="font-bebas text-xl text-white tracking-wider">gr8nikstudios@gmail.com</h3>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 font-space text-xs text-primary group-hover:text-white transition-colors">
-                      <span className="hidden sm:inline">SEND EMAIL</span>
+                      <span className="hidden sm:inline">{dict.about.sendEmail}</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
                   </a>
@@ -324,12 +296,12 @@ export default function AboutTabs() {
                         <Phone className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">PHONE NUMBER</span>
-                        <h3 className="font-bebas text-xl text-white tracking-wider">+20 101 144 4140</h3>
+                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">{dict.about.phoneNumber}</span>
+                        <h3 className="font-bebas text-xl text-white tracking-wider" dir="ltr">+20 101 144 4140</h3>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 font-space text-xs text-primary group-hover:text-white transition-colors">
-                      <span className="hidden sm:inline">CALL DIRECT</span>
+                      <span className="hidden sm:inline">{dict.about.callDirect}</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
                   </a>
@@ -346,12 +318,12 @@ export default function AboutTabs() {
                         <FaTiktok className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">OFFICIAL TIKTOK</span>
+                        <span className="font-space text-[10px] text-muted tracking-widest uppercase block">{dict.about.officialTiktok}</span>
                         <h3 className="font-bebas text-xl text-white tracking-wider">@gr8nikstudios</h3>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 font-space text-xs text-primary group-hover:text-white transition-colors">
-                      <span className="hidden sm:inline">WATCH CONTENT</span>
+                      <span className="hidden sm:inline">{dict.about.openTiktok}</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
                   </a>

@@ -1,8 +1,15 @@
+'use client';
+
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 import './HardwareShowcase.style.css';
 
 export default function HardwareShowcase() {
+  const { dict, isRTL } = useLanguage();
+
+  const ArrowIcon = isRTL ? ArrowLeft : ArrowRight;
+
   return (
     <section className="w-full py-24 border-b border-secondary bg-background relative overflow-hidden">
       {/* Optional subtle background accent */}
@@ -26,8 +33,8 @@ export default function HardwareShowcase() {
               ></div>
 
               <div className="absolute bottom-4 left-4 z-20 font-space text-[10px] text-white tracking-widest flex flex-col gap-1 bg-black/70 p-3 border border-secondary/50 backdrop-blur-sm">
-                <span>[ STATUS: <span className="text-primary">ONLINE</span> ]</span>
-                <span>[ ARSENAL // VOCAL CHAIN ]</span>
+                <span>[ {dict.hardware.status} ]</span>
+                <span>[ {dict.hardware.arsenal} ]</span>
               </div>
             </div>
           </div>
@@ -35,42 +42,38 @@ export default function HardwareShowcase() {
           {/* Right: Text Description */}
           <div className="w-full lg:w-1/2 flex flex-col items-start gap-6">
             <h2 className="font-bebas text-5xl md:text-7xl tracking-tight uppercase text-white leading-none">
-              MAKE IT  <br />
-              <span className="text-primary">SOUND LIKE YOU.</span>
+              {dict.hardware.title1}  <br />
+              <span className="text-primary">{dict.hardware.title2}</span>
             </h2>
 
-            <p className="font-space text-sm md:text-base text-muted leading-relaxed max-w-xl">
-              Good equipment helps.
-              <br />
+            <div className="font-space text-sm md:text-base text-muted leading-relaxed max-w-xl space-y-4">
+              <p>
+                {dict.hardware.p1}
+                <br />
+                {dict.hardware.p2}
+                <br />
+                {dict.hardware.p3}
+              </p>
 
+              <p>
+                {dict.hardware.p4}
+              </p>
 
-              Good engineering matters.
-              <br />
+              <p>
+                {dict.hardware.p5}
+                <br />
+                <span className="text-zinc-200 font-semibold">{dict.hardware.p6}</span>
+              </p>
 
-              But neither one makes a GR8 record by itself.
-              <br />
-              <br />
-
-              At GR8NIK, we care about the part that happens between the artist and the music — finding the right performance, making the right production decisions, fixing what needs fixing and knowing when to stop.
-              <br />
-              <br />
-
-              We don't want every artist to leave sounding like GR8NIK.
-              <br />
-
-
-              We want you to leave sounding *more like yourself.*
-              <br />
-
-
-              From recording and vocal production to beats, mixing, mastering and everything in between, we build around what the record actually needs.</p>
-
-
+              <p>
+                {dict.hardware.p7}
+              </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mt-8 w-full sm:w-auto">
               <Link href="/pricing" className="flex items-center gap-2 border border-primary text-primary px-8 py-4 font-space text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-colors rounded-none group">
-                RESERVE YOUR TIME
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                {dict.hardware.reserveTime}
+                <ArrowIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>

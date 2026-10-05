@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import AboutTabs from "@/components/AboutTabs/AboutTabs";
+import AboutHeader from "@/components/AboutTabs/AboutHeader";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -8,12 +9,49 @@ export const metadata: Metadata = {
     "Discover the vision, roadmap, and analog-digital sanctuary behind GR8NIK STUDIOS. Founded by audio engineer and producer AhmedyTheGr8 in Mokattam, Cairo.",
   alternates: {
     canonical: "/about",
+    languages: {
+      "en": "/about",
+      "ar-EG": "/about?lang=ar",
+      "ar": "/about?lang=ar",
+      "x-default": "/about",
+    },
   },
+  keywords: [
+    "About AhmedyTheGr8",
+    "AhmedyTheGr8",
+    "GR8NIK STUDIOS Founder",
+    "GR8CULT",
+    "Audio Engineer Mokattam Cairo",
+    "Music Producer Cairo",
+    "Analog Digital Sanctuary",
+    "Cairo Recording Studio Founder",
+    "Independent Egyptian Music Movement",
+    "Studio Gear Cairo",
+    "عن استوديو GR8NIK",
+    "من نحن GR8NIK ستوديوز",
+    "أحمدي ذا جريت",
+    "احمدي ذا جريت",
+    "أحمدي",
+    "احمدي",
+    "مهندس صوت أحمدي",
+    "مؤسس استوديو GR8NIK",
+    "تاريخ استوديو GR8NIK",
+    "استوديو تسجيل في المقطم القاهرة",
+    "فلسفة الصوت والإنتاج الموسيقي",
+    "معدات استوديو تسجيل احترافي",
+    "هندسة الصوت في مصر",
+    "إنتاج موسيقي مستقل مصر",
+    "حركة جريت كالت",
+    "قصة استوديو GR8NIK",
+    "استوديو تسجيل مستقل في مصر"
+  ],
   openGraph: {
     title: "About AhmedyTheGr8 & GR8CULT | GR8NIK STUDIOS",
     description:
       "The architect behind the cult: AhmedyTheGr8. Learn about the studio facility, sonic philosophy, and future roadmap.",
     url: `${SITE_URL}/about`,
+    locale: "en_US",
+    alternateLocale: ["ar_EG", "ar"],
     images: [
       {
         url: "/logo-nobg.png",
@@ -68,14 +106,7 @@ export default function AboutPage() {
         {/* Subtle background accent */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <h1 className="font-bebas text-6xl md:text-8xl tracking-wider uppercase text-white mb-2">
-            IDENTITY // <span className="text-primary">GR8CULT</span>
-          </h1>
-          <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em]">
-            [ THE ARCHITECTURE OF SOUND ]
-          </p>
-        </div>
+        <AboutHeader />
       </section>
 
       {/* Tabs Section */}

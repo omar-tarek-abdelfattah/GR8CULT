@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { MapPin, Disc } from "lucide-react";
-import { FaTwitch, FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
+import { FaTwitch, FaInstagram, FaWhatsapp, FaTiktok, FaPaypal } from "react-icons/fa";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { dict, locale } = useLanguage();
   const whatsappUrl = `https://wa.me/+201011444140?text=${encodeURIComponent(
-    "Hey GR8NIK Studios, I'd like to get in touch regarding studio sessions, beats, or general inquiries."
+    locale === 'ar'
+      ? "أهلاً GR8NIK STUDIOS، كنت حابب أسأل عن حجز سيشن في الاستوديو والبيتات والخدمات المتاحة."
+      : "Hey GR8NIK Studios, I'd like to get in touch regarding studio sessions, beats, or general inquiries."
   )}`;
 
   return (
@@ -39,16 +43,14 @@ export default function Footer() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <span>MOKATTAM, CAIRO // PRIVATE STUDIO</span>
+            <span>{dict.footer.radar}</span>
           </div>
         </div>
 
         {/* Location Notice */}
         <div className="inline-flex items-center justify-center gap-2.5 px-4 py-2 border border-secondary/40 bg-[#080808]/90 text-xs font-space tracking-wider text-muted max-w-md">
           <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
-          <span>
-            LOCATED IN <span className="text-zinc-200 font-bold">MOKATTAM</span> — SPECIFIC LOCATION WILL BE SHARED UPON BOOKING
-          </span>
+          <span>{dict.footer.locationNotice}</span>
         </div>
 
         {/* Slick Navigation Bar */}
@@ -58,7 +60,7 @@ export default function Footer() {
               href="/"
               className="text-muted hover:text-white transition-colors relative py-1"
             >
-              HOME
+              {dict.footer.home}
             </Link>
 
             <Link
@@ -69,7 +71,7 @@ export default function Footer() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-80" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary shadow-[0_0_4px_#D60000]" />
               </span>
-              <span>VAULT</span>
+              <span>{dict.footer.vault}</span>
               <Disc className="w-3 h-3 text-primary group-hover:rotate-180 transition-transform duration-500" />
             </Link>
 
@@ -77,14 +79,14 @@ export default function Footer() {
               href="/pricing"
               className="text-muted hover:text-white transition-colors relative py-1"
             >
-              PRICING
+              {dict.footer.pricing}
             </Link>
 
             <Link
               href="/about"
               className="text-muted hover:text-white transition-colors relative py-1"
             >
-              ABOUT
+              {dict.footer.about}
             </Link>
 
             <Link
@@ -94,7 +96,7 @@ export default function Footer() {
               className="group flex items-center gap-1.5 text-muted hover:text-emerald-400 transition-colors py-1"
             >
               <FaWhatsapp className="w-3.5 h-3.5 text-emerald-500 group-hover:scale-110 transition-transform shrink-0" />
-              <span>CONTACT US</span>
+              <span>{dict.footer.contactUs}</span>
             </Link>
           </div>
         </nav>
@@ -120,22 +122,12 @@ export default function Footer() {
             <FaTiktok className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
             <span>TIKTOK</span>
           </Link>
-
-          {/* <Link
-            href="https://twitch.tv"
-            target="_blank"
-            rel="noreferrer"
-            className="group flex items-center gap-2 px-5 py-2.5 border border-secondary/60 bg-[#080808] hover:border-primary font-space text-xs tracking-widest text-muted hover:text-white transition-all duration-300"
-          >
-            <FaTwitch className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
-            <span>TWITCH</span>
-          </Link> */}
         </div>
 
         {/* Payment Gateways */}
         <div className="flex flex-wrap items-center justify-center gap-3">
           <div className="flex items-center gap-2.5 px-4 py-2 border border-secondary/30 bg-[#060606] h-[60px] font-space text-[11px] tracking-widest text-muted">
-            <span className="text-secondary uppercase">ACCEPTED:</span>
+            <span className="text-secondary uppercase">{dict.footer.accepted}</span>
             <span className="text-zinc-300 flex items-center gap-2">
               INSTAPAY
               <img src="/instapay.png" alt="Instapay Egypt payment method accepted at GR8NIK STUDIOS" className="w-16 h-auto object-contain inline-block" />
@@ -143,10 +135,18 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-2.5 px-4 py-2 border border-secondary/30 bg-[#060606] h-[60px] font-space text-[11px] tracking-widest text-muted">
-            <span className="text-secondary uppercase">ACCEPTED:</span>
+            <span className="text-secondary uppercase">{dict.footer.accepted}</span>
             <span className="text-zinc-300 flex items-center gap-2">
               VODAFONE CASH
               <img src="/Vodafone_Symbol_1.png" alt="Vodafone Cash Egypt payment method accepted at GR8NIK STUDIOS" className="w-4 h-4 object-contain inline-block" />
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2.5 px-4 py-2 border border-secondary/30 bg-[#060606] h-[60px] font-space text-[11px] tracking-widest text-muted">
+            <span className="text-secondary uppercase">{dict.footer.accepted}</span>
+            <span className="text-zinc-300 flex items-center gap-2 font-bold tracking-wider">
+              PAYPAL
+              <FaPaypal className="w-4 h-4 text-[#0079C1] inline-block" />
             </span>
           </div>
         </div>
@@ -157,10 +157,10 @@ export default function Footer() {
         {/* Bottom Tagline & Copyright */}
         <div className="flex flex-col gap-2">
           <span className="font-space text-xs md:text-sm text-secondary tracking-[0.25em] uppercase">
-            WHERE MUSIC GETS MADE. THE CULTURE AROUND IT.
+            {dict.footer.tagline}
           </span>
           <span className="font-space text-[11px] text-muted tracking-widest">
-            GR8NIK STUDIOS © {new Date().getFullYear()} // ALL RIGHTS RESERVED
+            GR8NIK STUDIOS © {new Date().getFullYear()} // {dict.footer.rights}
           </span>
         </div>
 

@@ -8,6 +8,7 @@ import { ServiceItem, Currency } from "./types";
 import { useCalendarModal } from "@/components/CalendarModal/CalendarModalContext";
 import { WHATSAPP_PHONE_NUMBER, getServicePricing } from "./pricingData";
 import { usePricingCurrency } from "./PricingCurrencyContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ServiceDetailsModalProps {
   item: ServiceItem | null;
@@ -22,6 +23,8 @@ export default function ServiceDetailsModal({
   onClose,
   currency: propCurrency,
 }: ServiceDetailsModalProps) {
+  const { locale } = useLanguage();
+  const isAr = locale === "ar";
   const [mounted, setMounted] = useState(false);
   const { openCalendar } = useCalendarModal();
   const { currency: contextCurrency } = usePricingCurrency();
@@ -87,18 +90,18 @@ export default function ServiceDetailsModal({
         <div className="h-1 w-full bg-gradient-to-r from-primary via-red-500 to-primary/40" />
 
         {/* Modal Header */}
-        <div className="p-5 sm:p-6 border-b border-secondary/60 bg-[#0d0d0d] relative">
+        <div className="p-5 sm:p-6 border-b border-secondary/60 bg-[#0d0d0d] relative text-start">
           <button
             onClick={onClose}
-            aria-label="Close modal"
-            className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+            aria-label={isAr ? "قفل النافذة" : "Close modal"}
+            className="absolute top-4 right-4 rtl:right-auto rtl:left-4 p-2 text-zinc-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
 
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="font-space text-xs tracking-[0.25em] text-primary font-bold">
-              {item.number} — PACKAGE DETAILS
+              {item.number} — {isAr ? "تفاصيل الباقة" : "PACKAGE DETAILS"}
             </span>
             {item.badge && (
               <span className="px-2.5 py-0.5 bg-primary/20 border border-primary/50 text-white font-space text-[11px] font-bold uppercase tracking-wider">
@@ -113,7 +116,7 @@ export default function ServiceDetailsModal({
             )}
             {item.isFeatured && (
               <span className="inline-flex items-center gap-1 text-primary text-xs font-space font-bold uppercase tracking-wider">
-                <Flame className="w-3.5 h-3.5 animate-pulse" /> FEATURED
+                <Flame className="w-3.5 h-3.5 animate-pulse" /> {isAr ? "الأكثر طلباً" : "FEATURED"}
               </span>
             )}
           </div>
@@ -152,7 +155,7 @@ export default function ServiceDetailsModal({
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-grow custom-scrollbar">
+        <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-grow custom-scrollbar text-start">
           {/* Summary / Description */}
           {item.shortDescription && (
             <div className="p-3.5 bg-black/60 border border-secondary/50 font-space text-xs sm:text-sm text-zinc-300 leading-relaxed">
@@ -166,7 +169,7 @@ export default function ServiceDetailsModal({
               {item.youBring && (
                 <div>
                   <span className="text-primary font-bold uppercase tracking-wider block mb-1">
-                    YOU BRING:
+                    {isAr ? "عليك أنت:" : "YOU BRING:"}
                   </span>
                   <span className="text-zinc-200">{item.youBring}</span>
                 </div>
@@ -174,7 +177,7 @@ export default function ServiceDetailsModal({
               {item.weHandle && (
                 <div>
                   <span className="text-emerald-400 font-bold uppercase tracking-wider block mb-1">
-                    WE HANDLE:
+                    {isAr ? "إحنا بنتولى:" : "WE HANDLE:"}
                   </span>
                   <span className="text-zinc-200">{item.weHandle}</span>
                 </div>
@@ -186,7 +189,11 @@ export default function ServiceDetailsModal({
           <div>
             <div className="font-space text-xs tracking-[0.2em] text-zinc-300 uppercase mb-3.5 flex items-center gap-2 font-bold border-b border-secondary/40 pb-2">
               <CheckCircle2 className="w-4 h-4 text-primary" />
-              <span>WHAT THIS TIER FULLY INCLUDES:</span>
+              <span>
+                {isAr
+                  ? "الباقة دي بتشمل إيه بالظبط:"
+                  : "WHAT THIS TIER FULLY INCLUDES:"}
+              </span>
             </div>
             <ul className="space-y-2.5 font-space text-xs sm:text-[13px] text-zinc-200">
               {item.includes.map((inc, idx) => (
@@ -202,7 +209,7 @@ export default function ServiceDetailsModal({
           {item.notes && item.notes.length > 0 && (
             <div className="border-t border-secondary/40 pt-4 space-y-2">
               <span className="font-space text-xs tracking-[0.2em] text-zinc-400 uppercase block font-bold mb-2">
-                NOTES &amp; GUIDELINES:
+                {isAr ? "ملاحظات وتعليمات:" : "NOTES & GUIDELINES:"}
               </span>
               {item.notes.map((note, nIdx) => (
                 <p
@@ -210,7 +217,9 @@ export default function ServiceDetailsModal({
                   className={`font-space text-xs leading-relaxed ${
                     note.includes("DOES NOT INCLUDE") ||
                     note.includes("Additional") ||
-                    note.includes("scope")
+                    note.includes("scope") ||
+                    note.includes("مش داخلين") ||
+                    note.includes("زيادة")
                       ? "text-amber-400/90 font-medium"
                       : "text-zinc-400"
                   }`}
@@ -230,7 +239,9 @@ export default function ServiceDetailsModal({
             className="w-full sm:flex-1 py-3.5 px-4 bg-primary hover:bg-white text-white hover:text-black font-space text-xs sm:text-[13px] uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(214,0,0,0.4)] cursor-pointer"
           >
             <Calendar className="w-4 h-4" />
-            <span>CHOOSE TIME SLOT &amp; BOOK</span>
+            <span>
+              {isAr ? "اختر الميعاد واحجز" : "CHOOSE TIME SLOT & BOOK"}
+            </span>
             <ArrowUpRight className="w-4 h-4" />
           </button>
 
@@ -241,7 +252,7 @@ export default function ServiceDetailsModal({
             className="w-full sm:w-auto py-3.5 px-5 border border-emerald-500/60 hover:border-emerald-400 bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-300 hover:text-white font-space text-xs sm:text-[13px] uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
             <FaWhatsapp className="w-4 h-4 text-emerald-400" />
-            <span>CHAT ON WHATSAPP</span>
+            <span>{isAr ? "كلمنا ع الواتساب" : "CHAT ON WHATSAPP"}</span>
           </a>
         </div>
       </div>

@@ -2,6 +2,10 @@
     transform: translateX(250%) rotate(90deg);
 }
 
+[dir="rtl"] .grouped-link:hover .crosshair {
+    transform: translateX(-250%) rotate(-90deg);
+}
+
 .logo::before {
     content: '';
     background-color: #050505;
@@ -17,6 +21,11 @@
     left: 0;
     z-index: 2;
     transition: all .3s ease-in-out;
+}
+
+[dir="rtl"] .logo::before {
+    left: auto;
+    right: 0;
 }
 
 .grouped-link:hover .logo::before {

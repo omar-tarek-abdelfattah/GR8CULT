@@ -2,11 +2,17 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { decisionCards } from "./pricingData";
+import { decisionCards as decisionCardsEn } from "./pricingData";
+import { decisionCardsAr } from "./pricingDataAr";
 import { usePricingCurrency } from "./PricingCurrencyContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function DecisionGuide() {
+  const { locale } = useLanguage();
+  const isAr = locale === "ar";
   const { currency } = usePricingCurrency();
+
+  const currentCards = isAr ? decisionCardsAr : decisionCardsEn;
 
   return (
     <section
@@ -16,18 +22,20 @@ export default function DecisionGuide() {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-14">
           <span className="font-space text-xs sm:text-sm text-primary tracking-[0.25em] uppercase block mb-2 font-semibold">
-            DECISION ENGINE
+            {isAr ? "دليلك لاختيار الباقة" : "DECISION ENGINE"}
           </span>
           <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-white tracking-wider uppercase m-0 leading-none">
-            WHICH SERVICE DO I NEED?
+            {isAr ? "إيه الخدمة اللي محتاجها بالظبط؟" : "WHICH SERVICE DO I NEED?"}
           </h2>
           <p className="font-space text-xs sm:text-sm text-muted tracking-widest uppercase mt-2">
-            [ MATCH YOUR CURRENT STAGE TO THE EXACT PACKAGE ]
+            {isAr
+              ? "[ اختار الباقة اللي لايقة على مرحلة تراكك دلوقتي ]"
+              : "[ MATCH YOUR CURRENT STAGE TO THE EXACT PACKAGE ]"}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {decisionCards.map((d, index) => {
+          {currentCards.map((d, index) => {
             const isRoute = d.linkId.startsWith("/");
             const isFifthStretched = index === 4;
             const displayPrice = currency === "USD" && d.priceUsd ? d.priceUsd : d.price;
@@ -43,8 +51,10 @@ export default function DecisionGuide() {
               >
                 <div className={isFifthStretched ? "md:flex-grow" : ""}>
                   <div className="flex items-center gap-2 font-space text-xs text-primary tracking-widest uppercase mb-3 font-semibold">
-                    <ArrowRight className="w-3.5 h-3.5" />
-                    <span>SITUATION {index + 1}</span>
+                    <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+                    <span>
+                      {isAr ? `الحالة ${index + 1}` : `SITUATION ${index + 1}`}
+                    </span>
                   </div>
 
                   <h4 className="font-bebas text-2xl sm:text-3xl text-white tracking-wide uppercase mb-3 group-hover:text-primary transition-colors">
@@ -73,7 +83,7 @@ export default function DecisionGuide() {
                       className="font-space text-xs sm:text-sm text-primary group-hover:text-white uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer font-bold"
                     >
                       <span>{d.cta}</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                     </Link>
                   ) : (
                     <a
@@ -81,7 +91,7 @@ export default function DecisionGuide() {
                       className="font-space text-xs sm:text-sm text-primary group-hover:text-white uppercase tracking-wider flex items-center gap-2 transition-colors font-bold"
                     >
                       <span>{d.cta}</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                     </a>
                   )}
                 </div>

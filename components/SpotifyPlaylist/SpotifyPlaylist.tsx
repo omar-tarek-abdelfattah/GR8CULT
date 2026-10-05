@@ -1,6 +1,9 @@
+'use client';
+
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight, Disc } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ArrowLeft, Disc } from "lucide-react";
 import { FaSpotify, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface SpotifyPlaylistProps {
   /**
@@ -41,55 +44,46 @@ export default function SpotifyPlaylist({
   isTab = false,
   showSocials = false,
 }: SpotifyPlaylistProps) {
+  const { dict, isRTL } = useLanguage();
   const cleanPlaylistId = extractSpotifyPlaylistId(playlistId);
   const directSpotifyUrl =
     playlistUrl || `https://open.spotify.com/playlist/${cleanPlaylistId}`;
 
+  const ArrowIcon = isRTL ? ArrowLeft : ArrowRight;
+
   const content = (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
       {/* Left Column: Text & Context */}
-      <div className="lg:col-span-6 flex flex-col items-start text-left">
+      <div className="lg:col-span-6 flex flex-col items-start text-start">
         {/* Tactical Tag */}
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 border border-[#1DB954]/40 bg-[#1DB954]/10 text-[#1DB954] font-space text-[11px] tracking-[0.25em] uppercase mb-6">
           <FaSpotify className="w-3.5 h-3.5" />
-          <span>CATCH THE GR8CULT</span>
+          <span>{dict.spotify.tag}</span>
         </div>
 
         {/* Title in Bebas Neue */}
         <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white uppercase leading-none mb-6">
-          THE SOUND OF <br />
-          <span className="text-primary">GR8NIK.</span>
+          {dict.spotify.title1} <br />
+          <span className="text-primary">{dict.spotify.title2}</span>
         </h2>
 
         {/* Motivating Copy */}
         <p className="font-space text-sm md:text-base text-gray-300 leading-relaxed max-w-xl mb-4 font-light">
-
-          The music coming out of the room.
-          <br />
-          Beats we've made.
-          <br />
-          Records we've worked on.
-          <br />
-          Artists we're building with.
-          <br />
-          Sounds we're discovering.
-          <br />
-
-          From Cairo's underground to wherever the music takes us
+          {dict.spotify.copy}
         </p>
 
         <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em] max-w-lg mb-8">
-          HEAVY 808S // REAL ARTISTS // REAL RECORDS.
+          {dict.spotify.tagline}
         </p>
 
         {/* Tactical Spec Badges */}
         <div className="grid grid-cols-2 gap-4 w-full max-w-md mb-8">
           <div className="border border-zinc-900 bg-zinc-950/80 p-4">
             <div className="text-[10px] font-space text-muted tracking-widest uppercase mb-1">
-              CURATION
+              {dict.spotify.curation}
             </div>
             <div className="text-xs font-space text-white tracking-wider font-semibold">
-              HEAVY ROTATION
+              {dict.spotify.heavyRotation}
             </div>
           </div>
         </div>
@@ -103,7 +97,7 @@ export default function SpotifyPlaylist({
             className="flex items-center justify-center gap-3 bg-[#1DB954] text-black font-space text-xs font-bold uppercase tracking-widest px-7 py-4 hover:bg-white transition-all shadow-[0_0_25px_rgba(29,185,84,0.25)] group cursor-pointer"
           >
             <FaSpotify className="w-4 h-4 transition-transform group-hover:scale-110" />
-            <span>OPEN IN SPOTIFY</span>
+            <span>{dict.spotify.openSpotify}</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
 
@@ -116,8 +110,8 @@ export default function SpotifyPlaylist({
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_6px_#D60000]" />
             </span>
             <Disc className="w-3.5 h-3.5 text-primary group-hover:rotate-180 transition-transform duration-500 shrink-0" />
-            <span>ENTER THE VAULT</span>
-            <ArrowRight className="w-4 h-4 text-primary transition-transform group-hover:translate-x-1" />
+            <span>{dict.spotify.enterVault}</span>
+            <ArrowIcon className="w-4 h-4 text-primary transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
@@ -125,7 +119,7 @@ export default function SpotifyPlaylist({
         {showSocials && (
           <div className="mt-8 pt-6 border-t border-zinc-900 w-full">
             <div className="text-[10px] font-space text-muted tracking-widest uppercase mb-3">
-              NETWORK // SOCIAL CHANNELS
+              {dict.spotify.network}
             </div>
             <div className="flex flex-wrap gap-3">
               <a
@@ -175,7 +169,7 @@ export default function SpotifyPlaylist({
               </span>
             </div>
             <span className="text-[#1DB954] text-[10px] tracking-[0.2em] font-mono uppercase font-bold">
-              CONNECTED
+              {dict.spotify.connected}
             </span>
           </div>
 

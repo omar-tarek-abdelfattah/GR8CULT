@@ -8,6 +8,7 @@ import { SHOWCASE_BEATS, STATIC_MUSIC_VIDEOS, ShowcaseBeat } from "./types";
 import AllSongsTab from "./AllSongsTab";
 import BeatsTab from "./BeatsTab";
 import MusicVideosTab from "./MusicVideosTab";
+import { useLanguage } from "@/context/LanguageContext";
 
 export { STATIC_MUSIC_VIDEOS, SHOWCASE_BEATS };
 export type { MusicVideo, ShowcaseBeat } from "./types";
@@ -17,6 +18,7 @@ interface VaultClientProps {
 }
 
 export default function VaultClient({ initialTracks }: VaultClientProps) {
+  const { dict } = useLanguage();
   const [tracks] = useState<SpotifyVaultTrack[]>(initialTracks);
   const [activeTrack, setActiveTrack] = useState<SpotifyVaultTrack>(
     initialTracks[0] || null
@@ -194,17 +196,17 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
               </div>
               <h1 className="font-bebas text-5xl sm:text-7xl tracking-wider uppercase text-white m-0">
                 {selectedFilter === "BEATS"
-                  ? "THE VAULT // BEATS"
+                  ? `${dict.vault.title} // ${dict.vault.beats}`
                   : selectedFilter === "MUSIC VIDEOS"
-                  ? "THE VAULT // VISUALS"
-                  : "THE VAULT // RELEASES"}
+                  ? `${dict.vault.title} // ${dict.vault.musicVideos}`
+                  : `${dict.vault.title} // ${dict.vault.allSongs}`}
               </h1>
               <p className="font-space text-xs text-muted tracking-widest uppercase mt-2">
                 {selectedFilter === "BEATS"
                   ? "8 SHOWCASE INSTRUMENTALS // PRODUCED AT GR8NIK STUDIOS"
                   : selectedFilter === "MUSIC VIDEOS"
                   ? "OFFICIAL VISUAL PRODUCTIONS & MUSIC VIDEOS"
-                  : "LIVE MUSIC"}
+                  : dict.vault.subtitle}
               </p>
             </div>
 
@@ -246,19 +248,28 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
 
           {/* Filter Pills */}
           <div className="flex flex-wrap gap-3 font-space text-xs tracking-widest">
-            {filters.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => handleFilterChange(filter)}
-                className={`px-4 py-2 border transition-all uppercase cursor-pointer ${
-                  selectedFilter === filter
-                    ? "bg-primary border-primary text-white shadow-[0_0_12px_rgba(214,0,0,0.3)]"
-                    : "border-secondary/60 text-muted hover:border-primary hover:text-white bg-[#0a0a0a]"
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
+            {filters.map((filter) => {
+              const label =
+                filter === "ALL SONGS"
+                  ? dict.vault.allSongs
+                  : filter === "BEATS"
+                  ? dict.vault.beats
+                  : dict.vault.musicVideos;
+
+              return (
+                <button
+                  key={filter}
+                  onClick={() => handleFilterChange(filter)}
+                  className={`px-4 py-2 border transition-all uppercase cursor-pointer ${
+                    selectedFilter === filter
+                      ? "bg-primary border-primary text-white shadow-[0_0_12px_rgba(214,0,0,0.3)]"
+                      : "border-secondary/60 text-muted hover:border-primary hover:text-white bg-[#0a0a0a]"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>

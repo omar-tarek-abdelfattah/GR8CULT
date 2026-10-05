@@ -6,58 +6,60 @@ import type { Swiper as SwiperType } from 'swiper';
 import { Autoplay, Pagination, EffectCoverflow } from 'swiper/modules';
 import { Mic, SlidersHorizontal, Disc3, UserStar, Tv, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-const services = [
-  {
-    id: 1,
-    title: "VOCAL RECORDING",
-    description: "Capture your voice with pristine clarity using our world-class vocal chain. Perfect for artists who demand the highest fidelity.",
-    icon: Mic,
-    tag: "VOCALS"
-  },
-  {
-    id: 2,
-    title: "MIXING & MASTERING",
-    description: "Industry-standard processing that makes your tracks translate perfectly from the studio to the stadium.",
-    icon: SlidersHorizontal,
-    tag: "ENGINEERING"
-  },
-  {
-    id: 3,
-    title: "BEAT PRODUCTION",
-    description: "Custom instrumentals tailored to your exact sonic vision. Collaborate with our in-house producers.",
-    icon: Disc3,
-    tag: "PRODUCTION"
-  },
-  {
-    id: 4,
-    title: "COMMERCIAL MUSIC",
-    description: "Music for ads, brands, and campaigns. Every note with purpose, every beat with impact.",
-    icon: Tv,
-    tag: "BRANDED"
-  },
-  {
-    id: 5,
-    title: "ARTIST MANAGEMENT",
-    description: "From the studio to the stage, we handle every step. Building careers with strategy, vision, and real results.",
-    icon: UserStar,
-    tag: "MANAGEMENT"
-  },
-  {
-    id: 6,
-    title: "Music videos",
-    description: "Visualizing your music by equipping the visuals with the exact energy, vibe and direction you require",
-    icon: UserStar,
-    tag: "MUSIC VIDEOS"
-  }
-];
-
 export default function ServicesShowcase() {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const { dict, isRTL } = useLanguage();
+
+  const services = [
+    {
+      id: 1,
+      title: dict.services.items.vocal.title,
+      description: dict.services.items.vocal.desc,
+      icon: Mic,
+      tag: dict.services.items.vocal.tag
+    },
+    {
+      id: 2,
+      title: dict.services.items.mixMaster.title,
+      description: dict.services.items.mixMaster.desc,
+      icon: SlidersHorizontal,
+      tag: dict.services.items.mixMaster.tag
+    },
+    {
+      id: 3,
+      title: dict.services.items.beatProd.title,
+      description: dict.services.items.beatProd.desc,
+      icon: Disc3,
+      tag: dict.services.items.beatProd.tag
+    },
+    {
+      id: 4,
+      title: dict.services.items.commercial.title,
+      description: dict.services.items.commercial.desc,
+      icon: Tv,
+      tag: dict.services.items.commercial.tag
+    },
+    {
+      id: 5,
+      title: dict.services.items.management.title,
+      description: dict.services.items.management.desc,
+      icon: UserStar,
+      tag: dict.services.items.management.tag
+    },
+    {
+      id: 6,
+      title: dict.services.items.musicVideos.title,
+      description: dict.services.items.musicVideos.desc,
+      icon: UserStar,
+      tag: dict.services.items.musicVideos.tag
+    }
+  ];
 
   return (
     <section className="w-full py-24 border-b border-secondary bg-background relative overflow-hidden">
@@ -65,18 +67,18 @@ export default function ServicesShowcase() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary/5 rounded-[100%] blur-[120px] pointer-events-none"></div>
 
       <div className="container mx-auto px-4 md:px-12 relative z-10">
-        <div className="mb-16 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="mb-16 text-center md:text-start flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <h2 className="font-bebas text-5xl md:text-7xl tracking-tight uppercase text-white leading-none">
-              OUR <span className="text-primary">SERVICES</span>
+              {dict.services.title1} <span className="text-primary">{dict.services.title2}</span>
             </h2>
-            <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em] mt-4">
-              [ IT'S NOT JUST AUDIO , IT'S A FULL PACKAGE ]
+            <p className="font-space text-xs md:text-sm text-muted uppercase tracking-[0.2em] mt-6">
+              {dict.services.tagline}
             </p>
           </div>
           <div className="hidden md:block">
             <Link href="/pricing" className="border border-secondary text-muted px-6 py-2 font-space text-[10px] uppercase tracking-widest hover:border-primary hover:text-white transition-colors bg-[#050505]">
-              VIEW RATES
+              {dict.services.viewRates}
             </Link>
           </div>
         </div>
@@ -86,7 +88,7 @@ export default function ServicesShowcase() {
           {/* Left Arrow Button */}
           <button
             type="button"
-            onClick={() => swiperInstance?.slidePrev()}
+            onClick={() => isRTL ? swiperInstance?.slideNext() : swiperInstance?.slidePrev()}
             aria-label="Previous Service"
             className="absolute -left-2 sm:left-0 md:-left-8 top-[210px] -translate-y-1/2 z-30 p-2 text-white/70 hover:text-primary transition-all duration-200 cursor-pointer group"
           >
@@ -96,7 +98,7 @@ export default function ServicesShowcase() {
           {/* Right Arrow Button */}
           <button
             type="button"
-            onClick={() => swiperInstance?.slideNext()}
+            onClick={() => isRTL ? swiperInstance?.slidePrev() : swiperInstance?.slideNext()}
             aria-label="Next Service"
             className="absolute -right-2 sm:right-0 md:-right-8 top-[210px] -translate-y-1/2 z-30 p-2 text-white/70 hover:text-primary transition-all duration-200 cursor-pointer group"
           >
@@ -104,6 +106,8 @@ export default function ServicesShowcase() {
           </button>
 
           <Swiper
+            key={isRTL ? 'swiper-rtl' : 'swiper-ltr'}
+            dir={isRTL ? 'rtl' : 'ltr'}
             onSwiper={setSwiperInstance}
             loop={false}
             effect={'coverflow'}
@@ -164,7 +168,7 @@ export default function ServicesShowcase() {
 
                       <div className={`relative z-10 mt-8 pt-6 border-t border-secondary/30 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
                         <Link href="/pricing" className="font-space text-xs text-primary uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 w-max">
-                          BOOK NOW <span className="transition-transform group-hover:translate-x-1">-&gt;</span>
+                          {dict.services.bookNow} <span className="transition-transform group-hover:translate-x-1">-&gt;</span>
                         </Link>
                       </div>
                     </div>
@@ -177,8 +181,8 @@ export default function ServicesShowcase() {
 
         {/* Mobile View Rates Button */}
         <div className="mt-8 flex justify-center md:hidden">
-          <Link href="/#booking" className="border border-secondary text-muted px-8 py-3 font-space text-xs uppercase tracking-widest hover:border-primary hover:text-white transition-colors bg-[#050505]">
-            VIEW RATES
+          <Link href="/pricing" className="border border-secondary text-muted px-8 py-3 font-space text-xs uppercase tracking-widest hover:border-primary hover:text-white transition-colors bg-[#050505]">
+            {dict.services.viewRates}
           </Link>
         </div>
       </div>

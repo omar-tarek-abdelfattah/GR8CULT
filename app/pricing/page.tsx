@@ -8,12 +8,50 @@ export const metadata: Metadata = {
     "Transparent studio packages at GR8NIK STUDIOS in Mokattam, Cairo: 1. Recording Only (500 EGP/hr), 2. Rec + Mix + Master (2,000 EGP was 4,000 EGP), 3. Beat + Rec + Mix + Master (3,000 EGP was 6,000 EGP), plus custom and online bookings via WhatsApp.",
   alternates: {
     canonical: "/pricing",
+    languages: {
+      "en": "/pricing",
+      "ar-EG": "/pricing?lang=ar",
+      "ar": "/pricing?lang=ar",
+      "x-default": "/pricing",
+    },
   },
+  keywords: [
+    "Studio Rates Cairo",
+    "Recording Studio Prices Egypt",
+    "Hourly Studio Rate Cairo",
+    "Mix and Master Pricing Egypt",
+    "Vocal Recording Package Cairo",
+    "Book Studio Session Cairo",
+    "Mokattam Music Studio Booking",
+    "GR8NIK STUDIOS Pricing",
+    "GR8NIK Packages",
+    "اسعار استوديو التسجيل في مصر",
+    "أسعار استوديو تسجيل في القاهرة",
+    "سعر ساعة استوديو تسجيل",
+    "سعر حجز استوديو تسجيل في مصر",
+    "اسعار الميكس والماستر في مصر",
+    "تكلفة تسجيل اغنية في استوديو",
+    "تكلفة تسجيل أغنية في مصر",
+    "حجز استوديو تسجيل في المقطم",
+    "باقات استوديو تسجيل",
+    "عروض استوديوهات التسجيل في القاهرة",
+    "حجز استوديو صوت",
+    "سعر تسجيل راب",
+    "حجز موعد استوديو تسجيل",
+    "استوديو تسجيل بالساعة",
+    "ميكساج وماسترنج احترافي اسعار",
+    "شراء بيتات وتوزيع موسيقي",
+    "حجز استوديو اونلاين",
+    "استوديو GR8NIK اسعار",
+    "GR8NIK ستوديوز باقات الحجز"
+  ],
   openGraph: {
     title: "3 Core Studio Packages & Rates | GR8NIK STUDIOS Cairo",
     description:
       "Recording Only (500 EGP/hr), Rec + Mix + Master (2,000 EGP), Beat + Rec + Mix + Master (3,000 EGP). Direct calendar & WhatsApp online booking available.",
     url: `${SITE_URL}/pricing`,
+    locale: "en_US",
+    alternateLocale: ["ar_EG", "ar"],
     images: [
       {
         url: "/logo-nobg.png",
@@ -36,10 +74,17 @@ const pricingJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "Music Recording, Mixing, Mastering & Production",
+  inLanguage: ["en", "ar"],
+  availableChannel: {
+    "@type": "ServiceChannel",
+    serviceUrl: `${SITE_URL}/pricing?lang=ar`,
+    inLanguage: "ar-EG",
+  },
   provider: {
     "@type": "MusicRecordingStudio",
     name: "GR8NIK STUDIOS",
     url: SITE_URL,
+    knowsLanguage: ["en", "ar"],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Mokattam",
