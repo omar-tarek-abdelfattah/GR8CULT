@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import './HardwareShowcase.style.css';
@@ -18,23 +19,31 @@ export default function HardwareShowcase() {
       <div className="container mx-auto px-4 md:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
 
-          {/* Left: Image Display */}
-          <div className="w-full lg:w-1/2 relative group">
-            <div className="hardware-image-container">
+          {/* Left: Image Display (Matching AboutTabs Microphone with Aura & Hover) */}
+          <div className="w-full lg:w-1/2 flex justify-center items-center">
+            <div className="mic-aura-container relative group w-full max-w-md cursor-pointer">
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  src="/MIC.png"
+                  alt="Studio Vocal Recording Microphone at GR8NIK STUDIOS"
+                  className="w-full h-auto object-contain"
+                  priority
+                  width={600}
+                  height={600}
+                />
+                <Image
+                  src="/mic-w-bg.jpeg"
+                  alt="Professional studio microphone in acoustic environment at GR8NIK STUDIOS"
+                  className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  width={600}
+                  height={600}
+                  priority
+                />
 
-              {/* Fallback pattern */}
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#d60000_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-
-              {/* Background image handler */}
-              <div
-                className="hardware-image-bg"
-                role="img"
-                aria-label="GR8NIK STUDIOS professional studio recording hardware and microphone vocal chain"
-              ></div>
-
-              <div className="absolute bottom-4 left-4 z-20 font-space text-[10px] text-white tracking-widest flex flex-col gap-1 bg-black/70 p-3 border border-secondary/50 backdrop-blur-sm">
-                <span>[ {dict.hardware.status} ]</span>
-                <span>[ {dict.hardware.arsenal} ]</span>
+                <div className="absolute bottom-4 left-4 rtl:left-auto rtl:right-4 z-20 font-space text-[10px] text-white tracking-widest flex flex-col gap-1 bg-black/75 p-3 border border-secondary/50 backdrop-blur-sm pointer-events-none">
+                  <span>[ {dict.hardware.status} ]</span>
+                  <span>[ {dict.hardware.arsenal} ]</span>
+                </div>
               </div>
             </div>
           </div>

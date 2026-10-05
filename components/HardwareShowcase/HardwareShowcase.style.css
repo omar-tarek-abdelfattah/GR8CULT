@@ -1,88 +1,84 @@
-.hardware-image-container {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    background-color: #050505;
-    border: 2px solid #ff3333;
+/* Glowing aura and animated border for the microphone image in HardwareShowcase */
+
+.mic-aura-container {
     position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: neonPulse 8s infinite;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
 }
 
-@media (min-width: 768px) {
-    .hardware-image-container {
-        aspect-ratio: 1 / 1;
-    }
+.mic-aura-container:hover {
+    transform: translateY(-2px);
 }
 
-.hardware-image-bg {
+/* Pulsing ambient aura behind the picture */
+.mic-aura-container::before {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    background: radial-gradient(circle at center, rgba(214, 0, 0, 0.75) 0%, rgba(160, 0, 0, 0.4) 45%, transparent 72%);
+    border-radius: 4px;
+    filter: blur(20px);
+    opacity: 0.8;
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform: translateZ(0) scale(0.98);
+    transition: opacity 0.6s ease-in-out;
+    animation: micAuraBreathe 4s ease-in-out infinite;
+}
+
+/* Glowing breathing border around the picture */
+.mic-aura-container::after {
+    content: '';
     position: absolute;
     inset: 0;
-    z-index: 10;
-    background-image: url('/test-AI-image.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.9;
-    transition: opacity 0.5s;
-    animation: micZoom 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    border: 1px solid rgba(214, 0, 0, 0.5);
+    box-shadow:
+        0 0 10px rgba(214, 0, 0, 0.4),
+        0 0 20px rgba(214, 0, 0, 0.2),
+        inset 0 0 8px rgba(214, 0, 0, 0.15);
+    opacity: 0;
+    z-index: 20;
+    pointer-events: none;
+    will-change: opacity, border-color, box-shadow;
+    transition: opacity 0.6s ease-in-out;
 }
 
-.hardware-image-container:hover .hardware-image-bg {
+.mic-aura-container:hover::after {
     opacity: 1;
+    animation: micBorderBreathe 4s ease-in-out infinite;
 }
 
-@keyframes micZoom {
-
+/* Continuous sinusoidal breath for background aura */
+@keyframes micAuraBreathe {
     0%,
-    15% {
-        transform: scale(2.8) translateX(20%) translateY(10%);
-    }
-
-    45%,
-    55% {
-        transform: scale(1) translateX(0);
-    }
-
-    85%,
     100% {
-        transform: scale(2.8) translateX(20%) translateY(10%);
+        opacity: 0.7;
+        transform: translateZ(0) scale(0.97);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateZ(0) scale(1.04);
     }
 }
 
-@keyframes neonPulse {
-
+/* Fluid sinusoidal breathing for glowing border */
+@keyframes micBorderBreathe {
     0%,
-    15% {
-        box-shadow: 0 0 20px #d60000, inset 0 0 20px #d60000;
-        border-color: #ff3333;
-    }
-
-    17% {
-        box-shadow: 0 0 50px #ff3333, inset 0 0 50px #ff3333;
-        border-color: #ff6666;
-    }
-
-    20% {
-        box-shadow: 0 0 15px #d60000, inset 0 0 15px #d60000;
-        border-color: #ff3333;
-    }
-
-    45%,
-    55% {
-        box-shadow: 0 0 5px #800000, inset 0 0 5px #800000;
-        border-color: #660000;
-    }
-
-    82% {
-        box-shadow: 0 0 50px #ff3333, inset 0 0 50px #ff3333;
-        border-color: #ff6666;
-    }
-
-    85%,
     100% {
-        box-shadow: 0 0 20px #d60000, inset 0 0 20px #d60000;
-        border-color: #ff3333;
+        border-color: rgba(214, 0, 0, 0.45);
+        box-shadow:
+            0 0 10px rgba(214, 0, 0, 0.4),
+            0 0 20px rgba(214, 0, 0, 0.2),
+            inset 0 0 8px rgba(214, 0, 0, 0.15);
+    }
+
+    50% {
+        border-color: rgba(235, 15, 15, 0.85);
+        box-shadow:
+            0 0 16px rgba(235, 15, 15, 0.7),
+            0 0 32px rgba(214, 0, 0, 0.4),
+            inset 0 0 14px rgba(214, 0, 0, 0.3);
     }
 }
