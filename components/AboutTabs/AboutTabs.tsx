@@ -23,7 +23,6 @@ export default function AboutTabs() {
     dict.about.tabContact
   ];
 
-  /*
   useEffect(() => {
     if (activeTab !== 3) {
       if (contactMap.current) {
@@ -36,21 +35,25 @@ export default function AboutTabs() {
     const timer = setTimeout(() => {
       if (!contactMapContainer.current || contactMap.current) return;
 
-      mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+      try {
+        mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
 
-      const mapInstance = new mapboxgl.Map({
-        container: contactMapContainer.current,
-        style: process.env.NEXT_PUBLIC_MAPBOX_STYLE || '',
-        center: [31.318819202238007, 30.011750165945585],
-        zoom: 14.2,
-        interactive: false
-      });
+        const mapInstance = new mapboxgl.Map({
+          container: contactMapContainer.current,
+          style: process.env.NEXT_PUBLIC_MAPBOX_STYLE || 'mapbox://styles/mapbox/dark-v11',
+          center: [31.3039, 30.0150], // Center of El Mokattam, Cairo
+          zoom: 12.8, // Encompasses all of Mokattam district
+          interactive: false
+        });
 
-      new mapboxgl.Marker({ color: "#d60000" })
-        .setLngLat([31.318819202238007, 30.011750165945585])
-        .addTo(mapInstance);
+        new mapboxgl.Marker({ color: "#d60000" })
+          .setLngLat([31.3039, 30.0150])
+          .addTo(mapInstance);
 
-      contactMap.current = mapInstance;
+        contactMap.current = mapInstance;
+      } catch (err) {
+        console.warn("Mapbox initialization error:", err);
+      }
     }, 100);
 
     return () => {
@@ -61,7 +64,6 @@ export default function AboutTabs() {
       }
     };
   }, [activeTab]);
-  */
 
   return (
     <div className="w-full">
@@ -332,17 +334,19 @@ export default function AboutTabs() {
               </div>
 
               {/* Right Column: Studio Map */}
-              {/* <div className="w-full lg:w-1/2 flex flex-col">
-                <h2 className="font-bebas text-4xl text-white mb-2 tracking-wider">STUDIO LOCATION // CAIRO</h2>
-                <p className="font-space text-sm text-muted uppercase tracking-[0.2em] mb-6">
-                  [ CLICK MAP TO NAVIGATE VIA GOOGLE MAPS ]
+              <div className="w-full lg:w-1/2 flex flex-col">
+                <h2 className="font-bebas text-4xl text-white mb-2 tracking-wider">
+                  {dict.about.locationTitle}
+                </h2>
+                <p className="font-space text-[12px] text-muted uppercase tracking-[0.2em] mb-6">
+                  {dict.about.locationSub}
                 </p>
                 <a
-                  href="https://maps.app.goo.gl/8GVuSJFKQ2Np81CB9"
+                  href="https://maps.google.com/?q=El+Mokattam,+Cairo"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative w-full flex-grow min-h-[320px] border border-secondary/50 grayscale hover:grayscale-0 transition-all duration-700 bg-[#050505] p-2 block group overflow-hidden cursor-pointer"
-                  title="Open GR8NIK on Google Maps"
+                  title="Open Mokattam, Cairo on Google Maps"
                 >
                   <div
                     ref={contactMapContainer}
@@ -351,19 +355,19 @@ export default function AboutTabs() {
                   <div className="absolute inset-0 z-10 flex flex-col justify-between p-4 bg-gradient-to-t from-black/85 via-transparent to-black/30 pointer-events-none group-hover:from-black/60 transition-all">
                     <div className="flex items-center justify-between">
                       <span className="font-space text-[10px] text-muted tracking-widest uppercase bg-black/80 px-2.5 py-1 border border-secondary/50 backdrop-blur-sm">
-                        CAIRO_DISTRICT_COORD
+                        MOKATTAM_DISTRICT_CAIRO
                       </span>
                       <span className="font-space text-[10px] text-primary tracking-widest uppercase bg-black/80 px-2.5 py-1 border border-secondary/50 backdrop-blur-sm">
-                        31.3188° E, 30.0117° N
+                        31.3039° E, 30.0150° N
                       </span>
                     </div>
                     <div className="flex items-center gap-2 font-space text-xs text-white tracking-widest bg-black/85 px-4 py-2 border border-secondary/60 group-hover:border-primary group-hover:text-primary transition-all w-fit backdrop-blur-sm">
                       <MapPin className="w-4 h-4 text-primary" />
-                      <span>OPEN IN GOOGLE MAPS &gt;</span>
+                      <span>{dict.about.openMap} &gt;</span>
                     </div>
                   </div>
                 </a>
-              </div> */}
+              </div>
             </div>
           </div>
         )}

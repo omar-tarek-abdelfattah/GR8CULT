@@ -1,13 +1,50 @@
 'use client';
 
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { MapPin, Disc } from "lucide-react";
 import { FaTwitch, FaInstagram, FaWhatsapp, FaTiktok, FaPaypal } from "react-icons/fa";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 import { useLanguage } from "@/context/LanguageContext";
 import ScrollReveal from "@/components/Scroll/ScrollReveal";
 
 export default function Footer() {
   const { dict, locale } = useLanguage();
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<mapboxgl.Map | null>(null);
+
+  useEffect(() => {
+    if (!mapContainer.current || mapInstanceRef.current) return;
+
+    try {
+      mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+
+      const map = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: process.env.NEXT_PUBLIC_MAPBOX_STYLE || 'mapbox://styles/mapbox/dark-v11',
+        center: [31.3039, 30.0150], // Center of El Mokattam, Cairo
+        zoom: 12.6, // Encompasses all of Mokattam district
+        interactive: false,
+      });
+
+      new mapboxgl.Marker({ color: "#d60000" })
+        .setLngLat([31.3039, 30.0150])
+        .addTo(map);
+
+      mapInstanceRef.current = map;
+    } catch (err) {
+      console.warn("Footer Mapbox initialization error:", err);
+    }
+
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, []);
+
   const whatsappUrl = `https://wa.me/+201011444140?text=${encodeURIComponent(
     locale === 'ar'
       ? "أهلاً GR8NIK STUDIOS، كنت حابب أسأل عن حجز سيشن في الاستوديو والبيتات والخدمات المتاحة."
@@ -52,6 +89,35 @@ export default function Footer() {
         <div className="inline-flex items-center justify-center gap-2.5 px-4 py-2 border border-secondary/40 bg-[#080808]/90 text-xs font-space tracking-wider text-muted max-w-md">
           <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
           <span>{dict.footer.locationNotice}</span>
+        </div>
+
+        {/* Studio Location Map Box */}
+        <div className="w-full max-w-xl border border-secondary/50 bg-[#080808] p-1.5 relative overflow-hidden group shadow-[0_0_24px_rgba(0,0,0,0.85)]">
+          <a
+            href="https://maps.google.com/?q=El+Mokattam,+Cairo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative block w-full h-[180px] sm:h-[220px] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer"
+            title="Open Mokattam, Cairo on Google Maps"
+          >
+            <div ref={mapContainer} className="w-full h-full min-h-[180px]" />
+            <div className="absolute inset-0 z-10 flex flex-col justify-between p-3.5 bg-gradient-to-t from-black/85 via-transparent to-black/30 pointer-events-none group-hover:from-black/60 transition-all">
+              <div className="flex items-center justify-between">
+                <span className="font-space text-[10px] text-muted tracking-widest uppercase bg-black/85 px-2 py-0.5 border border-secondary/50 backdrop-blur-sm">
+                  MOKATTAM_DISTRICT_CAIRO
+                </span>
+                <span className="font-space text-[10px] text-primary tracking-widest uppercase bg-black/85 px-2 py-0.5 border border-secondary/50 backdrop-blur-sm">
+                  31.3039° E, 30.0150° N
+                </span>
+              </div>
+              <div className="flex items-center gap-2 font-space text-xs text-white tracking-widest bg-black/85 px-3 py-1.5 border border-secondary/60 group-hover:border-primary group-hover:text-primary transition-all w-fit backdrop-blur-sm">
+                <MapPin className="w-3.5 h-3.5 text-primary" />
+                <span>
+                  {locale === 'ar' ? 'استكشف المقطم ع الخريطة >' : 'EXPLORE MOKATTAM ON MAP >'}
+                </span>
+              </div>
+            </div>
+          </a>
         </div>
 
         {/* Slick Navigation Bar */}

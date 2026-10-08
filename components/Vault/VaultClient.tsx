@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Disc, ExternalLink } from "lucide-react";
 import { FaSpotify, FaYoutube } from "react-icons/fa";
 import { SpotifyVaultTrack } from "@/lib/spotify";
@@ -10,6 +10,7 @@ import BeatsTab from "./BeatsTab";
 import MusicVideosTab from "./MusicVideosTab";
 import { useLanguage } from "@/context/LanguageContext";
 import ScrollReveal from "@/components/Scroll/ScrollReveal";
+import VaultLoadingOverlay from "./VaultLoadingOverlay";
 
 export { STATIC_MUSIC_VIDEOS, SHOWCASE_BEATS };
 export type { MusicVideo, ShowcaseBeat } from "./types";
@@ -30,8 +31,13 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
   const [selectedFilter, setSelectedFilter] = useState<string>("ALL SONGS");
   const [isPlayingPreview, setIsPlayingPreview] = useState<boolean>(false);
   const [showEmbedPlayer, setShowEmbedPlayer] = useState<boolean>(false);
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    setIsDataLoaded(true);
+  }, []);
 
   const scrollToPlayer = () => {
     if (typeof window === "undefined") return;
@@ -146,7 +152,16 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
   const filters = ["ALL SONGS", "MUSIC VIDEOS", "BEATS"];
 
   return (
-    <div className="w-full bg-background min-h-screen text-foreground pb-24">
+    <>
+      {/* SEO-Preserving Visual Loading Overlay */}
+      <VaultLoadingOverlay
+        isLoading={!isDataLoaded}
+        title={dict.vault.loadingTitle}
+        subtitle={dict.vault.loadingSubtitle}
+        trackCount={tracks.length}
+      />
+
+      <div className="w-full bg-background min-h-screen text-foreground pb-24">
       {/* Universal audio element for tracks and showcase beats */}
       <audio
         ref={audioRef}
@@ -311,5 +326,6 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
         </div>
       </ScrollReveal>
     </div>
-  );
+  </>
+);
 }
