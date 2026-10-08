@@ -176,7 +176,10 @@ export default function PricingCatalog() {
         </div>
 
         {/* 2x2 Grid of Streamlined Minimal Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 items-stretch">
+        <div
+          key={`${activeCategory}-${currency}`}
+          className="tab-panel-enter grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 items-stretch"
+        >
           {filteredServices.map((item) => (
             <ServiceCard
               key={item.id}
@@ -249,11 +252,11 @@ export default function PricingCatalog() {
             aria-modal="true"
             aria-label="Thank you Jay"
             onClick={() => setShowJayOverlay(false)}
-            className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 cursor-pointer"
+            className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md modal-backdrop-enter cursor-pointer"
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-md w-full bg-[#0a0a0a] border-2 border-primary p-7 sm:p-9 text-center shadow-[0_0_80px_rgba(214,0,0,0.5)] cursor-default overflow-hidden animate-in zoom-in-95 duration-200"
+              className="relative max-w-md w-full bg-[#0a0a0a] border-2 border-primary p-7 sm:p-9 text-center shadow-[0_0_80px_rgba(214,0,0,0.5)] cursor-default overflow-hidden modal-content-enter"
             >
               {/* Top Accent Strip & Radial Ambient Glow */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />

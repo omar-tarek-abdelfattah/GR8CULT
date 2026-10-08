@@ -9,6 +9,7 @@ import AllSongsTab from "./AllSongsTab";
 import BeatsTab from "./BeatsTab";
 import MusicVideosTab from "./MusicVideosTab";
 import { useLanguage } from "@/context/LanguageContext";
+import ScrollReveal from "@/components/Scroll/ScrollReveal";
 
 export { STATIC_MUSIC_VIDEOS, SHOWCASE_BEATS };
 export type { MusicVideo, ShowcaseBeat } from "./types";
@@ -274,36 +275,41 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
         </div>
       </section>
 
-      {/* VIEW 1: ALL SONGS (Spotify Releases) */}
-      {selectedFilter === "ALL SONGS" && (
-        <AllSongsTab
-          tracks={tracks}
-          activeTrack={activeTrack}
-          onSelectTrack={handleSelectTrack}
-          onPlayPreview={handlePlayPreview}
-          isPlayingPreview={isPlayingPreview}
-          showEmbedPlayer={showEmbedPlayer}
-          onToggleEmbedPlayer={() => setShowEmbedPlayer(!showEmbedPlayer)}
-        />
-      )}
+      {/* Main Content Area */}
+      <ScrollReveal className="w-full">
+        <div key={selectedFilter} className="tab-panel-enter w-full">
+          {/* VIEW 1: ALL SONGS (Spotify Releases) */}
+          {selectedFilter === "ALL SONGS" && (
+            <AllSongsTab
+              tracks={tracks}
+              activeTrack={activeTrack}
+              onSelectTrack={handleSelectTrack}
+              onPlayPreview={handlePlayPreview}
+              isPlayingPreview={isPlayingPreview}
+              showEmbedPlayer={showEmbedPlayer}
+              onToggleEmbedPlayer={() => setShowEmbedPlayer(!showEmbedPlayer)}
+            />
+          )}
 
-      {/* VIEW 2: BEATS (8 Showcase Beats & YouTube Channel Link) */}
-      {selectedFilter === "BEATS" && (
-        <BeatsTab
-          beats={SHOWCASE_BEATS}
-          activeBeat={activeBeat}
-          onSelectBeat={handlePlayBeat}
-          isPlaying={isPlayingPreview}
-          currentTime={audioCurrentTime}
-          duration={audioDuration}
-          onSeek={handleBeatSeek}
-        />
-      )}
+          {/* VIEW 2: BEATS (8 Showcase Beats & YouTube Channel Link) */}
+          {selectedFilter === "BEATS" && (
+            <BeatsTab
+              beats={SHOWCASE_BEATS}
+              activeBeat={activeBeat}
+              onSelectBeat={handlePlayBeat}
+              isPlaying={isPlayingPreview}
+              currentTime={audioCurrentTime}
+              duration={audioDuration}
+              onSeek={handleBeatSeek}
+            />
+          )}
 
-      {/* VIEW 3: MUSIC VIDEOS SECTION (YouTube Grid & Modal) */}
-      {selectedFilter === "MUSIC VIDEOS" && (
-        <MusicVideosTab videos={STATIC_MUSIC_VIDEOS} />
-      )}
+          {/* VIEW 3: MUSIC VIDEOS SECTION (YouTube Grid & Modal) */}
+          {selectedFilter === "MUSIC VIDEOS" && (
+            <MusicVideosTab videos={STATIC_MUSIC_VIDEOS} />
+          )}
+        </div>
+      </ScrollReveal>
     </div>
   );
 }

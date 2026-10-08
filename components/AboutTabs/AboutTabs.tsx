@@ -72,9 +72,9 @@ export default function AboutTabs() {
             key={tab}
             onClick={() => setActiveTab(index)}
             className={`
-              font-space text-[11px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase py-4 px-2 sm:px-6 md:px-8 text-center flex items-center justify-center transition-colors
+              font-space text-[11px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase py-4 px-2 sm:px-6 md:px-8 text-center flex items-center justify-center transition-all duration-300 cursor-pointer
               ${activeTab === index
-                ? 'border-b-2 border-primary text-white bg-secondary/10'
+                ? 'border-b-2 border-primary text-white bg-secondary/15 shadow-[inset_0_-2px_12px_rgba(214,0,0,0.25)] font-bold'
                 : 'text-muted hover:text-white hover:bg-secondary/5'
               }
             `}
@@ -86,9 +86,10 @@ export default function AboutTabs() {
 
       {/* Tabs Content */}
       <div className="w-full min-h-[400px]">
-        {/* Tab 1: THE PERSON BEHIND GR8NIK */}
-        {activeTab === 0 && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div key={activeTab} className="tab-panel-enter w-full">
+          {/* Tab 1: THE PERSON BEHIND GR8NIK */}
+          {activeTab === 0 && (
+            <div>
             <div className="flex flex-col md:flex-row gap-8 items-start">
               <div className="w-full md:w-1/3 relative group overflow-hidden">
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#d60000_1px,transparent_1px)] bg-[size:16px_16px] z-10 pointer-events-none"></div>
@@ -161,7 +162,7 @@ export default function AboutTabs() {
 
         {/* Tab 2: Our Future */}
         {activeTab === 1 && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div>
             <h2 className="font-bebas text-4xl text-white mb-6 tracking-wider">{dict.about.roadmapTitle}</h2>
             <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
               <div className="w-full lg:w-2/3">
@@ -223,14 +224,14 @@ export default function AboutTabs() {
 
         {/* Tab 3: Join the Cult */}
         {activeTab === 2 && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div>
             <SpotifyPlaylist isTab={true} showSocials={true} />
           </div>
         )}
 
         {/* Tab 4: Contact Us */}
         {activeTab === 3 && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div>
             <div className="flex flex-col lg:flex-row gap-8 items-stretch">
               {/* Left Column: Direct Contact Links */}
               <div className="w-full lg:w-1/2 flex flex-col justify-between">
@@ -366,6 +367,7 @@ export default function AboutTabs() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MapPin, Disc } from "lucide-react";
 import { FaTwitch, FaInstagram, FaWhatsapp, FaTiktok, FaPaypal } from "react-icons/fa";
 import { useLanguage } from "@/context/LanguageContext";
+import ScrollReveal from "@/components/Scroll/ScrollReveal";
 
 export default function Footer() {
   const { dict, locale } = useLanguage();
@@ -20,7 +21,7 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[220px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
 
-      <div className="relative z-10 container mx-auto px-4 py-16 flex flex-col items-center text-center gap-7">
+      <ScrollReveal className="relative z-10 container mx-auto px-4 py-16 flex flex-col items-center text-center gap-7">
 
         {/* Brand Emblem & Logo */}
         <div className="flex flex-col items-center gap-3">
@@ -162,9 +163,20 @@ export default function Footer() {
           <span className="font-space text-[11px] text-muted tracking-widest">
             GR8NIK STUDIOS © {new Date().getFullYear()} // {dict.footer.rights}
           </span>
+          <span className="font-space text-[11px] text-muted tracking-widest">
+            {dict.footer.poweredBy}{" "}
+            <a
+              href="https://personal-portfolio-delta-inky-26.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-white underline underline-offset-4 decoration-primary/50 hover:decoration-white transition-colors duration-200 font-bold"
+            >
+              O.T
+            </a>
+          </span>
         </div>
 
-      </div>
+      </ScrollReveal>
     </footer>
   );
 }

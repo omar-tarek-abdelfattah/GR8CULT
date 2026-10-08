@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AboutTabs from "@/components/AboutTabs/AboutTabs";
 import AboutHeader from "@/components/AboutTabs/AboutHeader";
+import ScrollReveal from "@/components/Scroll/ScrollReveal";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -110,11 +111,11 @@ export default function AboutPage() {
       </section>
 
       {/* Tabs Section */}
-      <section className="py-16">
+      <ScrollReveal as="section" className="py-16">
         <div className="container mx-auto px-4">
           <AboutTabs />
         </div>
-      </section>
+      </ScrollReveal>
     </div>
     </>
   );

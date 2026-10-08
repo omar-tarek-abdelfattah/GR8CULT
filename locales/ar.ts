@@ -31,6 +31,7 @@ export const ar: TranslationType = {
     accepted: "طرق الدفع:",
     tagline: "المكان اللي المزيكا بتتعمل فيه.. والـ Culture اللي حواليها.",
     rights: "كل الحقوق محفوظة",
+    poweredBy: "تطوير بواسطة",
   },
   intro: {
     welcomeTo: "منور في",

@@ -79,11 +79,11 @@ export default function ServiceDetailsModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="service-modal-title"
-      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto modal-backdrop-enter"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl bg-[#0b0b0b] border border-primary/50 shadow-[0_0_60px_rgba(214,0,0,0.35)] text-white flex flex-col max-h-[92vh] overflow-hidden my-auto"
+        className="relative w-full max-w-2xl bg-[#0b0b0b] border border-primary/50 shadow-[0_0_60px_rgba(214,0,0,0.35)] text-white flex flex-col max-h-[92vh] overflow-hidden my-auto modal-content-enter"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Accent Strip */}

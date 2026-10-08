@@ -29,6 +29,7 @@ export const en = {
     accepted: "ACCEPTED:",
     tagline: "WHERE MUSIC GETS MADE. THE CULTURE AROUND IT.",
     rights: "ALL RIGHTS RESERVED",
+    poweredBy: "POWERED BY",
   },
   intro: {
     welcomeTo: "WELCOME TO",
