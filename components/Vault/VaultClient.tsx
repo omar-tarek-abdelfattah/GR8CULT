@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Disc, ExternalLink } from "lucide-react";
 import { FaSpotify, FaYoutube } from "react-icons/fa";
 import { SpotifyVaultTrack } from "@/lib/spotify";
@@ -9,6 +9,8 @@ import AllSongsTab from "./AllSongsTab";
 import BeatsTab from "./BeatsTab";
 import MusicVideosTab from "./MusicVideosTab";
 import { useLanguage } from "@/context/LanguageContext";
+import ScrollReveal from "@/components/Scroll/ScrollReveal";
+import VaultLoadingOverlay from "./VaultLoadingOverlay";
 
 export { STATIC_MUSIC_VIDEOS, SHOWCASE_BEATS };
 export type { MusicVideo, ShowcaseBeat } from "./types";
@@ -29,8 +31,13 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
   const [selectedFilter, setSelectedFilter] = useState<string>("ALL SONGS");
   const [isPlayingPreview, setIsPlayingPreview] = useState<boolean>(false);
   const [showEmbedPlayer, setShowEmbedPlayer] = useState<boolean>(false);
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    setIsDataLoaded(true);
+  }, []);
 
   const scrollToPlayer = () => {
     if (typeof window === "undefined") return;
@@ -145,7 +152,16 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
   const filters = ["ALL SONGS", "MUSIC VIDEOS", "BEATS"];
 
   return (
-    <div className="w-full bg-background min-h-screen text-foreground pb-24">
+    <>
+      {/* SEO-Preserving Visual Loading Overlay */}
+      <VaultLoadingOverlay
+        isLoading={!isDataLoaded}
+        title={dict.vault.loadingTitle}
+        subtitle={dict.vault.loadingSubtitle}
+        trackCount={tracks.length}
+      />
+
+      <div className="w-full bg-background min-h-screen text-foreground pb-24">
       {/* Universal audio element for tracks and showcase beats */}
       <audio
         ref={audioRef}
@@ -274,36 +290,42 @@ export default function VaultClient({ initialTracks }: VaultClientProps) {
         </div>
       </section>
 
-      {/* VIEW 1: ALL SONGS (Spotify Releases) */}
-      {selectedFilter === "ALL SONGS" && (
-        <AllSongsTab
-          tracks={tracks}
-          activeTrack={activeTrack}
-          onSelectTrack={handleSelectTrack}
-          onPlayPreview={handlePlayPreview}
-          isPlayingPreview={isPlayingPreview}
-          showEmbedPlayer={showEmbedPlayer}
-          onToggleEmbedPlayer={() => setShowEmbedPlayer(!showEmbedPlayer)}
-        />
-      )}
+      {/* Main Content Area */}
+      <ScrollReveal className="w-full">
+        <div key={selectedFilter} className="tab-panel-enter w-full">
+          {/* VIEW 1: ALL SONGS (Spotify Releases) */}
+          {selectedFilter === "ALL SONGS" && (
+            <AllSongsTab
+              tracks={tracks}
+              activeTrack={activeTrack}
+              onSelectTrack={handleSelectTrack}
+              onPlayPreview={handlePlayPreview}
+              isPlayingPreview={isPlayingPreview}
+              showEmbedPlayer={showEmbedPlayer}
+              onToggleEmbedPlayer={() => setShowEmbedPlayer(!showEmbedPlayer)}
+            />
+          )}
 
-      {/* VIEW 2: BEATS (8 Showcase Beats & YouTube Channel Link) */}
-      {selectedFilter === "BEATS" && (
-        <BeatsTab
-          beats={SHOWCASE_BEATS}
-          activeBeat={activeBeat}
-          onSelectBeat={handlePlayBeat}
-          isPlaying={isPlayingPreview}
-          currentTime={audioCurrentTime}
-          duration={audioDuration}
-          onSeek={handleBeatSeek}
-        />
-      )}
+          {/* VIEW 2: BEATS (8 Showcase Beats & YouTube Channel Link) */}
+          {selectedFilter === "BEATS" && (
+            <BeatsTab
+              beats={SHOWCASE_BEATS}
+              activeBeat={activeBeat}
+              onSelectBeat={handlePlayBeat}
+              isPlaying={isPlayingPreview}
+              currentTime={audioCurrentTime}
+              duration={audioDuration}
+              onSeek={handleBeatSeek}
+            />
+          )}
 
-      {/* VIEW 3: MUSIC VIDEOS SECTION (YouTube Grid & Modal) */}
-      {selectedFilter === "MUSIC VIDEOS" && (
-        <MusicVideosTab videos={STATIC_MUSIC_VIDEOS} />
-      )}
+          {/* VIEW 3: MUSIC VIDEOS SECTION (YouTube Grid & Modal) */}
+          {selectedFilter === "MUSIC VIDEOS" && (
+            <MusicVideosTab videos={STATIC_MUSIC_VIDEOS} />
+          )}
+        </div>
+      </ScrollReveal>
     </div>
-  );
+  </>
+);
 }

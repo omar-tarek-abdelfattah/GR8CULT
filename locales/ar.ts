@@ -31,6 +31,7 @@ export const ar: TranslationType = {
     accepted: "طرق الدفع:",
     tagline: "المكان اللي المزيكا بتتعمل فيه.. والـ Culture اللي حواليها.",
     rights: "كل الحقوق محفوظة",
+    poweredBy: "تطوير بواسطة",
   },
   intro: {
     welcomeTo: "منور في",
@@ -192,6 +193,9 @@ export const ar: TranslationType = {
     callDirect: "اتصل علطول",
     officialTiktok: "تيك توك الرسمي",
     openTiktok: "افتح تيك توك",
+    locationTitle: "موقع الاستوديو // المقطم",
+    locationSub: "[ منطقة المقطم، القاهرة // العنوان بالتفصيل بيتبعت بعد الحجز ]",
+    openMap: "افتح في خرائط جوجل",
   },
   vault: {
     title: "الخزنة (THE VAULT)",
@@ -203,6 +207,8 @@ export const ar: TranslationType = {
     watchVideo: "شوف الفيديو",
     bpm: "السرعة (BPM)",
     key: "المقام (KEY)",
+    loadingTitle: "جاري فتح أرشيف الخزنة",
+    loadingSubtitle: "مزامنة تراكات سبوتيفاي والترددات الصوتية",
   },
   calendar: {
     modalTitle: "اختر ميعاد وتوقيت سيشن الاستوديو",

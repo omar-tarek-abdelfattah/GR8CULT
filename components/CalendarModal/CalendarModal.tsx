@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import {
   X,
@@ -295,18 +296,28 @@ export default function CalendarModal({
     }
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Google Calendar Live Time Slots"
-      className="fixed inset-0 z-[110] flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[110] flex items-center justify-center p-2 sm:p-4 bg-black/90 backdrop-blur-md modal-backdrop-enter"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[92vh] bg-[#0c0c0c] border border-primary shadow-[0_0_60px_rgba(214,0,0,0.35)] flex flex-col overflow-hidden"
+        className="relative w-full max-w-4xl max-h-[92vh] bg-[#0c0c0c] border border-primary shadow-[0_0_60px_rgba(214,0,0,0.35)] flex flex-col overflow-hidden modal-content-enter"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Header */}
@@ -778,6 +789,7 @@ export default function CalendarModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

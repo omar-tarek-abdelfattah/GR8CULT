@@ -7,10 +7,10 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 
 const VIDEOS = [
-  {webM:"https://d2flaqome864xs.cloudfront.net/vid1.webm",mp4:"https://d2flaqome864xs.cloudfront.net/vid1.mp4"},
-  {webM:"https://d2flaqome864xs.cloudfront.net/vid2.webm",mp4:"https://d2flaqome864xs.cloudfront.net/vid2.mp4"},
-  {webM:"https://d2flaqome864xs.cloudfront.net/vid3.webm",mp4:"https://d2flaqome864xs.cloudfront.net/vid3.mp4"},
-  {webM:"https://d2flaqome864xs.cloudfront.net/vid4.webm",mp4:"https://d2flaqome864xs.cloudfront.net/vid4.mp4"},
+  { webM: "https://d2flaqome864xs.cloudfront.net/vid2.webm", mp4: "https://d2flaqome864xs.cloudfront.net/vid2.mp4" },
+  { webM: "https://d2flaqome864xs.cloudfront.net/vid3.webm", mp4: "https://d2flaqome864xs.cloudfront.net/vid3.mp4" },
+  { webM: "https://d2flaqome864xs.cloudfront.net/vid1.webm", mp4: "https://d2flaqome864xs.cloudfront.net/vid1.mp4" },
+  { webM: "https://d2flaqome864xs.cloudfront.net/vid4.webm", mp4: "https://d2flaqome864xs.cloudfront.net/vid4.mp4" },
 ];
 
 
@@ -35,27 +35,26 @@ export default function HeroVideoSlider() {
         modules={[Autoplay, Mousewheel]}
         className="h-full w-full"
       >
-        {VIDEOS.map((video: {webM:string,mp4:string}, index: number) => (
+        {VIDEOS.map((video: { webM: string, mp4: string }, index: number) => (
           <SwiperSlide
             key={index}
             className="transition-opacity duration-500 overflow-hidden border border-secondary/50 rounded-sm bg-black"
           >
             {({ isActive }: any) => (
               <div
-                className={`w-full h-full relative ${
-                  isActive ? 'opacity-100' : 'opacity-40 grayscale'
-                } transition-all duration-700`}
+                className={`w-full h-full relative ${isActive ? 'opacity-100' : 'opacity-40 grayscale'
+                  } transition-all duration-700`}
               >
                 <video
-                className="object-cover w-full h-full"
-                preload='auto' 
-                autoPlay 
-                muted 
-                poster='/logo-nobg.png'
-                loop 
-                playsInline 
-                aria-label={`GR8NIK STUDIOS recording session reel clip ${index + 1}`} 
-                title="GR8NIK STUDIOS studio session highlight"
+                  className="object-cover w-full h-full"
+                  preload='auto'
+                  autoPlay
+                  muted
+                  poster='/logo-nobg.png'
+                  loop
+                  playsInline
+                  aria-label={`GR8NIK STUDIOS recording session reel clip ${index + 1}`}
+                  title="GR8NIK STUDIOS studio session highlight"
                 >
                   <source src={video.webM} type="video/webm" />
                   <source src={video.mp4} type="video/mp4" />

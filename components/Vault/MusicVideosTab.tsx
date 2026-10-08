@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Play, ExternalLink, Film, X } from "lucide-react";
 import { FaYoutube } from "react-icons/fa";
 import { MusicVideo, getYouTubeId } from "./types";
@@ -11,6 +12,22 @@ interface MusicVideosTabProps {
 
 export default function MusicVideosTab({ videos }: MusicVideosTabProps) {
   const [selectedVideo, setSelectedVideo] = useState<MusicVideo | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll when modal is open so it stays locked to screen
+  useEffect(() => {
+    if (selectedVideo) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [selectedVideo]);
 
   return (
     <>
@@ -126,84 +143,91 @@ export default function MusicVideosTab({ videos }: MusicVideosTabProps) {
         </div>
       </section>
 
-      {/* Video Modal Player (opens on click) */}
-      {selectedVideo && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in duration-200"
-          onClick={() => setSelectedVideo(null)}
-        >
+      {/* Video Modal Player (opens on click) - Teleported to document.body to lock on viewport screen */}
+      {mounted &&
+        selectedVideo &&
+        createPortal(
           <div
-            className="relative w-full max-w-4xl border border-primary/70 bg-[#0a0a0a] shadow-[0_0_50px_rgba(214,0,0,0.3)] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${selectedVideo.title} video player`}
+            className="fixed inset-0 z-[120] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 modal-backdrop-enter"
+            onClick={() => setSelectedVideo(null)}
           >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between p-4 border-b border-secondary/50 bg-black">
-              <div className="flex items-center gap-2">
-                <FaYoutube className="w-5 h-5 text-[#FF0000]" />
-                <span className="font-bebas text-2xl text-white tracking-wider">
-                  {selectedVideo.title} — {selectedVideo.artist}
-                </span>
-              </div>
-              <button
-                onClick={() => setSelectedVideo(null)}
-                className="text-muted hover:text-white p-1 cursor-pointer transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-
-            {/* Video Iframe or Fallback Container */}
-            <div className="relative w-full aspect-video bg-black">
-              {getYouTubeId(selectedVideo.youtubeUrl) ? (
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(
-                    selectedVideo.youtubeUrl
-                  )}?autoplay=1`}
-                  title={selectedVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full border-0"
-                />
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center">
-                  <Film className="w-16 h-16 text-secondary mb-4 animate-pulse" />
-                  <p className="font-space text-sm text-white tracking-widest uppercase mb-2">
-                    {selectedVideo.title}
-                  </p>
-                  <p className="font-space text-xs text-muted tracking-widest uppercase max-w-md">
-                    PASTE A VALID YOUTUBE VIDEO LINK INTO STATIC_MUSIC_VIDEOS ARRAY IN TYPES.TS
-                  </p>
-                  <a
-                    href={selectedVideo.youtubeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-6 px-6 py-2.5 border border-primary text-primary hover:bg-primary hover:text-white font-space text-xs tracking-widest uppercase transition-all"
-                  >
-                    TEST LINK ON YOUTUBE &gt;
-                  </a>
+            <div
+              className="relative w-full max-w-4xl border border-primary/70 bg-[#0a0a0a] shadow-[0_0_50px_rgba(214,0,0,0.3)] overflow-hidden modal-content-enter"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 border-b border-secondary/50 bg-black">
+                <div className="flex items-center gap-2">
+                  <FaYoutube className="w-5 h-5 text-[#FF0000]" />
+                  <span className="font-bebas text-2xl text-white tracking-wider">
+                    {selectedVideo.title} — {selectedVideo.artist}
+                  </span>
                 </div>
-              )}
-            </div>
+                <button
+                  onClick={() => setSelectedVideo(null)}
+                  className="text-muted hover:text-white p-1 cursor-pointer transition-colors"
+                  aria-label="Close video player"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
 
-            {/* Modal Footer */}
-            <div className="p-4 flex items-center justify-between border-t border-secondary/50 bg-[#050505] text-xs font-space text-muted">
-              <span className="text-secondary tracking-widest uppercase">
-                {selectedVideo.role || "OFFICIAL VIDEO PRODUCTION"}
-              </span>
-              <a
-                href={selectedVideo.youtubeUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[#FF0000] hover:text-white flex items-center gap-1.5 tracking-widest uppercase transition-colors"
-              >
-                <FaYoutube className="w-4 h-4" />
-                <span>OPEN ON YOUTUBE</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
+              {/* Video Iframe or Fallback Container */}
+              <div className="relative w-full aspect-video bg-black">
+                {getYouTubeId(selectedVideo.youtubeUrl) ? (
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(
+                      selectedVideo.youtubeUrl
+                    )}?autoplay=1`}
+                    title={selectedVideo.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full border-0"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center">
+                    <Film className="w-16 h-16 text-secondary mb-4 animate-pulse" />
+                    <p className="font-space text-sm text-white tracking-widest uppercase mb-2">
+                      {selectedVideo.title}
+                    </p>
+                    <p className="font-space text-xs text-muted tracking-widest uppercase max-w-md">
+                      PASTE A VALID YOUTUBE VIDEO LINK INTO STATIC_MUSIC_VIDEOS ARRAY IN TYPES.TS
+                    </p>
+                    <a
+                      href={selectedVideo.youtubeUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-6 px-6 py-2.5 border border-primary text-primary hover:bg-primary hover:text-white font-space text-xs tracking-widest uppercase transition-all"
+                    >
+                      TEST LINK ON YOUTUBE &gt;
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              {/* Modal Footer */}
+              <div className="p-4 flex items-center justify-between border-t border-secondary/50 bg-[#050505] text-xs font-space text-muted">
+                <span className="text-secondary tracking-widest uppercase">
+                  {selectedVideo.role || "OFFICIAL VIDEO PRODUCTION"}
+                </span>
+                <a
+                  href={selectedVideo.youtubeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#FF0000] hover:text-white flex items-center gap-1.5 tracking-widest uppercase transition-colors"
+                >
+                  <FaYoutube className="w-4 h-4" />
+                  <span>OPEN ON YOUTUBE</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </>
   );
 }

@@ -29,6 +29,7 @@ export const en = {
     accepted: "ACCEPTED:",
     tagline: "WHERE MUSIC GETS MADE. THE CULTURE AROUND IT.",
     rights: "ALL RIGHTS RESERVED",
+    poweredBy: "POWERED BY",
   },
   intro: {
     welcomeTo: "WELCOME TO",
@@ -190,6 +191,9 @@ export const en = {
     callDirect: "CALL DIRECT",
     officialTiktok: "OFFICIAL TIKTOK",
     openTiktok: "OPEN TIKTOK",
+    locationTitle: "STUDIO LOCATION // MOKATTAM",
+    locationSub: "[ MOKATTAM DISTRICT, CAIRO // EXACT ADDRESS SHARED UPON BOOKING ]",
+    openMap: "OPEN IN GOOGLE MAPS",
   },
   vault: {
     title: "THE VAULT",
@@ -201,6 +205,8 @@ export const en = {
     watchVideo: "WATCH VIDEO",
     bpm: "BPM",
     key: "KEY",
+    loadingTitle: "INITIALIZING AUDIO VAULT",
+    loadingSubtitle: "SYNCHRONIZING SPOTIFY DISCOGRAPHY & FREQUENCIES",
   },
   calendar: {
     modalTitle: "SELECT STUDIO SESSION DATE & TIME",
